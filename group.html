@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>小グループ会 | 西成住之江支部</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --primary: #1a3a5c; --accent: #c8973a; --light: #f8f6f2; --white: #ffffff; --gray: #666; --border: #e0dbd2; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--white); color: #333; line-height: 1.7; }
+  header { background: var(--white); border-bottom: 3px solid var(--primary); }
+  .header-top { background: var(--primary); text-align: center; padding: 6px; font-size: 12px; letter-spacing: 2px; color: white; }
+  .header-main { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; }
+  .header-logo h1 { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; color: var(--primary); }
+  .header-logo p { font-size: 12px; color: var(--gray); margin-top: 4px; letter-spacing: 2px; }
+  .breadcrumb { font-size: 12px; color: var(--gray); }
+  .breadcrumb span { color: var(--accent); font-weight: 500; }
+  nav { background: var(--primary); padding: 0 40px; }
+  nav ul { display: flex; list-style: none; }
+  nav ul li a { display: block; padding: 14px 20px; color: white; text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: background 0.2s; }
+  nav ul li a:hover, nav ul li a.active { background: rgba(255,255,255,0.15); }
+  .page-hero { background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%); color: white; padding: 40px; }
+  .page-hero-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); margin-bottom: 8px; }
+  .page-hero h2 { font-family: 'Noto Serif JP', serif; font-size: 26px; color: white; margin-bottom: 8px; }
+  .page-hero p { font-size: 13px; opacity: 0.8; color: white; }
+  section { padding: 60px 40px; }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); font-weight: 500; }
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: 22px; color: var(--primary); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+  .group-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+  .group-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .group-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .group-card-header { padding: 20px; color: white; text-align: center; }
+  .g1 .group-card-header { background: #1a3a5c; }
+  .g2 .group-card-header { background: #c8973a; }
+  .g3 .group-card-header { background: #2e7d52; }
+  .g4 .group-card-header { background: #7b3f8c; }
+  .group-number { font-size: 11px; letter-spacing: 3px; opacity: 0.8; margin-bottom: 4px; }
+  .group-name { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 700; }
+  .group-leader { font-size: 12px; opacity: 0.85; margin-top: 6px; }
+  .group-card-body { padding: 20px; }
+  .group-info-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .group-info-row:last-child { border-bottom: none; }
+  .group-info-label { color: var(--gray); font-size: 12px; }
+  .group-info-value { font-weight: 500; color: var(--primary); }
+  .group-next { margin-top: 14px; background: var(--light); border-radius: 8px; padding: 12px; font-size: 12px; }
+  .group-next-label { color: var(--accent); font-weight: 700; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
+  .group-next-date { color: var(--primary); font-weight: 700; font-size: 15px; }
+  .group-next-theme { color: var(--gray); font-size: 12px; margin-top: 2px; }
+  .schedule-bg { background: var(--light); }
+  .schedule-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .schedule-card { background: white; border-radius: 8px; padding: 20px; text-align: center; border-top: 4px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .schedule-round { font-size: 11px; color: var(--gray); letter-spacing: 1px; margin-bottom: 8px; }
+  .schedule-month { font-size: 40px; font-weight: 700; color: var(--primary); line-height: 1; }
+  .schedule-month-label { font-size: 13px; color: var(--gray); margin-bottom: 12px; }
+  .schedule-date { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+  .schedule-place { font-size: 12px; color: var(--gray); }
+  .schedule-status { display: inline-block; margin-top: 10px; padding: 3px 12px; border-radius: 20px; font-size: 11px; }
+  .status-next { background: #fff3e0; color: #e65100; font-weight: 700; }
+  .status-plan { background: #e3f2fd; color: #1565c0; }
+  .report-list { display: flex; flex-direction: column; gap: 32px; }
+  .report-item { display: flex; gap: 32px; align-items: flex-start; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .report-item:last-child { border-bottom: none; }
+  .report-img { width: 240px; min-width: 240px; height: 160px; background: linear-gradient(135deg, #e8e0d4, #d4ccc0); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 12px; }
+  .report-content { flex: 1; }
+  .report-tag { display: inline-block; background: var(--primary); color: white; font-size: 10px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 1px; }
+  .report-date { font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
+  .report-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 10px; line-height: 1.5; }
+  .report-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
+  .report-group-badge { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-left: 8px; }
+  .badge-g2 { background: #fff3e0; color: #c8973a; }
+  footer { background: var(--primary); color: white; text-align: center; padding: 40px; }
+  footer h3 { font-family: 'Noto Serif JP', serif; font-size: 18px; margin-bottom: 12px; color: white; }
+  footer p { font-size: 13px; opacity: 0.7; margin-bottom: 6px; color: white; }
+  footer .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 11px; opacity: 0.5; color: white; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-top">大阪中小企業家同友会 ／ 南東ブロック ／ 西成住之江支部</div>
+  <div class="header-main">
+    <div class="header-logo">
+      <h1>西成住之江支部</h1>
+      <p>NISHINARI SUMINOE BRANCH</p>
+    </div>
+    <div class="breadcrumb">HOME ＞ <span>小グループ会</span></div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="report.html">活動報告</a></li>
+      <li><a href="group.html" class="active">小グループ会</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="page-hero">
+  <div class="page-hero-label">SMALL GROUP</div>
+  <h2>小グループ会</h2>
+  <p>少人数で本音を語り合い、経営の悩みを共に解決する場。<br>西成住之江支部には4つのグループがあります。</p>
+</div>
+<section>
+  <div class="section-header">
+    <div>
+      <div class="section-label">GROUPS</div>
+      <div class="section-title">グループ紹介</div>
+    </div>
+    <div class="section-line"></div>
+  </div>
+  <div class="group-grid">
+    <div class="group-card g1">
+      <div class="group-card-header">
+        <div class="group-number">GROUP 1</div>
+        <div class="group-name">グループ1</div>
+        <div class="group-leader">リーダー：宮高 豪</div>
+      </div>
+      <div class="group-card-body">
+        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">約20名</span></div>
+        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">－</span></div>
+        <div class="group-next">
+          <div class="group-next-label">✅ 開催済</div>
+          <div class="group-next-date">5月19日（火）18:30〜</div>
+          <div class="group-next-theme">懐石料理「徳」住之江本店</div>
+          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967038&vSelDate=20260519&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#1a3a5c;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">e-doyu で確認</a>
+        </div>
+      </div>
+    </div>
+    <div class="group-card g2">
+      <div class="group-card-header">
+        <div class="group-number">GROUP 2</div>
+        <div class="group-name">グループ2</div>
+        <div class="group-leader">リーダー：松塲 謙一</div>
+      </div>
+      <div class="group-card-body">
+        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">22名</span></div>
+        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">濵中・牛丸</span></div>
+        <div class="group-next">
+          <div class="group-next-label">NEXT ▶</div>
+          <div class="group-next-date">6月10日（水）18:30〜</div>
+          <div class="group-next-theme">一人工務店のAI活用〜クラウドとAIで仕事はどう変わるか〜</div>
+          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966013&vSelDate=20260610&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F1" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#c8973a;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">参加登録（e-doyu）</a>
+        </div>
+      </div>
+    </div>
+    <div class="group-card g3">
+      <div class="group-card-header">
+        <div class="group-number">GROUP 3</div>
+        <div class="group-name">グループ3</div>
+        <div class="group-leader">リーダー：松浦 貴嗣</div>
+      </div>
+      <div class="group-card-body">
+        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">約20名</span></div>
+        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">中村 俊介</span></div>
+        <div class="group-next">
+          <div class="group-next-label">✅ 開催済</div>
+          <div class="group-next-date">5月15日（金）18:30〜</div>
+          <div class="group-next-theme">西成区民センター 会議室2-3｜近況報告＆経営課題</div>
+          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967417&vSelDate=20260515&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#1a3a5c;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">e-doyu で確認</a>
+        </div>
+      </div>
+    </div>
+    <div class="group-card g4">
+      <div class="group-card-header">
+        <div class="group-number">GROUP 4</div>
+        <div class="group-name">グループ4</div>
+        <div class="group-leader">リーダー：清水 修吉</div>
+      </div>
+      <div class="group-card-body">
+        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">約20名</span></div>
+        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">－</span></div>
+        <div class="group-next">
+          <div class="group-next-label">NEXT ▶</div>
+          <div class="group-next-date">6月3日（水）18:30〜</div>
+          <div class="group-next-theme">西成区民センター｜意見交換・経営課題共有</div>
+          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=968062&vSelDate=20260603&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F01" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#c8973a;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">参加登録（e-doyu）</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="schedule-bg">
+  <div class="section-header">
+    <div>
+      <div class="section-label">SCHEDULE</div>
+      <div class="section-title">2026年度 年間スケジュール</div>
+    </div>
+    <div class="section-line"></div>
+  </div>
+  <style>
+    .schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .schedule-table th { background: var(--primary); color: white; padding: 12px 16px; text-align: center; font-weight: 500; letter-spacing: 1px; font-size: 12px; }
+    .schedule-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); text-align: center; vertical-align: middle; }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table tr:hover td { background: #faf8f4; }
+    .g-label { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+    .g1-label { background: #e8eef5; color: #1a3a5c; }
+    .g2-label { background: #fdf3e3; color: #c8973a; }
+    .g3-label { background: #e8f5ee; color: #2e7d52; }
+    .g4-label { background: #f3e8f5; color: #7b3f8c; }
+    .done-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 10px; padding: 2px 8px; border-radius: 20px; }
+    .next-badge { display: inline-block; background: #fff3e0; color: #e65100; font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
+    .plan-badge { display: inline-block; background: #e3f2fd; color: #1565c0; font-size: 10px; padding: 2px 8px; border-radius: 20px; }
+    .edoyu-btn { display: inline-block; margin-top: 4px; padding: 3px 10px; background: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-size: 10px; }
+    .edoyu-btn.gold { background: var(--accent); }
+  </style>
+  <table class="schedule-table">
+    <thead>
+      <tr>
+        <th>グループ</th>
+        <th>第1回</th>
+        <th>第2回</th>
+        <th>第3回</th>
+        <th>第4回</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="g-label g1-label">G1 宮高</span></td>
+        <td>5月19日（火）<br><span class="done-badge">✅ 開催済</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967038&vSelDate=20260519" target="_blank" class="edoyu-btn">e-doyu</a></td>
+        <td>7月7日（火）<br><span class="plan-badge">予定</span></td>
+        <td>10月7日（水）<br><span class="plan-badge">予定</span></td>
+        <td>1月13日（火）<br><span class="plan-badge">予定</span></td>
+      </tr>
+      <tr>
+        <td><span class="g-label g2-label">G2 松塲</span></td>
+        <td>6月10日（水）<br><span class="next-badge">▶ 次回</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966013&vSelDate=20260610" target="_blank" class="edoyu-btn gold">e-doyu</a></td>
+        <td>9月9日（火）<br><span class="plan-badge">予定</span></td>
+        <td>12月9日（火）<br><span class="plan-badge">予定</span></td>
+        <td>2月10日（火）<br><span class="plan-badge">予定</span></td>
+      </tr>
+      <tr>
+        <td><span class="g-label g3-label">G3 松浦</span></td>
+        <td>5月15日（金）<br><span class="done-badge">✅ 開催済</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967417&vSelDate=20260515" target="_blank" class="edoyu-btn">e-doyu</a></td>
+        <td>7月7日（月）<br><span class="plan-badge">予定</span></td>
+        <td>10月6日（火）<br><span class="plan-badge">予定</span></td>
+        <td>1月12日（月）<br><span class="plan-badge">予定</span></td>
+      </tr>
+      <tr>
+        <td><span class="g-label g4-label">G4 清水</span></td>
+        <td>6月3日（水）<br><span class="next-badge">▶ 次回</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=968062&vSelDate=20260603" target="_blank" class="edoyu-btn gold">e-doyu</a></td>
+        <td>日程確認中<br><span class="plan-badge">予定</span></td>
+        <td>日程確認中<br><span class="plan-badge">予定</span></td>
+        <td>日程確認中<br><span class="plan-badge">予定</span></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+<section>
+  <div class="section-header">
+    <div>
+      <div class="section-label">REPORT</div>
+      <div class="section-title">活動報告</div>
+    </div>
+    <div class="section-line"></div>
+  </div>
+  <div class="report-list">
+    <div class="report-item">
+      <div class="report-img">📸 写真をここに差し替え</div>
+      <div class="report-content">
+        <span class="report-tag">小グループ会</span>
+        <span class="report-group-badge badge-g2">G2</span>
+        <div class="report-date">2026年6月10日（火）</div>
+        <div class="report-title">第1回小グループ会<br>一人工務店のAI活用</div>
+        <div class="report-text">住之江会館にて開催。グループ2リーダーの松塲謙一氏が、一人工務店でAIチームを組み経営を変えた実体験を報告。参加者からは「自分の仕事にも置き換えられる」と多くの声があがりました。</div>
+      </div>
+    </div>
+    <div class="report-item">
+      <div class="report-img">📸 写真をここに差し替え</div>
+      <div class="report-content">
+        <span class="report-tag">勉強会</span>
+        <div class="report-date">2026年4月27日（月）</div>
+        <div class="report-title">小グループ長勉強会<br>大阪同友会事務局にて</div>
+        <div class="report-text">全大阪の小グループ長が集まり、2026年度の活動方針と成功事例を共有。愛知同友会の取り組みを学び、今期の運営に活かします。</div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <h3>大阪中小企業家同友会 西成住之江支部</h3>
+  <p>大阪府大阪市西成区・住之江区</p>
+  <p>お問い合わせ：支部長 堂上 智史</p>
+  <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
+</footer>
+</body>
+</html>

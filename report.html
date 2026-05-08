@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>活動報告 | 西成住之江支部</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --primary: #1a3a5c; --accent: #c8973a; --light: #f8f6f2; --white: #ffffff; --gray: #666; --border: #e0dbd2; }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--white); color: #333; line-height: 1.7; }
+  header { background: var(--white); border-bottom: 3px solid var(--primary); }
+  .header-top { background: var(--primary); text-align: center; padding: 6px; font-size: 12px; letter-spacing: 2px; color: white; }
+  .header-main { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; }
+  .header-logo h1 { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; color: var(--primary); }
+  .header-logo p { font-size: 12px; color: var(--gray); margin-top: 4px; letter-spacing: 2px; }
+  .breadcrumb { font-size: 12px; color: var(--gray); }
+  .breadcrumb span { color: var(--accent); font-weight: 500; }
+  nav { background: var(--primary); padding: 0 40px; }
+  nav ul { display: flex; list-style: none; }
+  nav ul li a { display: block; padding: 14px 20px; color: white; text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: background 0.2s; }
+  nav ul li a:hover, nav ul li a.active { background: rgba(255,255,255,0.15); }
+  .page-hero { background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%); color: white; padding: 40px; }
+  .page-hero-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); margin-bottom: 8px; }
+  .page-hero h2 { font-family: 'Noto Serif JP', serif; font-size: 26px; color: white; margin-bottom: 8px; }
+  .page-hero p { font-size: 13px; opacity: 0.8; color: white; }
+  section { padding: 60px 40px; max-width: 900px; margin: 0 auto; }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); font-weight: 500; }
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: 22px; color: var(--primary); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* 活動報告リスト */
+  .report-list { display: flex; flex-direction: column; gap: 40px; }
+  .report-item { display: flex; gap: 32px; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+  .report-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .report-img { width: 260px; min-width: 260px; height: 174px; background: linear-gradient(135deg, #e8e0d4, #d4ccc0); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 12px; overflow: hidden; }
+  .report-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+  .report-content { flex: 1; }
+  .report-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .report-tag { display: inline-block; background: var(--primary); color: white; font-size: 10px; padding: 3px 10px; border-radius: 20px; letter-spacing: 1px; }
+  .report-tag.group { background: var(--accent); }
+  .report-tag.event { background: #2e7d52; }
+  .report-tag.block { background: #7b3f8c; }
+  .report-date { font-size: 12px; color: var(--accent); font-weight: 500; }
+  .report-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 10px; line-height: 1.5; }
+  .report-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
+
+  /* 空状態 */
+  .empty-state { text-align: center; padding: 80px 40px; color: var(--gray); }
+  .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+  .empty-state p { font-size: 14px; line-height: 1.8; }
+
+  footer { background: var(--primary); color: white; text-align: center; padding: 40px; }
+  footer h3 { font-family: 'Noto Serif JP', serif; font-size: 18px; margin-bottom: 12px; color: white; }
+  footer p { font-size: 13px; opacity: 0.7; margin-bottom: 6px; color: white; }
+  footer .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 11px; opacity: 0.5; color: white; }
+
+  /* レスポンシブ */
+  @media (max-width: 640px) {
+    .report-item { flex-direction: column; }
+    .report-img { width: 100%; min-width: unset; }
+    section { padding: 40px 20px; }
+    .header-main { padding: 16px 20px; }
+    nav { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-top">大阪中小企業家同友会 ／ 南東ブロック ／ 西成住之江支部</div>
+  <div class="header-main">
+    <div class="header-logo">
+      <h1>西成住之江支部</h1>
+      <p>NISHINARI SUMINOE BRANCH</p>
+    </div>
+    <div class="breadcrumb">HOME ＞ <span>活動報告</span></div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="report.html" class="active">活動報告</a></li>
+      <li><a href="group.html">小グループ会</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <div class="page-hero-label">ACTIVITY REPORT</div>
+  <h2>活動報告</h2>
+  <p>2026年度の支部活動の記録です。<br>例会・小グループ会・イベントの様子をお届けします。</p>
+</div>
+
+<section>
+  <div class="section-header">
+    <div>
+      <div class="section-label">2026年度</div>
+      <div class="section-title">活動履歴</div>
+    </div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="report-list">
+
+    <!-- ↓ここから活動報告を追加していく（新しい順）↓ -->
+
+    <div class="report-item">
+      <div class="report-img">📸 写真をここに差し替え</div>
+      <div class="report-content">
+        <div class="report-meta">
+          <span class="report-tag group">小グループ会</span>
+          <span class="report-date">2026年5月19日（火）</span>
+        </div>
+        <div class="report-title">G1小グループ会 第1回<br>自社紹介・経営課題共有</div>
+        <div class="report-text">懐石料理「徳」住之江本店にて開催。メンバー同士の自社紹介と経営課題を共有し、活発な意見交換が行われました。</div>
+      </div>
+    </div>
+
+    <div class="report-item">
+      <div class="report-img">📸 写真をここに差し替え</div>
+      <div class="report-content">
+        <div class="report-meta">
+          <span class="report-tag group">小グループ会</span>
+          <span class="report-date">2026年5月15日（金）</span>
+        </div>
+        <div class="report-title">G3小グループ会 第1回<br>近況報告＆経営課題</div>
+        <div class="report-text">大阪市立西成区民センター 会議室2-3にて開催。各会員の近況報告と経営課題を語り合い、終了後は駅前で懇親会を行いました。</div>
+      </div>
+    </div>
+
+    <div class="report-item">
+      <div class="report-img">📸 写真をここに差し替え</div>
+      <div class="report-content">
+        <div class="report-meta">
+          <span class="report-tag event">支部行事</span>
+          <span class="report-date">2026年5月12日（火）</span>
+        </div>
+        <div class="report-title">新春★西成住之江支部【新会員を知る会】</div>
+        <div class="report-text">今期入会した新会員を迎え、お互いを知り合う場を設けました。</div>
+      </div>
+    </div>
+
+    <div class="report-item">
+      <div class="report-img">📸 写真をここに差し替え</div>
+      <div class="report-content">
+        <div class="report-meta">
+          <span class="report-tag">勉強会</span>
+          <span class="report-date">2026年4月27日（月）</span>
+        </div>
+        <div class="report-title">小グループ長勉強会<br>大阪同友会事務局にて</div>
+        <div class="report-text">全大阪の小グループ長が集まり、2026年度の活動方針と成功事例を共有。今期の運営に活かします。</div>
+      </div>
+    </div>
+
+    <!-- ↑ここまで。新しい報告は上に追加する↑ -->
+
+  </div>
+</section>
+
+<footer>
+  <h3>大阪中小企業家同友会 西成住之江支部</h3>
+  <p>大阪府大阪市西成区・住之江区</p>
+  <p>お問い合わせ：支部長 堂上 智史</p>
+  <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
+</footer>
+</body>
+</html>

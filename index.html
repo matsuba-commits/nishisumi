@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大阪中小企業家同友会 西成住之江支部</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --primary: #1a3a5c;
+    --accent: #c8973a;
+    --light: #f8f6f2;
+    --white: #ffffff;
+    --gray: #666;
+    --border: #e0dbd2;
+  }
+  body { font-family: 'Noto Sans JP', sans-serif; background: var(--white); color: #333; line-height: 1.7; }
+  header { background: var(--white); border-bottom: 3px solid var(--primary); }
+  .header-top { background: var(--primary); text-align: center; padding: 6px; font-size: 12px; letter-spacing: 2px; color: white; }
+  .header-main { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; }
+  .header-logo h1 { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; color: var(--primary); }
+  .header-logo p { font-size: 12px; color: var(--gray); margin-top: 4px; letter-spacing: 2px; }
+  .header-info { text-align: right; font-size: 13px; color: var(--gray); }
+  .header-info .count { font-size: 28px; font-weight: 700; color: var(--accent); }
+  .header-info .count span { font-size: 14px; color: var(--primary); }
+  nav { background: var(--primary); padding: 0 40px; }
+  nav ul { display: flex; list-style: none; }
+  nav ul li a { display: block; padding: 14px 20px; color: white; text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: background 0.2s; }
+  nav ul li a:hover { background: rgba(255,255,255,0.15); }
+  .hero { background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%); color: white; text-align: center; padding: 60px 40px; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: rgba(200,151,58,0.1); border-radius: 50%; }
+  .hero-slogan { font-size: 13px; letter-spacing: 3px; color: var(--accent); margin-bottom: 16px; }
+  .hero h2 { font-family: 'Noto Serif JP', serif; font-size: 28px; font-weight: 700; line-height: 1.5; margin-bottom: 20px; color: white; }
+  .hero p { font-size: 14px; opacity: 0.85; max-width: 500px; margin: 0 auto; color: white; }
+  section { padding: 60px 40px; }
+  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); font-weight: 500; }
+  .section-title { font-family: 'Noto Serif JP', serif; font-size: 22px; color: var(--primary); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+  .report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+  .report-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+  .report-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+  .report-card-img { width: 100%; height: 180px; background: linear-gradient(135deg, #e8e0d4, #d4ccc0); display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 13px; }
+  .report-card-body { padding: 20px; }
+  .report-card-date { font-size: 11px; color: var(--accent); font-weight: 500; letter-spacing: 1px; margin-bottom: 8px; }
+  .report-card-title { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; line-height: 1.5; }
+  .report-card-text { font-size: 13px; color: var(--gray); line-height: 1.7; }
+  .event-bg { background: var(--light); }
+  .event-list { display: flex; flex-direction: column; gap: 16px; max-width: 800px; }
+  .event-item { background: white; border-radius: 8px; padding: 24px; display: flex; gap: 24px; align-items: flex-start; border-left: 4px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .event-date-box { text-align: center; min-width: 60px; }
+  .event-month { font-size: 11px; color: var(--accent); font-weight: 700; letter-spacing: 1px; }
+  .event-day { font-size: 32px; font-weight: 700; color: var(--primary); line-height: 1; }
+  .event-weekday { font-size: 11px; color: var(--gray); }
+  .event-content { flex: 1; }
+  .event-tag { display: inline-block; background: var(--primary); color: white; font-size: 10px; padding: 3px 10px; border-radius: 20px; margin-bottom: 8px; letter-spacing: 1px; }
+  .event-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .event-detail { font-size: 13px; color: var(--gray); }
+  .event-link { display: inline-block; margin-top: 10px; padding: 6px 16px; background: var(--accent); color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: 500; letter-spacing: 1px; }
+  .calendar-embed { width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 8px; background: var(--light); display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 14px; }
+  .update-badge { display: inline-block; background: #e74c3c; color: white; font-size: 10px; padding: 2px 8px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
+  footer { background: var(--primary); color: white; text-align: center; padding: 40px; }
+  footer h3 { font-family: 'Noto Serif JP', serif; font-size: 18px; margin-bottom: 12px; color: white; }
+  footer p { font-size: 13px; opacity: 0.7; margin-bottom: 6px; color: white; }
+  footer .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 11px; opacity: 0.5; color: white; }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-top">大阪中小企業家同友会 ／ 南東ブロック ／ 西成住之江支部</div>
+  <div class="header-main">
+    <div class="header-logo">
+      <h1>西成住之江支部</h1>
+      <p>NISHINARI SUMINOE BRANCH</p>
+    </div>
+    <div class="header-info">
+      <div class="count">80<span>名</span></div>
+      <div style="font-size:11px;">2026年度 会員数</div>
+    </div>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="report.html">活動報告</a></li>
+      <li><a href="group.html">小グループ会</a></li>
+    </ul>
+  </nav>
+</header>
+<div class="hero">
+  <div class="hero-slogan">2026年度スローガン</div>
+  <h2>つながりを力に、学びを行動に。<br>組織力高い支部づくり</h2>
+  <p>仲間と共に学び、経営を磨き、地域と共に歩む<br>西成住之江支部へようこそ</p>
+</div>
+<section>
+  <div class="section-header">
+    <div>
+      <div class="section-label">REPORT</div>
+      <div class="section-title">活動報告 <span class="update-badge">NEW</span></div>
+    </div>
+    <div class="section-line"></div>
+  </div>
+  <div class="report-grid">
+    <div class="report-card">
+      <div class="report-card-img">📸 写真をここに差し替え</div>
+      <div class="report-card-body">
+        <div class="report-card-date">2026.04.27</div>
+        <div class="report-card-title">小グループ長勉強会<br>大阪同友会事務局にて開催</div>
+        <div class="report-card-text">全大阪の小グループ長が集まり、2026年度の活動方針と運営ノウハウを共有しました。</div>
+      </div>
+    </div>
+    <div class="report-card">
+      <div class="report-card-img">📸 写真をここに差し替え</div>
+      <div class="report-card-body">
+        <div class="report-card-date">2026.05.XX</div>
+        <div class="report-card-title">支部例会<br>〇〇会館にて開催</div>
+        <div class="report-card-text">今月の例会の様子です。報告者の経営体験を聞き、グループ討論で深く学びました。</div>
+      </div>
+    </div>
+    <div class="report-card">
+      <div class="report-card-img">📸 写真をここに差し替え</div>
+      <div class="report-card-body">
+        <div class="report-card-date">2026.04.XX</div>
+        <div class="report-card-title">新会員歓迎会<br>仲間が増えました！</div>
+        <div class="report-card-text">今期も新しい仲間が加わりました。一緒に学び、経営を磨いていきましょう。</div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="event-bg">
+  <div class="section-header">
+    <div>
+      <div class="section-label">EVENTS</div>
+      <div class="section-title">直近のイベント案内</div>
+    </div>
+    <div class="section-line"></div>
+  </div>
+  <div class="event-list">
+    <div class="event-item">
+      <div class="event-date-box">
+        <div class="event-month">MAY</div>
+        <div class="event-day">12</div>
+        <div class="event-weekday">火曜日</div>
+      </div>
+      <div class="event-content">
+        <span class="event-tag">支部行事</span>
+        <div class="event-title">新春★西成住之江支部【新会員を知る会】</div>
+        <div class="event-detail">🕕 詳細はe-doyuにて</div>
+        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966073&vSelDate=20260512&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-date-box">
+        <div class="event-month">MAY</div>
+        <div class="event-day">15</div>
+        <div class="event-weekday">金曜日</div>
+      </div>
+      <div class="event-content">
+        <span class="event-tag">小グループ会</span>
+        <div class="event-title">G3小グループ会 第1回｜近況報告＆経営課題</div>
+        <div class="event-detail">📍 西成区民センター 会議室2-3　🕕 18:30〜20:30</div>
+        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967417&vSelDate=20260515&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-date-box">
+        <div class="event-month">MAY</div>
+        <div class="event-day">19</div>
+        <div class="event-weekday">火曜日</div>
+      </div>
+      <div class="event-content">
+        <span class="event-tag">小グループ会</span>
+        <div class="event-title">G1小グループ会 第1回｜自社紹介・経営課題共有</div>
+        <div class="event-detail">📍 懐石料理「徳」住之江本店　🕕 18:30〜21:00　参加費：8,000円</div>
+        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967038&vSelDate=20260519&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-date-box">
+        <div class="event-month">MAY</div>
+        <div class="event-day">21</div>
+        <div class="event-weekday">木曜日</div>
+      </div>
+      <div class="event-content">
+        <span class="event-tag">合同例会</span>
+        <div class="event-title">【南東ブロック】4支部合同例会</div>
+        <div class="event-detail">📍 たかつガーデン（天王寺区東高津町7-11）　🕕 18:30〜21:00</div>
+        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=963447&vSelDate=20260521&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-date-box">
+        <div class="event-month">JUN</div>
+        <div class="event-day">3</div>
+        <div class="event-weekday">水曜日</div>
+      </div>
+      <div class="event-content">
+        <span class="event-tag">小グループ会</span>
+        <div class="event-title">G4小グループ会 第1回｜意見交換・経営課題共有</div>
+        <div class="event-detail">📍 西成区民センター　🕕 18:30〜20:30</div>
+        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=968062&vSelDate=20260603&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F01" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-date-box">
+        <div class="event-month">JUN</div>
+        <div class="event-day">10</div>
+        <div class="event-weekday">水曜日</div>
+      </div>
+      <div class="event-content">
+        <span class="event-tag">小グループ会</span>
+        <div class="event-title">G2小グループ会 第1回｜一人工務店のAI活用〜クラウドとAIで仕事はどう変わるか〜</div>
+        <div class="event-detail">📍 墨の絵会館（住之江区南加賀屋3丁目）　🕕 18:30〜21:30</div>
+        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966013&vSelDate=20260610&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F1" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="event-bg">
+  <div class="section-header">
+    <div>
+      <div class="section-label">ANNUAL SCHEDULE</div>
+      <div class="section-title">2026年度 年間スケジュール</div>
+    </div>
+    <div class="section-line"></div>
+  </div>
+  <style>
+    .annual-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .annual-table th { background: var(--primary); color: white; padding: 10px 12px; text-align: center; font-size: 11px; letter-spacing: 1px; }
+    .annual-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); text-align: center; vertical-align: middle; background: white; }
+    .annual-table td:first-child { background: var(--light); font-weight: 700; color: var(--primary); font-size: 11px; }
+    .annual-table tr:last-child td { border-bottom: none; }
+    .ev-tag { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+    .ev-block { background: #fde8e8; color: #c0392b; }
+    .ev-branch { background: #e8f0fe; color: #1a3a8c; }
+    .ev-group { background: #fdf3e3; color: #c8973a; }
+    .ev-other { background: #e8f5e9; color: #2e7d32; }
+    .ev-done { color: #999; text-decoration: line-through; font-size: 11px; }
+    .ev-next { font-weight: 700; color: #e65100; }
+  </style>
+  <table class="annual-table">
+    <thead>
+      <tr>
+        <th>区分</th>
+        <th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th><th>1月</th><th>2月</th><th>3月</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ブロック役委会</td>
+        <td class="ev-done">4/15</td><td class="ev-done">5/18</td><td>6/10</td><td>7/14</td><td>8/10</td><td>9/8</td><td>10/9</td><td>11/10</td><td>12/8</td><td>1/14</td><td>2/9</td><td>3月</td>
+      </tr>
+      <tr>
+        <td>支部幹事会</td>
+        <td class="ev-done">4/21</td><td class="ev-done">5/22</td><td>6/19</td><td>7/17</td><td>8/17</td><td>9/11</td><td>10/16</td><td>11/13</td><td>12/10</td><td>1/22</td><td>2/12</td><td>3月</td>
+      </tr>
+      <tr>
+        <td>支部例会</td>
+        <td>－</td><td class="ev-done">合同例会<br>5/21</td><td>6/15</td><td>7/28</td><td>－</td><td>9/28</td><td>－</td><td>11/27</td><td>12/10<br>忘年</td><td>－</td><td>2/24</td><td>3/24</td>
+      </tr>
+      <tr>
+        <td>G1（宮高）</td>
+        <td>－</td><td class="ev-done">5/19</td><td>－</td><td>7/7</td><td>－</td><td>－</td><td>10/7</td><td>－</td><td>－</td><td>1/13</td><td>－</td><td>－</td>
+      </tr>
+      <tr>
+        <td>G2（松塲）</td>
+        <td>－</td><td>－</td><td class="ev-next">6/10 ▶</td><td>－</td><td>－</td><td>9/9</td><td>－</td><td>－</td><td>12/9</td><td>－</td><td>2/10</td><td>－</td>
+      </tr>
+      <tr>
+        <td>G3（松浦）</td>
+        <td>－</td><td class="ev-done">5/15</td><td>－</td><td>7/7</td><td>－</td><td>－</td><td>10/6</td><td>－</td><td>－</td><td>1/12</td><td>－</td><td>－</td>
+      </tr>
+      <tr>
+        <td>G4（清水）</td>
+        <td>－</td><td>－</td><td class="ev-next">6/3 ▶</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td>
+      </tr>
+      <tr>
+        <td>その他</td>
+        <td class="ev-done">指針4/9</td><td class="ev-done">大阪総会<br>5/13</td><td>指針6/13</td><td>住之江<br>博物館<br>7/26<br>指針7/11</td><td>指針8/8</td><td>指針9/12</td><td>指針10/10<br>西成博物館<br>11/8</td><td>全大阪<br>11/5</td><td>－</td><td>役員研修<br>1/7</td><td>支部方針</td><td>－</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px;color:var(--gray);margin-top:12px;">※取消線は開催済み　▶は次回開催　詳細はe-doyuにて</p>
+</section>
+
+<footer>
+  <h3>大阪中小企業家同友会 西成住之江支部</h3>
+  <p>大阪府大阪市西成区・住之江区</p>
+  <p>お問い合わせ：支部長 堂上 智史</p>
+  <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
+</footer>
+</body>
+</html>
