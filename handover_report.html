@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サイト管理・引き継ぎレポート｜西成住之江支部</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: #f5f5f5; color: #333; line-height: 1.8; }
+  .cover { background: #1a3a5c; color: white; padding: 48px 40px; }
+  .cover h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; }
+  .cover .sub { font-size: 14px; opacity: 0.8; margin-bottom: 24px; }
+  .cover .meta { font-size: 13px; opacity: 0.6; }
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+  .card { background: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .card-title { font-size: 18px; font-weight: 700; color: #1a3a5c; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid #e0dbd2; }
+  h2.section { font-size: 12px; letter-spacing: 3px; color: #c8973a; margin: 32px 0 12px; font-weight: 700; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0; }
+  th { background: #1a3a5c; color: white; padding: 10px 14px; text-align: left; font-size: 12px; }
+  td { padding: 10px 14px; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .tag-easy { background: #e8f5e9; color: #2e7d32; }
+  .tag-mid { background: #fff3e0; color: #e65100; }
+  .tag-tom { background: #e3f2fd; color: #1565c0; }
+  .highlight { background: #fff8e8; border-left: 4px solid #c8973a; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 14px; }
+  .point { display: flex; gap: 10px; margin: 6px 0; font-size: 14px; }
+  .point::before { content: "✅"; flex-shrink: 0; }
+  .warn { display: flex; gap: 10px; margin: 6px 0; font-size: 14px; }
+  .warn::before { content: "⚠️"; flex-shrink: 0; }
+  .flow-item { display: flex; gap: 16px; margin-bottom: 20px; }
+  .flow-num { width: 32px; height: 32px; background: #1a3a5c; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .flow-title { font-weight: 700; font-size: 15px; color: #1a3a5c; }
+  .flow-text { font-size: 13px; color: #666; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="cover">
+  <h1>🌐 ポータルサイト管理・引き継ぎレポート</h1>
+  <div class="sub">大阪中小企業家同友会 西成住之江支部</div>
+  <div class="meta">作成日：2026年5月8日　作成：トム（ジェリーの知恵袋AI）</div>
+</div>
+<div class="container">
+
+  <h2 class="section">SECTION 1 — サイト基本情報</h2>
+  <div class="card">
+    <div class="card-title">🔗 URL・アカウント情報</div>
+    <table>
+      <tr><th>項目</th><th>内容</th></tr>
+      <tr><td>サイトURL</td><td><strong>https://matsuba-commits.github.io/nishisumi/</strong></td></tr>
+      <tr><td>GitHubアカウント</td><td>matsuba-commits</td></tr>
+      <tr><td>登録メール</td><td>matsuba@ma-pd.com</td></tr>
+      <tr><td>リポジトリ名</td><td>nishisumi</td></tr>
+      <tr><td>公開方法</td><td>GitHub Pages（無料）</td></tr>
+    </table>
+    <div class="warn" style="margin-top:12px;">GitHubのパスワードは松塲謙一が管理。引き継ぎ時は必ず新担当者に伝えること。</div>
+  </div>
+
+  <h2 class="section">SECTION 2 — サイト構成</h2>
+  <div class="card">
+    <div class="card-title">📄 ページ構成（3ページ）</div>
+    <table>
+      <tr><th>ファイル名</th><th>ページ名</th><th>主な内容</th></tr>
+      <tr><td>index.html</td><td>HOME</td><td>スローガン・活動報告・イベント一覧・年間スケジュール</td></tr>
+      <tr><td>group.html</td><td>小グループ会</td><td>4グループ紹介・年間日程・活動報告</td></tr>
+      <tr><td>report.html</td><td>活動報告</td><td>2026年度の活動履歴（新しい順に積み上げ）</td></tr>
+    </table>
+  </div>
+
+  <h2 class="section">SECTION 3 — 更新ルール</h2>
+  <div class="card">
+    <div class="card-title">🔄 更新頻度と作業分担</div>
+    <table>
+      <tr><th>タイミング</th><th>作業内容</th><th>文章作成</th><th>アップロード</th></tr>
+      <tr><td>イベント後</td><td>活動報告に写真・コメント追加</td><td><span class="tag tag-tom">トム</span></td><td>担当者</td></tr>
+      <tr><td>開催確定時</td><td>イベント一覧・日程を更新</td><td><span class="tag tag-tom">トム</span></td><td>担当者</td></tr>
+      <tr><td>年度初め</td><td>リーダー・メンバー情報を更新</td><td><span class="tag tag-tom">トム</span></td><td>担当者</td></tr>
+    </table>
+    <div class="highlight" style="margin-top:16px;">文章・HTML修正はトムが担当。担当者はGitHubへのアップロードだけでよい。</div>
+  </div>
+
+  <h2 class="section">SECTION 4 — 更新手順</h2>
+  <div class="card">
+    <div class="card-title">💻 毎回の作業手順（5分）</div>
+    <div class="flow-item">
+      <div class="flow-num">1</div>
+      <div>
+        <div class="flow-title">GitHubにアクセス</div>
+        <div class="flow-text">https://github.com/matsuba-commits/nishisumi を開く（ブックマーク推奨）</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">2</div>
+      <div>
+        <div class="flow-title">「Add file」→「Upload files」をクリック</div>
+        <div class="flow-text">画面上部のボタンから選択する</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">3</div>
+      <div>
+        <div class="flow-title">修正済みHTMLをドラッグ＆ドロップ</div>
+        <div class="flow-text">トムから受け取ったファイルをエリアにドラッグ。同じファイル名で自動上書き。</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">4</div>
+      <div>
+        <div class="flow-title">「Commit changes」を押す</div>
+        <div class="flow-text">緑ボタンをそのまま押すだけ。1〜2分後に反映される。</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-num">5</div>
+      <div>
+        <div class="flow-title">サイトを確認する</div>
+        <div class="flow-text">https://matsuba-commits.github.io/nishisumi/ を開いて確認。反映されない場合はCtrl+Shift+Rでキャッシュクリア。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section">SECTION 5 — 引き継ぎ手順</h2>
+  <div class="card">
+    <div class="card-title">🤝 次の担当者への引き継ぎ</div>
+    <div class="point">GitHubのアカウント情報（ID・パスワード）を口頭で伝える</div>
+    <div class="point">このレポートを渡す</div>
+    <div class="point">更新マニュアル（github_update_guide.html）を渡す</div>
+    <div class="point">一緒に1回アップロード作業をやってみる（15分あれば十分）</div>
+    <div class="point">トムの使い方を説明する（「変えたい内容を伝えるだけ」）</div>
+    <div class="warn" style="margin-top:12px;">引き継ぎ後はGitHubのパスワードを新担当者が変更すること</div>
+  </div>
+
+  <h2 class="section">SECTION 6 — 運用上の注意</h2>
+  <div class="card">
+    <div class="card-title">📌 覚えておくこと</div>
+    <div class="point">サイトは誰でも見られる（会員・非会員問わず）</div>
+    <div class="point">e-douへのリンクはログインが必要なため会員のみ使える</div>
+    <div class="point">個人情報（住所・電話番号）は掲載しない</div>
+    <div class="point">写真を掲載する場合は本人の了承を得ること</div>
+    <div class="point">更新後は必ずサイトを確認する</div>
+    <div class="highlight" style="margin-top:16px;">文章はトムが作る。担当者はアップロードするだけ。これが継続のコツ。</div>
+  </div>
+
+  <h2 class="section">SECTION 7 — 今後の課題</h2>
+  <div class="card">
+    <div class="card-title">🚀 今後検討すること</div>
+    <table>
+      <tr><th>課題</th><th>内容</th><th>優先度</th></tr>
+      <tr><td>写真の差し替え</td><td>活動報告の📸プレースホルダーを実際の写真に</td><td><span class="tag tag-mid">高</span></td></tr>
+      <tr><td>G4日程の補完</td><td>第2〜4回の日程が未入力</td><td><span class="tag tag-mid">高</span></td></tr>
+      <tr><td>Googleカレンダー連携</td><td>支部長に専用カレンダーを作ってもらい埋め込む</td><td><span class="tag tag-easy">中</span></td></tr>
+      <tr><td>管理アカウントの移管</td><td>次期担当者への引き継ぎ時にGitHubオーナー変更</td><td><span class="tag tag-easy">低</span></td></tr>
+    </table>
+  </div>
+
+</div>
+</body>
+</html>

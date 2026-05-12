@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>サイト更新手順書｜西成住之江支部</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: #f5f5f5; color: #333; line-height: 1.8; }
+  .cover { background: #1a3a5c; color: white; padding: 48px 40px; }
+  .cover h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .cover p { font-size: 14px; opacity: 0.8; }
+  .cover .url { font-size: 13px; background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 4px; margin-top: 16px; display: inline-block; }
+  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+  .step-block { background: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #1a3a5c; color: white; border-radius: 50%; font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+  .step-title { font-size: 18px; font-weight: 700; color: #1a3a5c; margin-bottom: 16px; }
+  .step-text { font-size: 14px; color: #444; margin-bottom: 8px; }
+  .highlight { background: #fff3e0; border-left: 4px solid #c8973a; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 14px; }
+  .img-placeholder { background: #f0f0f0; border: 2px dashed #ccc; border-radius: 8px; padding: 24px; text-align: center; color: #999; font-size: 13px; margin: 16px 0; }
+  .point { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 14px; }
+  .point::before { content: '✅'; flex-shrink: 0; }
+  .warn { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 14px; }
+  .warn::before { content: '⚠️'; flex-shrink: 0; }
+  .url-box { background: #e8eef5; border-radius: 8px; padding: 16px; font-size: 15px; font-weight: 700; color: #1a3a5c; text-align: center; margin: 12px 0; word-break: break-all; }
+  .summary { background: #1a3a5c; color: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
+  .summary h2 { font-size: 18px; margin-bottom: 16px; color: #c8973a; }
+  .summary-row { display: flex; gap: 12px; align-items: flex-start; margin: 8px 0; font-size: 14px; }
+  .summary-num { background: #c8973a; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  h2.section { font-size: 13px; letter-spacing: 2px; color: #c8973a; margin: 32px 0 12px; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>🌐 サイト更新マニュアル</h1>
+  <p>西成住之江支部 ポータルサイト｜担当者向け手順書</p>
+  <div class="url">https://matsuba-commits.github.io/nishisumi/</div>
+</div>
+
+<div class="container">
+
+  <div class="summary">
+    <h2>📋 更新の全体の流れ（5分でできる）</h2>
+    <div class="summary-row"><div class="summary-num">1</div><div>トムに「○○を変更して」と伝える</div></div>
+    <div class="summary-row"><div class="summary-num">2</div><div>トムが修正したHTMLファイルをダウンロード</div></div>
+    <div class="summary-row"><div class="summary-num">3</div><div>GitHubを開いてファイルをアップロード</div></div>
+    <div class="summary-row"><div class="summary-num">4</div><div>「Commit changes」を押す → 完了！</div></div>
+  </div>
+
+  <h2 class="section">STEP 1 — GitHubを開く</h2>
+  <div class="step-block">
+    <div class="step-num">1</div>
+    <div class="step-title">GitHubにアクセスしてログイン</div>
+    <div class="step-text">ブラウザで以下のURLを開く</div>
+    <div class="url-box">https://github.com/matsuba-commits/nishisumi</div>
+    <div class="highlight">ブックマークに登録しておくと便利です</div>
+  </div>
+
+  <h2 class="section">STEP 2 — ファイルをアップロード</h2>
+  <div class="step-block">
+    <div class="step-num">2</div>
+    <div class="step-title">「Add file」→「Upload files」をクリック</div>
+    <div class="step-text">画面上部の緑のボタン付近にある「Add file」をクリックして「Upload files」を選ぶ</div>
+    <div class="img-placeholder">📸 ［Add file ▼］ボタンの画像</div>
+  </div>
+
+  <div class="step-block">
+    <div class="step-num">3</div>
+    <div class="step-title">修正済みのHTMLファイルをドラッグ＆ドロップ</div>
+    <div class="step-text">トムからダウンロードしたHTMLファイルを点線のエリアにドラッグする</div>
+    <div class="img-placeholder">📸 ドラッグ＆ドロップエリアの画像</div>
+    <div class="point">ファイル名が表示されたらアップロード成功</div>
+    <div class="warn">同じファイル名で上書きされる。古いファイルは自動で置き換わる</div>
+  </div>
+
+  <h2 class="section">STEP 3 — 保存して公開</h2>
+  <div class="step-block">
+    <div class="step-num">4</div>
+    <div class="step-title">「Commit changes」（緑ボタン）を押す</div>
+    <div class="step-text">画面下部の緑ボタンをそのまま押すだけでOK。コメント入力は不要。</div>
+    <div class="img-placeholder">📸 「Commit changes」ボタンの画像</div>
+    <div class="highlight">1〜2分後にサイトに反映されます。反映前はキャッシュをクリアして確認してください（Ctrl＋Shift＋R）</div>
+  </div>
+
+  <h2 class="section">確認用URL</h2>
+  <div class="step-block">
+    <div class="step-num">5</div>
+    <div class="step-title">サイトを確認する</div>
+    <div class="url-box">https://matsuba-commits.github.io/nishisumi/</div>
+    <div class="point">index.html → トップページ</div>
+    <div class="point">group.html → 小グループ会ページ</div>
+    <div class="point">report.html → 活動報告ページ</div>
+  </div>
+
+  <h2 class="section">困ったときは</h2>
+  <div class="step-block">
+    <div class="step-title">トムに相談する</div>
+    <div class="point">文章の変更・追加 → トムに依頼</div>
+    <div class="point">写真の差し替え → 写真をトムに送る</div>
+    <div class="point">レイアウトの修正 → トムに依頼</div>
+    <div class="highlight">「ここを変えて」と言えばトムがHTMLを修正してファイルを渡します。あとはアップロードするだけです。</div>
+  </div>
+
+</div>
+</body>
+</html>
