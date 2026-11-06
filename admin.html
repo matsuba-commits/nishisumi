@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イベント運用ガイド | 西成住之江支部</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #1a3a5c;
+      --accent: #c8973a;
+      --light: #f8f6f2;
+      --white: #ffffff;
+      --gray: #666666;
+      --border: #e0dbd2;
+      --ok-bg: #ebf6ee;
+      --ok-text: #25623a;
+      --warn-bg: #fff4e5;
+      --warn-text: #915b00;
+    }
+
+    body {
+      font-family: "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: var(--light);
+      color: #333333;
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 32px 20px;
+    }
+
+    header h1 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+      display: grid;
+      grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    p,
+    li {
+      font-size: 14px;
+    }
+
+    .lead {
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .status {
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .status.ok {
+      background: var(--ok-bg);
+      color: var(--ok-text);
+    }
+
+    .status.warn {
+      background: var(--warn-bg);
+      color: var(--warn-text);
+    }
+
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 12px;
+      padding: 22px 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .step-action {
+      margin-top: 14px;
+    }
+
+    .inline-code,
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      background: #f5f5f5;
+      border-radius: 4px;
+      padding: 2px 6px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    th {
+      background: var(--primary);
+      color: var(--white);
+      text-align: left;
+      padding: 10px 12px;
+      white-space: nowrap;
+    }
+
+    td {
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+      vertical-align: top;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 14px;
+      background: #eef2f7;
+      color: var(--primary);
+      text-decoration: none;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      color: var(--white);
+    }
+
+    .btn.accent {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .source-box {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 6px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .event-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .event-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .event-date {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .event-title {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .event-meta {
+      color: var(--gray);
+      font-size: 13px;
+      margin-top: 6px;
+      white-space: pre-wrap;
+    }
+
+    .wide-section {
+      grid-column: 1 / -1;
+    }
+
+    .helper-grid {
+      display: block;
+    }
+
+    .helper-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .helper-target {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+    }
+
+    .helper-target h3 {
+      color: var(--primary);
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .helper-target-grid {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 8px 12px;
+      font-size: 14px;
+    }
+
+    .helper-target-label {
+      color: var(--gray);
+      font-weight: 700;
+    }
+
+    .helper-form {
+      margin-top: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fffdf9;
+    }
+
+    .helper-form h3 {
+      color: var(--primary);
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .step .helper-form {
+      margin-top: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .step .helper-form h3 {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+
+    .helper-field {
+      margin-top: 12px;
+    }
+
+    .helper-field label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .helper-field input,
+    .helper-field textarea,
+    .helper-field select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 12px;
+      font: inherit;
+      background: var(--white);
+      color: #333333;
+    }
+
+    .helper-field textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .helper-hint {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .helper-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    .helper-result {
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .helper-result.ok {
+      color: var(--ok-text);
+    }
+
+    .helper-result.warn {
+      color: var(--warn-text);
+    }
+
+    .hidden-frame {
+      width: 0;
+      height: 0;
+      border: 0;
+      position: absolute;
+      left: -9999px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font: inherit;
+      background: #fff;
+    }
+
+    .field textarea {
+      min-height: 86px;
+      resize: vertical;
+    }
+
+    .field-help {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .helper-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fcfbf8;
+    }
+
+    .helper-image {
+      aspect-ratio: 3 / 2;
+      background: linear-gradient(135deg, #e8e0d4, #d4ccc0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--gray);
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    .helper-body {
+      padding: 16px;
+    }
+
+    .helper-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .helper-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      background: #eef2f7;
+      color: var(--primary);
+    }
+
+    .helper-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .helper-meta {
+      font-size: 13px;
+      color: var(--gray);
+      white-space: pre-wrap;
+    }
+
+    .copy-box {
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      background: #faf8f4;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .copy-box strong {
+      color: var(--primary);
+    }
+
+    body.helper-mode header,
+    body.helper-mode main>section {
+      display: none;
+    }
+
+    body.helper-mode-report-photo #report-photo-helper,
+    body.helper-mode-event-guide #event-guide-helper {
+      display: block;
+    }
+
+    body.helper-mode main {
+      max-width: 980px;
+      grid-template-columns: 1fr;
+      padding-top: 32px;
+    }
+
+    body.helper-mode #report-photo-helper,
+    body.helper-mode #event-guide-helper {
+      grid-column: auto;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      .wide-section {
+        grid-column: auto;
+      }
+
+      .helper-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>イベント運用ガイwwwwwwド</h1>
+    <p>更新担当者は Google スプレッドシートに行を追加するだけ、公開ページはその内容を自動で読み込みます。</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>使い方</h2>
+      <p class="lead">日々の更新で GitHub を触らない運用に切り替えるための確認ページです。</p>
+      <div id="status-box" class="status warn">まだ Google スプレッドシートの CSV URL が設定されていません。現在は <span
+          class="inline-code">data/events.json</span> を表示します。</div>
+
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">Google スプレッドシートを用意する</div>
+            <div>イベント一覧は1シートで管理します。グループ紹介や活動報告を変えやすくしたい場合は別シートも追加できます。</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">ウェブ公開した CSV URL を取得する</div>
+            <div>イベント一覧は <span class="inline-code">sheetCsvUrl</span>、グループ紹介は <span
+                class="inline-code">groupSheetCsvUrl</span>、活動報告は <span class="inline-code">reportSheetCsvUrl</span> に
+              CSV URL を入れます。</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">以後の更新はシートだけ</div>
+            <div>担当者はイベント一覧シート、グループ紹介シート、活動報告シートを更新するだけでよく、GitHub 側の更新作業は不要です。</div>
+            <div style="margin-top:6px;color:var(--gray);">活動報告の画像はシートに直接挿入せず、Drive共有リンクを <span
+                class="inline-code">画像Url</span> に貼ってください。活動報告ページはその共有リンクから画像を表示できます。テンプレートの <span
+                class="inline-code">プレビュー</span> 列を使うと、スプレッドシート上でも確認できます。Drive 側はリンク共有を有効にしてください。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>意味</th>
+              <th>列名（英字）</th>
+              <th>列名（日本語）</th>
+              <th>例</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>日付</td>
+              <td><code>date</code></td>
+              <td><code>年月日</code></td>
+              <td><code>2026-06-10</code></td>
+            </tr>
+            <tr>
+              <td>区分</td>
+              <td><code>category</code></td>
+              <td><code>種別</code></td>
+              <td>小グループ会</td>
+            </tr>
+            <tr>
+              <td>タイトル</td>
+              <td><code>title</code></td>
+              <td><code>タイトル</code></td>
+              <td>G2小グループ会 第1回</td>
+            </tr>
+            <tr>
+              <td>グループ</td>
+              <td><code>group</code></td>
+              <td><code>小グループ</code></td>
+              <td><code>G2</code></td>
+            </tr>
+            <tr>
+              <td>回数</td>
+              <td><code>round</code></td>
+              <td><code>回</code></td>
+              <td><code>1</code></td>
+            </tr>
+            <tr>
+              <td>場所</td>
+              <td><code>place</code></td>
+              <td><code>場所</code></td>
+              <td>墨の絵会館</td>
+            </tr>
+            <tr>
+              <td>時間</td>
+              <td><code>time</code></td>
+              <td><code>時間</code></td>
+              <td><code>18:30〜21:30</code></td>
+            </tr>
+            <tr>
+              <td>リンクURL</td>
+              <td><code>url</code></td>
+              <td><code>e.doyu_url</code></td>
+              <td>https://example.com</td>
+            </tr>
+            <tr>
+              <td>直近イベント案内</td>
+              <td><code>latestGuideVisible</code></td>
+              <td><code>直近のイベント案内表示</code></td>
+              <td><code>公開</code> / <code>非公開</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="source-box">
+        <strong>現在の設定</strong>
+        <div id="source-summary" style="margin-top:8px;">読み込み中です。</div>
+      </div>
+
+      <div class="actions">
+        <a class="btn primary" href="./index.html" target="_blank" rel="noopener noreferrer">公開ページを開く</a>
+        <button id="reload-button" class="btn" type="button">データを再読込</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>表示プレビュー</h2>
+      <p class="lead">ここに今のイベントデータが並びます。公開ページと同じ元データを使います。</p>
+      <div id="event-list" class="event-list"></div>
+    </section>
+
+    <section id="report-photo-helper" class="wide-section">
+      <h2>活動報告 写真設定補助</h2>
+      <p class="lead">写真を追加するときは、この順番で進めてください。</p>
+      <div id="helper-status" class="status warn">Drive フォルダURLとスプレッドシート編集URLを設定すると、この画面からすぐ開けます。</div>
+      <div id="helper-target" class="helper-target" hidden>
+        <h3>更新対象</h3>
+        <div class="helper-target-grid">
+          <div class="helper-target-label">識別子</div>
+          <div id="helper-target-id">未指定</div>
+          <div class="helper-target-label">年月日</div>
+          <div id="helper-target-date">未指定</div>
+          <div class="helper-target-label">タイトル</div>
+          <div id="helper-target-title">未指定</div>
+          <div class="helper-target-label">種別</div>
+          <div id="helper-target-category">未指定</div>
+          <div class="helper-target-label">場所</div>
+          <div id="helper-target-place">未指定</div>
+        </div>
+      </div>
+      <iframe id="report-photo-submit-frame" class="hidden-frame" name="report-photo-submit-frame"
+        title="report-photo-submit-frame"></iframe>
+
+      <div class="helper-grid">
+        <div class="helper-panel">
+          <div class="step-list" style="margin-top:0;">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-title">Driveフォルダを開いて写真をアップロード</div>
+              <div class="step-text">「Driveフォルダを開く」を押して、Google Drive で対象フォルダを開きます。左上の「＋
+                新規」→「ファイルのアップロード」を押し、入れたい写真を選びます。</div>
+              <div class="step-action">
+                <a id="open-drive-folder" class="btn accent" href="#" target="_blank"
+                  rel="noopener noreferrer">Driveフォルダを開く</a>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-title">画像の共有リンクをコピー</div>
+              <div class="step-text">アップロードした画像の「共有」からリンクをコピーします。Apps Scriptの実行者が写真を閲覧できることを確認してください。公開の活動報告に登録した写真はサイトへ配信されます。非掲載写真は登録しないでください。</div>
+            </div>
+
+            <div class="step" id="helper-form-panel" hidden>
+              <div class="step-num">3</div>
+              <div class="helper-form">
+                <h3>この画面に共有リンクを貼って反映</h3>
+                <p class="lead" style="margin-bottom:0;">Drive の共有リンクをここに貼って送信すると、Apps Script 経由で活動報告シートの該当行を更新します。</p>
+                <form id="report-photo-form" method="post" target="report-photo-submit-frame">
+                  <div class="helper-field">
+                    <label for="report-image-url">画像Url</label>
+                    <textarea id="report-image-url" name="imageUrl"
+                      placeholder="https://drive.google.com/file/d/..."></textarea>
+                    <div class="helper-hint">Drive の「リンクをコピー」で取得した共有URLをそのまま貼り付けます。</div>
+                  </div>
+                  <div class="helper-field">
+                    <label for="report-image-alt">画像説明</label>
+                    <input id="report-image-alt" name="imageAlt" type="text" placeholder="集合写真、登壇中の様子 など">
+                    <div class="helper-hint">必要なときだけ入力してください。Apps Script 側で `画像説明` 列も更新できます。</div>
+                  </div>
+                  <input id="report-id-input" name="reportId" type="hidden">
+                  <input id="report-date-input" name="reportDate" type="hidden">
+                  <input id="report-title-input" name="reportTitle" type="hidden">
+                  <input id="report-category-input" name="reportCategory" type="hidden">
+                  <input id="report-place-input" name="reportPlace" type="hidden">
+                  <div class="helper-actions">
+                    <button id="submit-report-photo" class="btn primary" type="submit">この画面から反映する</button>
+                    <a id="back-to-report-link" class="btn" href="./report.html?admin=1" hidden>もとの画面に戻る</a>
+                  </div>
+                </form>
+                <div id="helper-submit-result" class="helper-result"></div>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-title">うまく送れない時だけスプレッドシートを開く</div>
+              <div class="step-text">自動反映が使えない場合の予備手順です。活動報告のF列（ <span class="inline-code">画像Url</span>）を直接更新できます。</div>
+              <div class="step-action">
+                <a id="open-report-sheet" class="btn accent" href="#" target="_blank"
+                  rel="noopener noreferrer">更新用スプレットシートを開く</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="event-guide-helper" class="wide-section">
+      <h2>直近のイベント案内 →活動報告編集</h2>
+      <p class="lead">HOME の「直近のイベント案内」から開いたイベントに対応する、活動報告シートの内容を確認し、そのまま写真も設定できる画面です。</p>
+      <div id="event-helper-status" class="status warn">`index.html?admin=1` のイベント一覧から開くと、対応する活動報告シートの内容を確認し、画像を反映できます。</div>
+      <div id="event-helper-target" class="helper-target" hidden>
+        <h3>活動報告</h3>
+        <div class="helper-target-grid">
+          <div class="helper-target-label">年月日</div>
+          <div id="event-helper-date">未指定</div>
+          <div class="helper-target-label">種別</div>
+          <div id="event-helper-category">未指定</div>
+          <div class="helper-target-label">タイトル</div>
+          <div id="event-helper-title">未指定</div>
+          <div class="helper-target-label">内容</div>
+          <div id="event-helper-content">未指定</div>
+          <div class="helper-target-label">タグ</div>
+          <div id="event-helper-keywords">未指定</div>
+          <div class="helper-target-label">画像Url</div>
+          <div id="event-helper-image-url">未指定</div>
+          <div class="helper-target-label">画像説明</div>
+          <div id="event-helper-image-alt">未指定</div>
+          <div class="helper-target-label">場所</div>
+          <div id="event-helper-place">未指定</div>
+          <div class="helper-target-label">公開状態</div>
+          <div id="event-helper-visible">未指定</div>
+        </div>
+      </div>
+      <div class="helper-grid">
+        <div class="helper-panel">
+          <div class="step-list" style="margin-top:0;">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-title">活動報告シートの内容を編集</div>
+              <div class="step-text">内容、タグ、公開状態をこの画面から活動報告シートへ直接反映できます。</div>
+              <div class="helper-form">
+                <form id="event-guide-form" method="post" target="event-guide-submit-frame" novalidate>
+                  <div class="helper-field">
+                    <label for="event-report-text">内容</label>
+                    <textarea id="event-report-text" name="text" placeholder="活動報告として掲載する本文を入力します。"></textarea>
+                  </div>
+                  <div class="helper-field">
+                    <label for="event-report-keywords">タグ</label>
+                    <input id="event-report-keywords" name="keywords" type="text" placeholder="AI,一人経営者 など">
+                    <div class="helper-hint">カンマ区切りのまま入力できます。</div>
+                  </div>
+                  <div class="helper-field">
+                    <label for="event-report-visible">公開状態</label>
+                    <select id="event-report-visible" name="visible">
+                      <option value="公開">公開</option>
+                      <option value="非公開">非公開</option>
+                    </select>
+                  </div>
+                  <input id="event-report-id-input" name="reportId" type="hidden">
+                  <input id="event-report-date-input" name="reportDate" type="hidden">
+                  <input id="event-report-title-input" name="reportTitle" type="hidden">
+                  <div class="helper-actions">
+                    <button id="submit-event-guide" class="btn primary" type="submit">この画面から反映する</button>
+                    <a id="event-back-to-report-link" class="btn" href="./report.html?admin=1">活動報告画面へ</a>
+                  </div>
+                </form>
+                <iframe id="event-guide-submit-frame" class="hidden-frame" name="event-guide-submit-frame"
+                  title="イベント編集送信用隠しフレーム"></iframe>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-title">Driveフォルダを開いて写真をアップロード</div>
+              <div class="step-text">「Driveフォルダを開く」を押して、Google Drive で対象フォルダを開きます。左上の「＋ 新規」→「ファイルのアップロード」を押し、入れたい写真を選びます。</div>
+              <div class="step-action">
+                <a id="open-event-drive-folder" class="btn accent" href="#" target="_blank"
+                  rel="noopener noreferrer">Driveフォルダを開く</a>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-title">画像の共有リンクをコピー</div>
+              <div class="step-text">アップロードした画像の「共有」からリンクをコピーします。Apps Scriptの実行者が写真を閲覧できることを確認してください。公開の活動報告に登録した写真はサイトへ配信されます。非掲載写真は登録しないでください。</div>
+            </div>
+            <div class="step" id="event-guide-photo-form-panel" hidden>
+              <div class="step-num">4</div>
+              <div class="helper-form">
+                <h3>この画面に共有リンクを貼って反映</h3>
+                <p class="lead" style="margin-bottom:0;">Drive の共有リンクをここに貼って送信すると、Apps Script 経由で活動報告シートの該当行を更新します。</p>
+                <form id="event-guide-photo-form" method="post" target="event-guide-photo-submit-frame">
+                  <div class="helper-field">
+                    <label for="event-report-image-url">画像Url</label>
+                    <textarea id="event-report-image-url" name="imageUrl"
+                      placeholder="https://drive.google.com/file/d/..."></textarea>
+                    <div class="helper-hint">Drive の「リンクをコピー」で取得した共有URLをそのまま貼り付けます。</div>
+                  </div>
+                  <div class="helper-field">
+                    <label for="event-report-image-alt">画像説明</label>
+                    <input id="event-report-image-alt" name="imageAlt" type="text" placeholder="集合写真、登壇中の様子 など">
+                    <div class="helper-hint">必要なときだけ入力してください。Apps Script 側で `画像説明` 列も更新できます。</div>
+                  </div>
+                  <input id="event-report-photo-id-input" name="reportId" type="hidden">
+                  <input id="event-report-photo-date-input" name="reportDate" type="hidden">
+                  <input id="event-report-photo-title-input" name="reportTitle" type="hidden">
+                  <input id="event-report-photo-category-input" name="reportCategory" type="hidden">
+                  <input id="event-report-photo-place-input" name="reportPlace" type="hidden">
+                  <div class="helper-actions">
+                    <button id="submit-event-guide-photo" class="btn primary" type="submit">この画面から反映する</button>
+                    <a id="event-photo-back-to-report-link" class="btn" href="./report.html?admin=1">活動報告画面へ</a>
+                  </div>
+                </form>
+                <iframe id="event-guide-photo-submit-frame" class="hidden-frame" name="event-guide-photo-submit-frame"
+                  title="event-guide-photo-submit-frame"></iframe>
+                <div id="event-guide-photo-result" class="helper-result"></div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">5</div>
+              <div class="step-title">うまく送れない時だけ活動報告スプレッドシートを開く</div>
+              <div class="step-text">自動反映が使えない場合の予備手順です。活動報告のF列（ <span class="inline-code">画像Url</span>）を直接更新できます。</div>
+              <div class="step-action">
+                <a id="open-event-sheet" class="btn accent" href="#" target="_blank"
+                  rel="noopener noreferrer">活動報告スプレットシートを開く</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const defaultConfig = {
+      sheetCsvUrl: '',
+      fallbackJsonUrl: './data/events.json',
+      spreadsheetEditUrl: '',
+      groupSheetCsvUrl: '',
+      fallbackGroupsUrl: './data/groups.json',
+      reportSheetCsvUrl: '',
+      fallbackReportsUrl: './data/reports.json',
+      reportDriveFolderUrl: '',
+      reportSheetEditUrl: '',
+      reportSheetWebhookUrl: ''
+    };
+    const statusBox = document.getElementById('status-box');
+    const sourceSummary = document.getElementById('source-summary');
+    const eventList = document.getElementById('event-list');
+    const helperStatus = document.getElementById('helper-status');
+    const openDriveFolderLink = document.getElementById('open-drive-folder');
+    const openReportSheetLink = document.getElementById('open-report-sheet');
+    const openEventSheetLink = document.getElementById('open-event-sheet');
+    const helperTarget = document.getElementById('helper-target');
+    const helperTargetId = document.getElementById('helper-target-id');
+    const helperTargetDate = document.getElementById('helper-target-date');
+    const helperTargetTitle = document.getElementById('helper-target-title');
+    const helperTargetCategory = document.getElementById('helper-target-category');
+    const helperTargetPlace = document.getElementById('helper-target-place');
+    const helperFormPanel = document.getElementById('helper-form-panel');
+    const reportPhotoForm = document.getElementById('report-photo-form');
+    const reportImageUrlInput = document.getElementById('report-image-url');
+    const reportImageAltInput = document.getElementById('report-image-alt');
+    const reportIdInput = document.getElementById('report-id-input');
+    const reportDateInput = document.getElementById('report-date-input');
+    const reportTitleInput = document.getElementById('report-title-input');
+    const reportCategoryInput = document.getElementById('report-category-input');
+    const reportPlaceInput = document.getElementById('report-place-input');
+    const submitReportPhotoButton = document.getElementById('submit-report-photo');
+    const backToReportLink = document.getElementById('back-to-report-link');
+    const helperSubmitResult = document.getElementById('helper-submit-result');
+    const eventHelperStatus = document.getElementById('event-helper-status');
+    const eventHelperTarget = document.getElementById('event-helper-target');
+    const eventHelperDate = document.getElementById('event-helper-date');
+    const eventHelperCategory = document.getElementById('event-helper-category');
+    const eventHelperTitle = document.getElementById('event-helper-title');
+    const eventHelperContent = document.getElementById('event-helper-content');
+    const eventHelperKeywords = document.getElementById('event-helper-keywords');
+    const eventHelperImageUrl = document.getElementById('event-helper-image-url');
+    const eventHelperImageAlt = document.getElementById('event-helper-image-alt');
+    const eventHelperPlace = document.getElementById('event-helper-place');
+    const eventHelperVisible = document.getElementById('event-helper-visible');
+    const eventGuideForm = document.getElementById('event-guide-form');
+    const eventReportTextInput = document.getElementById('event-report-text');
+    const eventReportKeywordsInput = document.getElementById('event-report-keywords');
+    const eventReportVisibleInput = document.getElementById('event-report-visible');
+    const eventReportIdInput = document.getElementById('event-report-id-input');
+    const eventReportDateInput = document.getElementById('event-report-date-input');
+    const eventReportTitleInput = document.getElementById('event-report-title-input');
+    const submitEventGuideButton = document.getElementById('submit-event-guide');
+    const eventBackToReportLink = document.getElementById('event-back-to-report-link');
+    const eventPhotoBackToReportLink = document.getElementById('event-photo-back-to-report-link');
+    const openEventDriveFolderLink = document.getElementById('open-event-drive-folder');
+    const eventGuidePhotoFormPanel = document.getElementById('event-guide-photo-form-panel');
+    const eventGuidePhotoForm = document.getElementById('event-guide-photo-form');
+    const eventReportImageUrlInput = document.getElementById('event-report-image-url');
+    const eventReportImageAltInput = document.getElementById('event-report-image-alt');
+    const eventReportPhotoIdInput = document.getElementById('event-report-photo-id-input');
+    const eventReportPhotoDateInput = document.getElementById('event-report-photo-date-input');
+    const eventReportPhotoTitleInput = document.getElementById('event-report-photo-title-input');
+    const eventReportPhotoCategoryInput = document.getElementById('event-report-photo-category-input');
+    const eventReportPhotoPlaceInput = document.getElementById('event-report-photo-place-input');
+    const submitEventGuidePhotoButton = document.getElementById('submit-event-guide-photo');
+    const eventGuidePhotoResult = document.getElementById('event-guide-photo-result');
+    const helperParams = new URLSearchParams(window.location.search);
+    const helperMode = helperParams.get('mode') || '';
+    let currentConfig = { ...defaultConfig };
+    let helperSubmitTimer = 0;
+    let eventGuideSubmitTimer = 0;
+
+    if (helperMode === 'report-photo-helper') {
+      document.body.classList.add('helper-mode');
+      document.body.classList.add('helper-mode-report-photo');
+      document.title = '活動報告 写真リンク入力補助 | 西成住之江支部';
+    } else if (helperMode === 'event-guide-helper') {
+      document.body.classList.add('helper-mode');
+      document.body.classList.add('helper-mode-event-guide');
+      document.title = '直近のイベント案内 詳細確認 | 西成住之江支部';
+    }
+
+    if (document.referrer) {
+      try {
+        const referrerUrl = new URL(document.referrer, window.location.href);
+        if (referrerUrl.origin === window.location.origin) {
+          const adminReferrerUrl = buildAdminPageUrl(referrerUrl.href);
+          backToReportLink.href = adminReferrerUrl;
+          eventBackToReportLink.href = adminReferrerUrl;
+          eventPhotoBackToReportLink.href = adminReferrerUrl;
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function normalizeReportMatchValue(value) {
+      return String(value || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function buildReportIdentifier(date, title) {
+      return `${normalizeReportMatchValue(date)}__${normalizeReportMatchValue(title)}`;
+    }
+
+    function buildFreshRequestUrl(url) {
+      try {
+        const parsed = new URL(String(url || ''), window.location.href);
+        parsed.searchParams.set('_', String(Date.now()));
+        return parsed.toString();
+      } catch (error) {
+        console.error(error);
+        return url;
+      }
+    }
+
+    function buildApiResourceUrl(baseUrl, resource, includeHidden) {
+      const parsed = new URL(String(baseUrl || '').trim(), window.location.href);
+      parsed.searchParams.set('resource', resource);
+      if (includeHidden) {
+        parsed.searchParams.set('includeHidden', 'true');
+      }
+      parsed.searchParams.set('_', String(Date.now()));
+      return parsed.toString();
+    }
+
+    function buildAdminPageUrl(url) {
+      try {
+        const parsed = new URL(String(url || ''), window.location.href);
+        parsed.searchParams.set('admin', '1');
+        return `${parsed.pathname.split('/').pop()}${parsed.search}`;
+      } catch (error) {
+        console.error(error);
+        return './report.html?admin=1';
+      }
+    }
+
+    function persistPendingReportPhotoUpdate() {
+      const reportId = normalizeReportMatchValue(reportIdInput.value)
+        || buildReportIdentifier(reportDateInput.value, reportTitleInput.value);
+      const payload = {
+        reportId,
+        reportDate: reportDateInput.value,
+        reportTitle: reportTitleInput.value,
+        imageUrl: String(reportImageUrlInput.value || '').trim(),
+        imageAlt: String(reportImageAltInput.value || '').trim(),
+        updatedAt: Date.now()
+      };
+
+      try {
+        window.localStorage.setItem('pending-report-photo-update', JSON.stringify(payload));
+      } catch (error) {
+        console.error(error);
+      }
+
+      try {
+        if (window.opener && window.opener !== window) {
+          window.opener.postMessage({
+            type: 'pending-report-photo-update',
+            payload
+          }, window.location.origin);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+
+      backToReportLink.hidden = false;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let current = '';
+      let row = [];
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"') {
+          if (inQuotes && next === '"') {
+            current += '"';
+            i += 1;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          row.push(current);
+          current = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && next === '\n') {
+            i += 1;
+          }
+          row.push(current);
+          rows.push(row);
+          row = [];
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+
+      if (current.length > 0 || row.length > 0) {
+        row.push(current);
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function normalizeHeader(value) {
+      return String(value || '').trim().toLowerCase();
+    }
+
+    function pickValue(record, keys) {
+      for (const key of keys) {
+        const normalizedKey = normalizeHeader(key);
+        if (Object.prototype.hasOwnProperty.call(record, normalizedKey)) {
+          return String(record[normalizedKey] || '').trim();
+        }
+      }
+      return '';
+    }
+
+    function isLatestGuideVisible(record) {
+      const guideVisible = pickValue(record, [
+        'latestGuideVisible',
+        'guideVisible',
+        '直近のイベント案内表示',
+        '表示',
+        'visible',
+        '公開'
+      ]);
+
+      if (!guideVisible) {
+        return true;
+      }
+
+      return ['公開', 'true', '1', 'yes'].includes(guideVisible.toLowerCase());
+    }
+
+    function escapeAttribute(value) {
+      return escapeHtml(value).replace(/`/g, '&#96;');
+    }
+
+    function isValidWebUrl(value) {
+      try {
+        const url = new URL(String(value || '').trim());
+        return url.protocol === 'https:' || url.protocol === 'http:';
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function decodeParam(value) {
+      return String(value || '').trim();
+    }
+
+    function setHelperResult(message, tone) {
+      helperSubmitResult.textContent = message;
+      helperSubmitResult.className = `helper-result ${tone || ''}`.trim();
+    }
+
+    function setEventGuideResult(message, tone) {
+      if (!eventHelperStatus) {
+        return;
+      }
+      eventHelperStatus.textContent = message;
+      eventHelperStatus.className = `status ${tone || 'warn'}`.trim();
+    }
+
+    function setEventGuidePhotoResult(message, tone) {
+      eventGuidePhotoResult.textContent = message;
+      eventGuidePhotoResult.className = `helper-result ${tone || ''}`.trim();
+    }
+
+    function fillHelperTarget() {
+      const reportId = decodeParam(helperParams.get('reportId'));
+      const reportDate = decodeParam(helperParams.get('reportDate'));
+      const reportTitle = decodeParam(helperParams.get('reportTitle'));
+      const reportCategory = decodeParam(helperParams.get('reportCategory'));
+      const reportPlace = decodeParam(helperParams.get('reportPlace'));
+      const hasTarget = Boolean(reportId || (reportDate && reportTitle));
+
+      helperTarget.hidden = !hasTarget;
+      helperTargetId.textContent = reportId || '未指定';
+      helperTargetDate.textContent = reportDate || '未指定';
+      helperTargetTitle.textContent = reportTitle || '未指定';
+      helperTargetCategory.textContent = reportCategory || '未指定';
+      helperTargetPlace.textContent = reportPlace || '未指定';
+
+      reportIdInput.value = reportId;
+      reportDateInput.value = reportDate;
+      reportTitleInput.value = reportTitle;
+      reportCategoryInput.value = reportCategory;
+      reportPlaceInput.value = reportPlace;
+
+      return hasTarget;
+    }
+
+    function updateHelperFormState() {
+      const hasTarget = fillHelperTarget();
+      const hasWebhookUrl = isValidWebUrl(currentConfig.reportSheetWebhookUrl);
+
+      helperFormPanel.hidden = !hasTarget;
+      submitReportPhotoButton.disabled = !hasWebhookUrl;
+      submitReportPhotoButton.textContent = hasWebhookUrl ? 'この画面から反映する' : 'Webhook URL 設定待ち';
+      backToReportLink.hidden = true;
+
+      if (!hasTarget) {
+        setHelperResult('このカード専用の更新情報が渡されていません。活動履歴の「📸 写真をここに差し替え」から開いてください。', 'warn');
+        return;
+      }
+
+      if (!hasWebhookUrl) {
+        setHelperResult('Apps Script の Web アプリ URL が未設定です。`data/site-config.json` の `reportSheetWebhookUrl` を設定すると、この画面から直接反映できます。設定までは下の予備手順で手動更新できます。', 'warn');
+        return;
+      }
+
+      reportPhotoForm.action = currentConfig.reportSheetWebhookUrl;
+      setHelperResult('共有リンクを貼って「この画面から反映する」を押すと、この活動報告の `画像Url` を更新します。', 'ok');
+    }
+
+    function csvRowsToEvents(rows) {
+      if (!Array.isArray(rows) || rows.length < 2) {
+        return [];
+      }
+
+      const headers = rows[0].map((header) => normalizeHeader(header));
+      return rows.slice(1)
+        .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+        .map((row) => {
+          const record = {};
+          headers.forEach((header, index) => {
+            record[header] = row[index] ?? '';
+          });
+
+          return {
+            date: pickValue(record, ['date', '日付', '年月日']),
+            category: pickValue(record, ['category', '区分', '種別']),
+            group: pickValue(record, ['group', 'グループ', '小グループ']),
+            round: pickValue(record, ['round', '回']),
+            title: pickValue(record, ['title', 'タイトル']),
+            place: pickValue(record, ['place', '場所']),
+            time: pickValue(record, ['time', '時間']),
+            detail: pickValue(record, ['detail', '詳細', 'place', '場所']),
+            url: pickValue(record, ['url', 'e.doyu_url', 'リンクurl', 'linkurl', 'リンク']),
+            linkLabel: pickValue(record, ['linklabel', 'リンク文字', 'button', 'ボタン文字']),
+            latestGuideVisible: isLatestGuideVisible(record)
+          };
+        })
+        .filter((item) => item && item.date && item.title)
+        .sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title, 'ja'));
+    }
+
+    function parseKeywords(value) {
+      return String(value || '')
+        .split(/[,\n、]/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function rowsToReports(rows) {
+      if (!Array.isArray(rows) || rows.length < 2) {
+        return [];
+      }
+
+      const headers = rows[0].map((header) => normalizeHeader(header));
+      return rows.slice(1)
+        .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+        .map((row) => {
+          const record = {};
+          headers.forEach((header, index) => {
+            record[header] = row[index] ?? '';
+          });
+
+          return {
+            id: pickValue(record, ['id', '識別子']),
+            date: pickValue(record, ['date', '日付', '年月日']),
+            categoryLabel: pickValue(record, ['category', '区分', '種別']) || '活動報告',
+            title: pickValue(record, ['title', 'タイトル']),
+            text: pickValue(record, ['text', 'body', 'report', '本文', '内容', '詳細']),
+            place: pickValue(record, ['place', 'location', 'venue', '会場', '場所']),
+            keywords: parseKeywords(pickValue(record, ['keywords', 'tags', 'キーワード', 'タグ'])),
+            imageUrl: pickValue(record, ['imageurl', 'image', 'photo', '画像url', '写真url']),
+            imageAlt: pickValue(record, ['imagealt', 'alt', '画像alt', '代替テキスト', '画像説明']),
+            visible: pickValue(record, ['visible', '公開', '公開/非公開'])
+          };
+        })
+        .filter((item) => item && item.date && item.title);
+    }
+
+    function normalizeJsonReports(data) {
+      const items = Array.isArray(data?.reports) ? data.reports : [];
+      return items
+        .map((item) => ({
+          id: String(item.id || '').trim(),
+          date: String(item.date || '').trim(),
+          categoryLabel: String(item.categoryLabel || item.category || '活動報告').trim(),
+          title: String(item.title || '').trim(),
+          text: String(item.text || item.body || item.detail || '').trim(),
+          place: String(item.place || item.location || '').trim(),
+          keywords: Array.isArray(item.keywords) ? item.keywords.map((keyword) => String(keyword || '').trim()).filter(Boolean) : [],
+          imageUrl: String(item.imageUrl || '').trim(),
+          imageAlt: String(item.imageAlt || '').trim(),
+          visible: String(item.visible || '').trim()
+        }))
+        .filter((item) => item.date && item.title);
+    }
+
+    function normalizeLiveReports(items) {
+      return (Array.isArray(items) ? items : [])
+        .map((item) => ({
+          id: String(item?.id || '').trim(),
+          date: String(item?.date || '').trim(),
+          categoryLabel: String(item?.categoryLabel || item?.category || '活動報告').trim(),
+          title: String(item?.title || '').trim(),
+          text: String(item?.text || item?.body || item?.detail || '').trim(),
+          place: String(item?.place || item?.location || '').trim(),
+          keywords: parseKeywords(item?.keywords),
+          imageUrl: String(item?.imageUrl || '').trim(),
+          imageAlt: String(item?.imageAlt || '').trim(),
+          visible: String(item?.visible || '').trim()
+        }))
+        .filter((item) => item.date && item.title);
+    }
+
+    function renderEvents(events) {
+      if (!Array.isArray(events) || events.length === 0) {
+        eventList.innerHTML = '<div class="event-card">表示できるイベントがありません。</div>';
+        return;
+      }
+
+      eventList.innerHTML = events.map((event) => `
+      <article class="event-card">
+        <div class="event-date">${escapeHtml(event.date)}</div>
+        <div class="event-title">${escapeHtml(event.title)}</div>
+        <div class="event-meta">${escapeHtml(event.category || '')}</div>
+        <div class="event-meta">${escapeHtml(event.place || event.detail || '')}${event.time ? ` ${escapeHtml(event.time)}` : ''}</div>
+        <div class="event-meta">${event.url ? escapeHtml(event.url) : 'リンクなし'}</div>
+      </article>
+    `).join('');
+    }
+
+    function renderPhotoHelper() {
+      const helperActive = helperMode === 'report-photo-helper' || Boolean(helperParams.get('reportId') || helperParams.get('reportTitle'));
+      const hasValidDriveFolderUrl = isValidWebUrl(currentConfig.reportDriveFolderUrl);
+      const hasValidReportSheetUrl = isValidWebUrl(currentConfig.reportSheetEditUrl);
+      const hasValidWebhookUrl = isValidWebUrl(currentConfig.reportSheetWebhookUrl);
+      const hasTarget = Boolean(helperParams.get('reportId') || (helperParams.get('reportDate') && helperParams.get('reportTitle')));
+
+      if (!helperActive) {
+        helperStatus.style.display = '';
+        helperStatus.className = 'status warn';
+        helperStatus.textContent = 'report.html の「📸 写真をここに差し替え」から開くと、対象の活動報告情報を引き継げます。';
+      } else if (!hasTarget) {
+        helperStatus.style.display = '';
+        helperStatus.className = 'status warn';
+        helperStatus.textContent = '対象の活動報告情報を受け取れていません。活動履歴カードのリンクから開き直してください。';
+      } else if (!hasValidWebhookUrl) {
+        helperStatus.style.display = '';
+        helperStatus.className = 'status warn';
+        helperStatus.textContent = 'この画面に貼るUIは使えますが、まだ Web アプリ URL が未設定です。`reportSheetWebhookUrl` を設定すると、スプレッドシートを開かずに直接反映できます。';
+      } else if (hasValidDriveFolderUrl && hasValidReportSheetUrl) {
+        helperStatus.style.display = 'none';
+      } else {
+        helperStatus.style.display = '';
+        helperStatus.className = 'status warn';
+        helperStatus.textContent = 'Drive フォルダURLか活動報告スプシURLが未設定、またはURLが無効です。';
+      }
+
+      if (hasValidDriveFolderUrl) {
+        openDriveFolderLink.href = currentConfig.reportDriveFolderUrl;
+        openDriveFolderLink.setAttribute('aria-disabled', 'false');
+        openDriveFolderLink.style.pointerEvents = '';
+        openDriveFolderLink.style.opacity = '';
+      } else {
+        openDriveFolderLink.href = '#';
+        openDriveFolderLink.setAttribute('aria-disabled', 'true');
+        openDriveFolderLink.style.pointerEvents = 'none';
+        openDriveFolderLink.style.opacity = '0.55';
+      }
+
+      if (hasValidReportSheetUrl) {
+        openReportSheetLink.href = currentConfig.reportSheetEditUrl;
+        openReportSheetLink.setAttribute('aria-disabled', 'false');
+        openReportSheetLink.style.pointerEvents = '';
+        openReportSheetLink.style.opacity = '';
+      } else {
+        openReportSheetLink.href = '#';
+        openReportSheetLink.setAttribute('aria-disabled', 'true');
+        openReportSheetLink.style.pointerEvents = 'none';
+        openReportSheetLink.style.opacity = '0.55';
+      }
+
+      updateHelperFormState();
+    }
+
+    function setActionLinkState(link, href) {
+      if (link && isValidWebUrl(href)) {
+        link.href = href;
+        link.setAttribute('aria-disabled', 'false');
+        link.style.pointerEvents = '';
+        link.style.opacity = '';
+        return;
+      }
+      if (link) {
+        link.href = '#';
+        link.setAttribute('aria-disabled', 'true');
+        link.style.pointerEvents = 'none';
+        link.style.opacity = '0.55';
+      }
+    }
+
+    function findMatchingReportForEvent(reports) {
+      const eventDate = String(helperParams.get('eventDate') || '').trim();
+      const eventDateValue = normalizeReportMatchValue(eventDate);
+      const eventTitle = normalizeReportMatchValue(helperParams.get('eventTitle'));
+      const eventCategory = normalizeReportMatchValue(helperParams.get('eventCategory'));
+      const items = Array.isArray(reports) ? reports : [];
+
+      const scoredItems = items
+        .map((report) => {
+          const reportDate = normalizeReportMatchValue(report.date);
+          const reportTitle = normalizeReportMatchValue(report.title);
+          const reportCategory = normalizeReportMatchValue(report.categoryLabel);
+          const sameDate = Boolean(eventDateValue) && reportDate === eventDateValue;
+          let score = 0;
+
+          if (sameDate) {
+            score += 100;
+          }
+          if (eventTitle && reportTitle === eventTitle) {
+            score += 40;
+          }
+          if (eventCategory && reportCategory === eventCategory) {
+            score += 30;
+          }
+          if (eventTitle && reportCategory === eventTitle) {
+            score += 25;
+          }
+          if (eventCategory && reportTitle === eventCategory) {
+            score += 20;
+          }
+          if (eventTitle && reportTitle && (reportTitle.includes(eventTitle) || eventTitle.includes(reportTitle))) {
+            score += 10;
+          }
+          if (eventCategory && reportCategory && (reportCategory.includes(eventCategory) || eventCategory.includes(reportCategory))) {
+            score += 8;
+          }
+
+          return {
+            report,
+            score,
+            sameDate
+          };
+        })
+        .filter((item) => item.score > 0);
+
+      scoredItems.sort((a, b) => {
+        if (b.score !== a.score) {
+          return b.score - a.score;
+        }
+        return normalizeReportMatchValue(b.report.date).localeCompare(normalizeReportMatchValue(a.report.date), 'ja');
+      });
+
+      return scoredItems[0]?.report || null;
+    }
+
+    function renderEventGuideHelper(reports) {
+      const helperActive = helperMode === 'event-guide-helper';
+      const eventUrl = String(helperParams.get('eventUrl') || '').trim();
+      const eventDate = String(helperParams.get('eventDate') || '').trim();
+      const eventTitle = String(helperParams.get('eventTitle') || '').trim();
+      const hasTarget = Boolean(eventDate || eventTitle);
+      const matchedReport = findMatchingReportForEvent(reports);
+      const hasValidWebhookUrl = isValidWebUrl(currentConfig.reportSheetWebhookUrl);
+
+      if (!helperActive) {
+        return;
+      }
+
+      if (!hasTarget) {
+        eventHelperStatus.className = 'status warn';
+        eventHelperStatus.textContent = '対象イベント情報を受け取れていません。HOME の「直近のイベント案内」から開き直してください。';
+        eventHelperTarget.hidden = true;
+        eventGuidePhotoFormPanel.hidden = true;
+        setEventGuideResult('対象イベント情報を取得できないため、この画面からは反映できません。', 'warn');
+        setEventGuidePhotoResult('対象イベント情報を取得できないため、この画面からは反映できません。', 'warn');
+      } else if (!matchedReport) {
+        eventHelperStatus.className = 'status warn';
+        eventHelperStatus.textContent = 'このイベントに対応する活動報告が、活動報告シートで見つかりませんでした。年月日・種別・タイトルを確認してください。';
+        eventHelperTarget.hidden = false;
+        eventGuidePhotoFormPanel.hidden = true;
+        setEventGuideResult('対応する活動報告が見つからないため、この画面からは反映できません。', 'warn');
+        setEventGuidePhotoResult('対応する活動報告が見つからないため、この画面からは反映できません。', 'warn');
+      } else {
+        eventHelperStatus.className = 'status ok';
+        eventHelperStatus.textContent = '対応する活動報告シートの内容を編集でき、このまま写真の共有リンクも反映できます。';
+        eventHelperTarget.hidden = false;
+        eventGuidePhotoFormPanel.hidden = false;
+        if (hasValidWebhookUrl) {
+          setEventGuideResult('編集後に「この画面から反映する」を押すと、活動報告シートへ直接書き込みます。', 'ok');
+          setEventGuidePhotoResult('共有リンクを貼って「この画面から反映する」を押すと、この活動報告の `画像Url` を更新します。', 'ok');
+        } else {
+          setEventGuideResult('Apps Script の Web アプリ URL が未設定です。この画面からは反映できないので、活動報告スプレッドシートを直接開いて更新してください。', 'warn');
+          setEventGuidePhotoResult('Apps Script の Web アプリ URL が未設定です。この画面からは反映できないので、下の活動報告スプレッドシートを開いて更新してください。', 'warn');
+        }
+      }
+
+      eventHelperDate.textContent = matchedReport?.date || eventDate || '未指定';
+      eventHelperCategory.textContent = matchedReport?.categoryLabel || String(helperParams.get('eventCategory') || '').trim() || '未指定';
+      eventHelperTitle.textContent = matchedReport?.title || eventTitle || '未指定';
+      eventHelperContent.textContent = matchedReport?.text || '未指定';
+      eventHelperKeywords.textContent = matchedReport?.keywords?.length ? matchedReport.keywords.join(' / ') : '未指定';
+      eventHelperImageUrl.textContent = matchedReport?.imageUrl || '未指定';
+      eventHelperImageAlt.textContent = matchedReport?.imageAlt || '未指定';
+      eventHelperPlace.textContent = matchedReport?.place || String(helperParams.get('eventPlace') || '').trim() || '未指定';
+      eventHelperVisible.textContent = matchedReport?.visible || '未指定';
+
+      setActionLinkState(openEventDriveFolderLink, currentConfig.reportDriveFolderUrl);
+      setActionLinkState(openEventSheetLink, currentConfig.reportSheetEditUrl);
+
+      if (eventGuideForm) {
+        eventGuideForm.action = currentConfig.reportSheetWebhookUrl || '';
+      }
+
+      eventReportTextInput.value = matchedReport?.text || '';
+      eventReportKeywordsInput.value = matchedReport?.keywords?.length ? matchedReport.keywords.join(',') : '';
+      eventReportVisibleInput.value = matchedReport?.visible === '公開' ? '公開' : '非公開';
+      eventReportIdInput.value = matchedReport?.id || '';
+      eventReportDateInput.value = matchedReport?.date || eventDate || '';
+      eventReportTitleInput.value = matchedReport?.title || eventTitle || '';
+
+      if (eventGuidePhotoForm) {
+        eventGuidePhotoForm.action = currentConfig.reportSheetWebhookUrl || '';
+      }
+
+      eventReportPhotoIdInput.value = matchedReport?.id || '';
+      eventReportPhotoDateInput.value = matchedReport?.date || eventDate || '';
+      eventReportPhotoTitleInput.value = matchedReport?.title || eventTitle || '';
+      eventReportPhotoCategoryInput.value = matchedReport?.categoryLabel || '';
+      eventReportPhotoPlaceInput.value = matchedReport?.place || '';
+      eventReportImageUrlInput.value = matchedReport?.imageUrl || '';
+      eventReportImageAltInput.value = matchedReport?.imageAlt || '';
+
+      if (submitEventGuideButton) {
+        submitEventGuideButton.disabled = !matchedReport || !hasValidWebhookUrl;
+        submitEventGuideButton.textContent = hasValidWebhookUrl ? 'この画面から反映する' : 'Webhook URL 設定待ち';
+      }
+
+      if (submitEventGuidePhotoButton) {
+        submitEventGuidePhotoButton.disabled = !matchedReport || !hasValidWebhookUrl;
+        submitEventGuidePhotoButton.textContent = hasValidWebhookUrl ? 'この画面から反映する' : 'Webhook URL 設定待ち';
+      }
+    }
+
+    async function loadConfig() {
+      try {
+        const response = await fetch('./data/site-config.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error('Failed to fetch site-config.json');
+        }
+        return {
+          ...defaultConfig,
+          ...(await response.json())
+        };
+      } catch (error) {
+        console.error(error);
+        return defaultConfig;
+      }
+    }
+
+    async function loadEventsFromSheet(csvUrl) {
+      const response = await fetch(buildFreshRequestUrl(csvUrl), { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch published Google Sheet CSV');
+      }
+      return csvRowsToEvents(parseCsv(await response.text()));
+    }
+
+    async function loadEventsFromJson(jsonUrl) {
+      const response = await fetch(jsonUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch fallback events.json');
+      }
+      const data = await response.json();
+      return Array.isArray(data.events) ? data.events : [];
+    }
+
+    async function loadEventsFromApi(apiUrl) {
+      const response = await fetch(buildApiResourceUrl(apiUrl, 'events'), { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch live events API');
+      }
+      const data = await response.json();
+      return Array.isArray(data.events) ? data.events : [];
+    }
+
+    async function loadReportsFromSheet(csvUrl) {
+      const response = await fetch(buildFreshRequestUrl(csvUrl), { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch published report Google Sheet CSV');
+      }
+      return rowsToReports(parseCsv(await response.text()));
+    }
+
+    async function loadReportsFromJson(jsonUrl) {
+      const response = await fetch(jsonUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch fallback reports.json');
+      }
+      return normalizeJsonReports(await response.json());
+    }
+
+    async function loadReportsFromApi(apiUrl) {
+      const response = await fetch(buildApiResourceUrl(apiUrl, 'reports', true), { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch live reports API');
+      }
+      const data = await response.json();
+      return normalizeLiveReports(data.reports);
+    }
+
+    async function refresh() {
+      try {
+        const config = await loadConfig();
+        currentConfig = config;
+        const usingSheet = Boolean(config.sheetCsvUrl);
+        let usingLiveApi = false;
+        let events = [];
+        let reports = [];
+
+        if (isValidWebUrl(config.reportSheetWebhookUrl)) {
+          try {
+            [events, reports] = await Promise.all([
+              loadEventsFromApi(config.reportSheetWebhookUrl),
+              loadReportsFromApi(config.reportSheetWebhookUrl)
+            ]);
+            usingLiveApi = true;
+          } catch (apiError) {
+            console.error(apiError);
+          }
+        }
+
+        if (!events.length) {
+          events = usingSheet
+            ? await loadEventsFromSheet(config.sheetCsvUrl)
+            : await loadEventsFromJson(config.fallbackJsonUrl);
+        }
+
+        if (!reports.length) {
+          reports = config.reportSheetCsvUrl
+            ? await loadReportsFromSheet(config.reportSheetCsvUrl)
+            : await loadReportsFromJson(config.fallbackReportsUrl);
+        }
+
+        renderEvents(events);
+        renderPhotoHelper();
+        renderEventGuideHelper(reports);
+
+        if (usingLiveApi) {
+          statusBox.className = 'status ok';
+          statusBox.textContent = 'Apps Script のライブ取得が有効です。スプレッドシート更新後の反映が早くなります。';
+          sourceSummary.innerHTML = `
+          <div>データ元: Apps Script Web アプリ</div>
+          <div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.reportSheetWebhookUrl)}</div>
+          <div style="margin-top:10px;">予備経路: ${config.sheetCsvUrl ? 'Google スプレッドシート CSV を使用' : `フォールバック JSON を使用 (${escapeHtml(config.fallbackJsonUrl)})`}</div>
+          ${config.sheetCsvUrl ? `<div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.sheetCsvUrl)}</div>` : ''}
+          <div style="margin-top:10px;">活動報告予備経路: ${config.reportSheetCsvUrl ? 'Google スプレッドシート CSV を使用' : `フォールバック JSON を使用 (${escapeHtml(config.fallbackReportsUrl)})`}</div>
+          ${config.reportSheetCsvUrl ? `<div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.reportSheetCsvUrl)}</div>` : ''}
+          <div style="margin-top:6px;">読込件数: ${events.length}件</div>
+        `;
+        } else if (usingSheet) {
+          statusBox.className = 'status ok';
+          statusBox.textContent = 'Google スプレッドシート連携が有効です。更新担当者はシートを編集するだけで反映されます。';
+          sourceSummary.innerHTML = `
+          <div>データ元: Google スプレッドシート CSV</div>
+          <div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.sheetCsvUrl)}</div>
+          <div style="margin-top:10px;">グループ紹介: ${config.groupSheetCsvUrl ? 'Google スプレッドシート CSV を使用' : `フォールバック JSON を使用 (${escapeHtml(config.fallbackGroupsUrl)})`}</div>
+          ${config.groupSheetCsvUrl ? `<div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.groupSheetCsvUrl)}</div>` : ''}
+          <div style="margin-top:10px;">活動報告: ${config.reportSheetCsvUrl ? 'Google スプレッドシート CSV を使用' : `フォールバック JSON を使用 (${escapeHtml(config.fallbackReportsUrl)})`}</div>
+          ${config.reportSheetCsvUrl ? `<div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.reportSheetCsvUrl)}</div>` : ''}
+          <div style="margin-top:6px;">読込件数: ${events.length}件</div>
+        `;
+        } else {
+          statusBox.className = 'status warn';
+          statusBox.innerHTML = 'まだ Google スプレッドシートの CSV URL が設定されていません。現在は <span class="inline-code">data/events.json</span> を表示します。';
+          sourceSummary.innerHTML = `
+          <div>データ元: フォールバック JSON</div>
+          <div style="margin-top:6px;">${escapeHtml(config.fallbackJsonUrl)}</div>
+          <div style="margin-top:10px;">グループ紹介: ${config.groupSheetCsvUrl ? 'Google スプレッドシート CSV を使用' : `フォールバック JSON を使用 (${escapeHtml(config.fallbackGroupsUrl)})`}</div>
+          ${config.groupSheetCsvUrl ? `<div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.groupSheetCsvUrl)}</div>` : ''}
+          <div style="margin-top:10px;">活動報告: ${config.reportSheetCsvUrl ? 'Google スプレッドシート CSV を使用' : `フォールバック JSON を使用 (${escapeHtml(config.fallbackReportsUrl)})`}</div>
+          ${config.reportSheetCsvUrl ? `<div style="margin-top:6px;word-break:break-all;">${escapeHtml(config.reportSheetCsvUrl)}</div>` : ''}
+          <div style="margin-top:6px;">読込件数: ${events.length}件</div>
+        `;
+        }
+      } catch (error) {
+        console.error(error);
+        statusBox.className = 'status warn';
+        statusBox.textContent = 'データの読み込みに失敗しました。公開設定または URL を確認してください。';
+        sourceSummary.textContent = '読み込み失敗';
+        eventList.innerHTML = '<div class="event-card">データを表示できませんでした。</div>';
+        renderPhotoHelper();
+        renderEventGuideHelper([]);
+      }
+    }
+
+    document.getElementById('reload-button').addEventListener('click', refresh);
+
+    reportPhotoForm.addEventListener('submit', (event) => {
+      const imageUrl = String(reportImageUrlInput.value || '').trim();
+      if (!imageUrl) {
+        event.preventDefault();
+        setHelperResult('送信する前に `画像Url` を入力してください。', 'warn');
+        return;
+      }
+
+      window.clearTimeout(helperSubmitTimer);
+      submitReportPhotoButton.disabled = true;
+      submitReportPhotoButton.textContent = '送信中...';
+      setHelperResult('スプレッドシート に送信しています…', 'ok');
+      helperSubmitTimer = window.setTimeout(() => {
+        submitReportPhotoButton.disabled = false;
+        submitReportPhotoButton.textContent = '画像Url を反映する';
+        persistPendingReportPhotoUpdate();
+        setHelperResult('「もとの画面に戻る」で表示を確認してください。', 'ok');
+      }, 15000);
+    });
+
+    eventGuideForm.addEventListener('submit', (event) => {
+      const reportDate = String(eventReportDateInput.value || '').trim();
+      const reportTitle = String(eventReportTitleInput.value || '').trim();
+      const text = String(eventReportTextInput.value || '').trim();
+      const keywords = String(eventReportKeywordsInput.value || '').trim();
+      const visible = String(eventReportVisibleInput.value || '').trim();
+
+      if (!isValidWebUrl(currentConfig.reportSheetWebhookUrl)) {
+        event.preventDefault();
+        setEventGuideResult('Apps Script の Web アプリ URL が未設定です。活動報告スプレッドシートを直接開いて更新してください。', 'warn');
+        return;
+      }
+
+      if (!reportDate || !reportTitle) {
+        event.preventDefault();
+        setEventGuideResult('対象の活動報告を特定できません。HOME の管理リンクから開き直してください。', 'warn');
+        return;
+      }
+
+      if (!text && !keywords && !visible) {
+        event.preventDefault();
+        setEventGuideResult('反映する内容が空です。少なくとも1項目を入力してください。', 'warn');
+        return;
+      }
+
+      window.clearTimeout(eventGuideSubmitTimer);
+      submitEventGuideButton.disabled = true;
+      submitEventGuideButton.textContent = '送信中...';
+      setEventGuideResult('活動報告シートに送信しています…', 'ok');
+      eventGuideSubmitTimer = window.setTimeout(() => {
+        submitEventGuideButton.disabled = false;
+        submitEventGuideButton.textContent = 'この画面から反映する';
+        setEventGuideResult('反映は進んでいる可能性があります。活動報告シートを確認してください。', 'ok');
+      }, 15000);
+    });
+
+    eventGuidePhotoForm.addEventListener('submit', (event) => {
+      const imageUrl = String(eventReportImageUrlInput.value || '').trim();
+      if (!isValidWebUrl(currentConfig.reportSheetWebhookUrl)) {
+        event.preventDefault();
+        setEventGuidePhotoResult('Apps Script の Web アプリ URL が未設定です。活動報告スプレッドシートを直接開いて更新してください。', 'warn');
+        return;
+      }
+
+      if (!String(eventReportPhotoDateInput.value || '').trim() || !String(eventReportPhotoTitleInput.value || '').trim()) {
+        event.preventDefault();
+        setEventGuidePhotoResult('対象の活動報告を特定できません。HOME の管理リンクから開き直してください。', 'warn');
+        return;
+      }
+
+      if (!imageUrl) {
+        event.preventDefault();
+        setEventGuidePhotoResult('送信する前に `画像Url` を入力してください。', 'warn');
+        return;
+      }
+
+      window.clearTimeout(helperSubmitTimer);
+      submitEventGuidePhotoButton.disabled = true;
+      submitEventGuidePhotoButton.textContent = '送信中...';
+      setEventGuidePhotoResult('活動報告シートに送信しています…', 'ok');
+      helperSubmitTimer = window.setTimeout(() => {
+        submitEventGuidePhotoButton.disabled = false;
+        submitEventGuidePhotoButton.textContent = 'この画面から反映する';
+        setEventGuidePhotoResult('送信は進んでいる可能性があります。活動報告シートを確認してください。', 'ok');
+      }, 15000);
+    });
+
+    window.addEventListener('message', (event) => {
+      const data = event.data;
+      if (!data || data.type !== 'report-photo-helper-result') {
+        return;
+      }
+
+      if (helperMode === 'event-guide-helper') {
+        if (submitEventGuideButton.disabled) {
+          window.clearTimeout(eventGuideSubmitTimer);
+          submitEventGuideButton.disabled = false;
+          submitEventGuideButton.textContent = 'この画面から反映する';
+
+          if (data.ok) {
+            setEventGuideResult(data.message || '活動報告シートを更新しました。', 'ok');
+            return;
+          }
+
+          setEventGuideResult(data.message || '活動報告シートの更新に失敗しました。Apps Script の設定を確認してください。', 'warn');
+          return;
+        }
+
+        window.clearTimeout(helperSubmitTimer);
+        submitEventGuidePhotoButton.disabled = false;
+        submitEventGuidePhotoButton.textContent = 'この画面から反映する';
+
+        if (data.ok) {
+          setEventGuidePhotoResult(data.message || '画像Url を更新しました。', 'ok');
+          return;
+        }
+
+        setEventGuidePhotoResult(data.message || '画像Url の更新に失敗しました。Apps Script の設定を確認してください。', 'warn');
+        return;
+      }
+
+      window.clearTimeout(helperSubmitTimer);
+      submitReportPhotoButton.disabled = false;
+      submitReportPhotoButton.textContent = '画像Url を反映する';
+
+      if (data.ok) {
+        persistPendingReportPhotoUpdate();
+        setHelperResult(data.message || '画像Url を更新しました。公開CSVへの反映には少し時間がかかることがあります。', 'ok');
+        return;
+      }
+
+      setHelperResult(data.message || '画像Url の更新に失敗しました。Apps Script の設定を確認してください。', 'warn');
+    });
+
+    refresh();
+  </script>
+</body>
+
+</html>

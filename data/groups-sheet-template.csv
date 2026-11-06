@@ -1,0 +1,5 @@
+group,number,name,leader,memberCount,manager,visible
+G1,GROUP 1,グループ1,宮高 豪,約20名,－,TRUE
+G2,GROUP 2,グループ2,松塲 謙一,22名,濵中・牛丸,TRUE
+G3,GROUP 3,グループ3,松浦 貴嗣,約20名,中村 俊介,TRUE
+G4,GROUP 4,グループ4,清水 修吉,約20名,－,TRUE
