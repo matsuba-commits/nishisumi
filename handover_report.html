@@ -47,7 +47,7 @@
     <div class="card-title">🔗 URL・アカウント情報</div>
     <table>
       <tr><th>項目</th><th>内容</th></tr>
-      <tr><td>サイトURL</td><td><strong>https://matsuba-commits.github.io/nishisumi/</strong></td></tr>
+      <tr><td>サイトURL</td><td><strong data-current-dir></strong></td></tr>
       <tr><td>GitHubアカウント</td><td>matsuba-commits</td></tr>
       <tr><td>登録メール</td><td>matsuba@ma-pd.com</td></tr>
       <tr><td>リポジトリ名</td><td>nishisumi</td></tr>
@@ -64,6 +64,7 @@
       <tr><td>index.html</td><td>HOME</td><td>スローガン・活動報告・イベント一覧・年間スケジュール</td></tr>
       <tr><td>group.html</td><td>小グループ会</td><td>4グループ紹介・年間日程・活動報告</td></tr>
       <tr><td>report.html</td><td>活動報告</td><td>2026年度の活動履歴（新しい順に積み上げ）</td></tr>
+      <tr><td>admin.html</td><td>運用ガイド</td><td>イベントデータ元の確認・スプレッドシート運用説明</td></tr>
     </table>
   </div>
 
@@ -73,10 +74,10 @@
     <table>
       <tr><th>タイミング</th><th>作業内容</th><th>文章作成</th><th>アップロード</th></tr>
       <tr><td>イベント後</td><td>活動報告に写真・コメント追加</td><td><span class="tag tag-tom">トム</span></td><td>担当者</td></tr>
-      <tr><td>開催確定時</td><td>イベント一覧・日程を更新</td><td><span class="tag tag-tom">トム</span></td><td>担当者</td></tr>
+      <tr><td>開催確定時</td><td>イベント一覧・日程を更新</td><td>担当者</td><td><span class="tag tag-easy">自動</span></td></tr>
       <tr><td>年度初め</td><td>リーダー・メンバー情報を更新</td><td><span class="tag tag-tom">トム</span></td><td>担当者</td></tr>
     </table>
-    <div class="highlight" style="margin-top:16px;">文章・HTML修正はトムが担当。担当者はGitHubへのアップロードだけでよい。</div>
+    <div class="highlight" style="margin-top:16px;">イベント一覧は Google スプレッドシート更新方式に寄せる。担当者は GitHub を触らず、表を更新するだけにする。</div>
   </div>
 
   <h2 class="section">SECTION 4 — 更新手順</h2>
@@ -85,36 +86,29 @@
     <div class="flow-item">
       <div class="flow-num">1</div>
       <div>
-        <div class="flow-title">GitHubにアクセス</div>
-        <div class="flow-text">https://github.com/matsuba-commits/nishisumi を開く（ブックマーク推奨）</div>
+        <div class="flow-title">Google スプレッドシートを開く</div>
+        <div class="flow-text">イベント管理用のシートを開く。GitHub は日常運用では使わない。</div>
       </div>
     </div>
     <div class="flow-item">
       <div class="flow-num">2</div>
       <div>
-        <div class="flow-title">「Add file」→「Upload files」をクリック</div>
-        <div class="flow-text">画面上部のボタンから選択する</div>
+        <div class="flow-title">イベントを1行追加または修正</div>
+        <div class="flow-text">日付・区分・タイトル・詳細・URL を入力する。保存は自動。</div>
       </div>
     </div>
     <div class="flow-item">
       <div class="flow-num">3</div>
       <div>
-        <div class="flow-title">修正済みHTMLをドラッグ＆ドロップ</div>
-        <div class="flow-text">トムから受け取ったファイルをエリアにドラッグ。同じファイル名で自動上書き。</div>
+        <div class="flow-title">1〜2分待つ</div>
+        <div class="flow-text">公開ページがシートの内容を読み込むまで少し待つ。</div>
       </div>
     </div>
     <div class="flow-item">
       <div class="flow-num">4</div>
       <div>
-        <div class="flow-title">「Commit changes」を押す</div>
-        <div class="flow-text">緑ボタンをそのまま押すだけ。1〜2分後に反映される。</div>
-      </div>
-    </div>
-    <div class="flow-item">
-      <div class="flow-num">5</div>
-      <div>
         <div class="flow-title">サイトを確認する</div>
-        <div class="flow-text">https://matsuba-commits.github.io/nishisumi/ を開いて確認。反映されない場合はCtrl+Shift+Rでキャッシュクリア。</div>
+        <div class="flow-text"><span data-current-dir></span> を開いて確認。反映されない場合はCtrl+Shift+Rでキャッシュクリア。</div>
       </div>
     </div>
   </div>
@@ -138,7 +132,7 @@
     <div class="point">個人情報（住所・電話番号）は掲載しない</div>
     <div class="point">写真を掲載する場合は本人の了承を得ること</div>
     <div class="point">更新後は必ずサイトを確認する</div>
-    <div class="highlight" style="margin-top:16px;">文章はトムが作る。担当者はアップロードするだけ。これが継続のコツ。</div>
+    <div class="highlight" style="margin-top:16px;">イベント更新は Google スプレッドシートだけで完結させる。GitHub を運用担当者に触らせないのが継続のコツ。</div>
   </div>
 
   <h2 class="section">SECTION 7 — 今後の課題</h2>
@@ -154,5 +148,12 @@
   </div>
 
 </div>
+<script>
+  const currentDirectoryUrl = new URL('.', window.location.href).href;
+
+  document.querySelectorAll('[data-current-dir]').forEach((element) => {
+    element.textContent = currentDirectoryUrl;
+  });
+</script>
 </body>
 </html>

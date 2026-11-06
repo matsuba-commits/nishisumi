@@ -1,107 +1,518 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>サイト更新手順書｜西成住之江支部</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; background: #f5f5f5; color: #333; line-height: 1.8; }
-  .cover { background: #1a3a5c; color: white; padding: 48px 40px; }
-  .cover h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-  .cover p { font-size: 14px; opacity: 0.8; }
-  .cover .url { font-size: 13px; background: rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 4px; margin-top: 16px; display: inline-block; }
-  .container { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
-  .step-block { background: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #1a3a5c; color: white; border-radius: 50%; font-size: 16px; font-weight: 700; margin-bottom: 12px; }
-  .step-title { font-size: 18px; font-weight: 700; color: #1a3a5c; margin-bottom: 16px; }
-  .step-text { font-size: 14px; color: #444; margin-bottom: 8px; }
-  .highlight { background: #fff3e0; border-left: 4px solid #c8973a; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 14px; }
-  .img-placeholder { background: #f0f0f0; border: 2px dashed #ccc; border-radius: 8px; padding: 24px; text-align: center; color: #999; font-size: 13px; margin: 16px 0; }
-  .point { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 14px; }
-  .point::before { content: '✅'; flex-shrink: 0; }
-  .warn { display: flex; align-items: flex-start; gap: 10px; margin: 8px 0; font-size: 14px; }
-  .warn::before { content: '⚠️'; flex-shrink: 0; }
-  .url-box { background: #e8eef5; border-radius: 8px; padding: 16px; font-size: 15px; font-weight: 700; color: #1a3a5c; text-align: center; margin: 12px 0; word-break: break-all; }
-  .summary { background: #1a3a5c; color: white; border-radius: 12px; padding: 28px; margin-bottom: 24px; }
-  .summary h2 { font-size: 18px; margin-bottom: 16px; color: #c8973a; }
-  .summary-row { display: flex; gap: 12px; align-items: flex-start; margin: 8px 0; font-size: 14px; }
-  .summary-num { background: #c8973a; color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
-  h2.section { font-size: 13px; letter-spacing: 2px; color: #c8973a; margin: 32px 0 12px; text-transform: uppercase; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スプレッドシート更新手順書｜西成住之江支部</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    .cover {
+      background: #1a3a5c;
+      color: white;
+      padding: 48px 40px;
+    }
+
+    .cover h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .cover p {
+      font-size: 14px;
+      opacity: 0.84;
+    }
+
+    .cover .url {
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-top: 16px;
+      display: inline-block;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .summary {
+      background: #1a3a5c;
+      color: white;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+
+    .summary h2 {
+      font-size: 18px;
+      margin-bottom: 16px;
+      color: #c8973a;
+    }
+
+    .summary-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .summary-num {
+      background: #c8973a;
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    h2.section {
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: #c8973a;
+      margin: 32px 0 12px;
+      text-transform: uppercase;
+    }
+
+    .step-block {
+      background: white;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: #1a3a5c;
+      color: white;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a3a5c;
+      margin-bottom: 16px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: #444;
+      margin-bottom: 8px;
+    }
+
+    .highlight {
+      background: #fff3e0;
+      border-left: 4px solid #c8973a;
+      padding: 12px 16px;
+      border-radius: 0 8px 8px 0;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .img-placeholder {
+      background: #f0f0f0;
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+
+    .img-caption {
+      font-size: 12px;
+      color: #777;
+      margin-top: -6px;
+      margin-bottom: 6px;
+    }
+
+    .point {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .point::before {
+      content: 'OK';
+      font-size: 11px;
+      font-weight: 700;
+      color: #1a3a5c;
+      border: 1px solid #1a3a5c;
+      border-radius: 999px;
+      padding: 1px 6px;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+
+    .warn {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .warn::before {
+      content: '注意';
+      font-size: 11px;
+      font-weight: 700;
+      color: #a35d16;
+      border: 1px solid #a35d16;
+      border-radius: 999px;
+      padding: 1px 6px;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+
+    .url-box {
+      background: #e8eef5;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a3a5c;
+      text-align: center;
+      margin: 12px 0;
+      word-break: break-all;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    .mini-table th,
+    .mini-table td {
+      border: 1px solid #d7dde5;
+      padding: 10px 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .mini-table th {
+      background: #eef3f8;
+      color: #1a3a5c;
+      font-weight: 700;
+    }
+
+    code {
+      background: #f3f5f7;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 12px;
+    }
+
+    .sub-box {
+      background: #f8fafc;
+      border: 1px solid #dbe4ee;
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .sub-box-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1a3a5c;
+      margin-bottom: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .checklist {
+      background: #f8fafc;
+      border: 1px solid #dbe4ee;
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .checklist h3 {
+      font-size: 14px;
+      color: #1a3a5c;
+      margin-bottom: 10px;
+    }
+
+    .check-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+      margin: 8px 0;
+    }
+
+    .check-item::before {
+      content: '□';
+      color: #1a3a5c;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .cover {
+        padding: 36px 24px;
+      }
+
+      .container {
+        padding: 24px 16px;
+      }
+
+      .step-block,
+      .summary {
+        padding: 22px 18px;
+      }
+
+      .mini-table {
+        font-size: 12px;
+        display: block;
+        overflow-x: auto;
+      }
+
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="cover">
-  <h1>🌐 サイト更新マニュアル</h1>
-  <p>西成住之江支部 ポータルサイト｜担当者向け手順書</p>
-  <div class="url">https://matsuba-commits.github.io/nishisumi/</div>
-</div>
-
-<div class="container">
-
-  <div class="summary">
-    <h2>📋 更新の全体の流れ（5分でできる）</h2>
-    <div class="summary-row"><div class="summary-num">1</div><div>トムに「○○を変更して」と伝える</div></div>
-    <div class="summary-row"><div class="summary-num">2</div><div>トムが修正したHTMLファイルをダウンロード</div></div>
-    <div class="summary-row"><div class="summary-num">3</div><div>GitHubを開いてファイルをアップロード</div></div>
-    <div class="summary-row"><div class="summary-num">4</div><div>「Commit changes」を押す → 完了！</div></div>
+  <div class="cover">
+    <h1>活動報告 スプレッドシート更新マニュアル</h1>
+    <p>西成住之江支部 ポータルサイト｜担当者向け手順書</p>
+    <div class="url" data-page-url="report.html"></div>
   </div>
 
-  <h2 class="section">STEP 1 — GitHubを開く</h2>
-  <div class="step-block">
-    <div class="step-num">1</div>
-    <div class="step-title">GitHubにアクセスしてログイン</div>
-    <div class="step-text">ブラウザで以下のURLを開く</div>
-    <div class="url-box">https://github.com/matsuba-commits/nishisumi</div>
-    <div class="highlight">ブックマークに登録しておくと便利です</div>
-  </div>
+  <div class="container">
 
-  <h2 class="section">STEP 2 — ファイルをアップロード</h2>
-  <div class="step-block">
-    <div class="step-num">2</div>
-    <div class="step-title">「Add file」→「Upload files」をクリック</div>
-    <div class="step-text">画面上部の緑のボタン付近にある「Add file」をクリックして「Upload files」を選ぶ</div>
-    <div class="img-placeholder">📸 ［Add file ▼］ボタンの画像</div>
-  </div>
+    <div class="summary">
+      <h2>更新の全体の流れ（5分でできる）</h2>
+      <div class="summary-row">
+        <div class="summary-num">1</div>
+        <div>活動報告用の Google スプレッドシートを開く</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-num">2</div>
+        <div>1行追加して、本文と写真リンクを入力する</div>
+      </div>
+      <div class="summary-row">
+        <div class="summary-num">3</div>
+        <div>自動保存後に活動報告ページを確認する</div>
+      </div>
+    </div>
 
-  <div class="step-block">
-    <div class="step-num">3</div>
-    <div class="step-title">修正済みのHTMLファイルをドラッグ＆ドロップ</div>
-    <div class="step-text">トムからダウンロードしたHTMLファイルを点線のエリアにドラッグする</div>
-    <div class="img-placeholder">📸 ドラッグ＆ドロップエリアの画像</div>
-    <div class="point">ファイル名が表示されたらアップロード成功</div>
-    <div class="warn">同じファイル名で上書きされる。古いファイルは自動で置き換わる</div>
-  </div>
+    <h2 class="section">STEP 1 — シートを開く</h2>
+    <div class="step-block">
+      <div class="step-num">1</div>
+      <div class="step-title">活動報告のスプレッドシートを開く</div>
+      <div class="step-text">更新担当者は、活動報告用の Google スプレッドシートを開きます。ブックマークしておくと毎回迷いません。</div>
+      <div class="img-placeholder">ここに「活動報告シートを開く画面」のスクリーンショットを入れる</div>
+      <div class="img-caption">例: Google Drive 一覧、またはシート下部の「活動報告」タブが見える画面</div>
+      <div class="highlight">GitHub や HTML ファイルは触りません。日々の更新はスプレッドシートだけで完結します。</div>
+    </div>
 
-  <h2 class="section">STEP 3 — 保存して公開</h2>
-  <div class="step-block">
-    <div class="step-num">4</div>
-    <div class="step-title">「Commit changes」（緑ボタン）を押す</div>
-    <div class="step-text">画面下部の緑ボタンをそのまま押すだけでOK。コメント入力は不要。</div>
-    <div class="img-placeholder">📸 「Commit changes」ボタンの画像</div>
-    <div class="highlight">1〜2分後にサイトに反映されます。反映前はキャッシュをクリアして確認してください（Ctrl＋Shift＋R）</div>
-  </div>
+    <h2 class="section">STEP 2 — 1行追加して入力する</h2>
+    <div class="step-block">
+      <div class="step-num">2</div>
+      <div class="step-title">新しい活動報告を1行追加する</div>
+      <div class="step-text">1行が1件の活動報告です。直前の行をコピーして下に貼り付けると、式の列もそのまま引き継げるので安心です。</div>
+      <div class="img-placeholder">ここに「新しい行を追加して入力する画面」のスクリーンショットを入れる</div>
+      <div class="img-caption">例: 既存行をコピーして、その下の行に新しい内容を入れている画面</div>
+      <div class="point">日付は <code>YYYY-MM-DD</code> 形式で入力します</div>
+      <div class="point"><code>visible</code> は <code>公開</code>、 <code>公開</code> を選択します</div>
+      <div class="warn">式が入っている列を空白のまま新規作成すると、画像URLが自動生成されないことがあります。迷ったら前の行をコピーしてください。</div>
 
-  <h2 class="section">確認用URL</h2>
-  <div class="step-block">
-    <div class="step-num">5</div>
-    <div class="step-title">サイトを確認する</div>
-    <div class="url-box">https://matsuba-commits.github.io/nishisumi/</div>
-    <div class="point">index.html → トップページ</div>
-    <div class="point">group.html → 小グループ会ページ</div>
-    <div class="point">report.html → 活動報告ページ</div>
-  </div>
+      <table class="mini-table">
+        <thead>
+          <tr>
+            <th>列名</th>
+            <th>入力する内容</th>
+            <th>例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>date</code></td>
+            <td>開催日</td>
+            <td><code>2026-05-19</code></td>
+          </tr>
+          <tr>
+            <td><code>category</code></td>
+            <td>区分</td>
+            <td>小グループ会 / 支部行事</td>
+          </tr>
+          <tr>
+            <td><code>title</code></td>
+            <td>見出し</td>
+            <td>G1小グループ会 第1回 自社紹介・経営課題共有</td>
+          </tr>
+          <tr>
+            <td><code>text</code></td>
+            <td>本文</td>
+            <td>開催内容を2〜4文程度で入力</td>
+          </tr>
+          <tr>
+            <td><code>place</code></td>
+            <td>会場名</td>
+            <td>懐石料理「徳」住之江本店</td>
+          </tr>
+          <tr>
+            <td><code>keywords</code></td>
+            <td>キーワードをカンマ区切り</td>
+            <td><code>G1,自社紹介,課題共有</code></td>
+          </tr>
+          <tr>
+            <td><code>imageAlt</code></td>
+            <td>写真の説明文</td>
+            <td>G1小グループ会の集合写真</td>
+          </tr>
+        </tbody>
+      </table>
 
-  <h2 class="section">困ったときは</h2>
-  <div class="step-block">
-    <div class="step-title">トムに相談する</div>
-    <div class="point">文章の変更・追加 → トムに依頼</div>
-    <div class="point">写真の差し替え → 写真をトムに送る</div>
-    <div class="point">レイアウトの修正 → トムに依頼</div>
-    <div class="highlight">「ここを変えて」と言えばトムがHTMLを修正してファイルを渡します。あとはアップロードするだけです。</div>
-  </div>
+      <div class="two-col">
+        <div class="sub-box">
+          <div class="sub-box-title">担当者が入力する列</div>
+          <div class="point"><code>date</code></div>
+          <div class="point"><code>category</code></div>
+          <div class="point"><code>title</code></div>
+          <div class="point"><code>text</code></div>
+          <div class="point"><code>place</code></div>
+          <div class="point"><code>keywords</code></div>
+          <div class="point"><code>driveShareUrl</code></div>
+          <div class="point"><code>imageAlt</code></div>
+          <div class="point"><code>visible</code></div>
+        </div>
+        <div class="sub-box">
+          <div class="sub-box-title">基本的に触らない列</div>
+          <div class="point"><code>imageFileId</code> は共有リンクから自動抽出</div>
+          <div class="point"><code>imageUrl</code> は自動生成</div>
+          <div class="point"><code>previewImage</code> はシート内プレビュー用</div>
+          <div class="warn">これらの列の式を消すと、写真がサイトに出なくなることがあります</div>
+        </div>
+      </div>
 
-</div>
+      <div class="sub-box">
+        <div class="sub-box-title">この手順なら迷いません</div>
+        <div class="point">前の行を丸ごとコピーする</div>
+        <div class="point"><code>date</code> から <code>imageAlt</code> まで必要な内容だけ書き換える</div>
+        <div class="point"><code>driveShareUrl</code> に写真リンクを貼る</div>
+        <div class="point"><code>visible</code> を <code>TRUE</code> にする</div>
+        <div class="point">式が入っている列は、数式が残っているかだけ確認する</div>
+      </div>
+    </div>
+
+    <h2 class="section">STEP 3 — 写真リンクを入れる</h2>
+    <div class="step-block">
+      <div class="step-num">3</div>
+      <div class="step-title">Drive 共有リンクを貼る</div>
+      <div class="step-text">写真はシートに直接貼り込まず、Google Drive の共有リンクを <code>driveShareUrl</code> 列に入力します。</div>
+      <div class="img-placeholder">ここに「Drive の共有リンクをコピーする画面」のスクリーンショットを入れる</div>
+      <div class="img-caption">例: 「共有」ダイアログで「リンクを知っている全員が閲覧可」が見える画面</div>
+      <div class="point">Drive 側は「リンクを知っている全員が閲覧可」にします</div>
+      <div class="point"><code>imageFileId</code> と <code>imageUrl</code> はテンプレートの式で自動生成されます</div>
+      <div class="point"><code>previewImage</code> はシート内確認用なので、式が入っていれば編集不要です</div>
+      <div class="warn">画像をシートに直接挿入してもサイトには表示されません。必ず共有リンクを貼ってください。</div>
+      <div class="highlight">共有リンクを貼ったあと、<code>previewImage</code> に画像が見えればほぼOKです。</div>
+    </div>
+
+    <h2 class="section">STEP 4 — 保存と反映を待つ</h2>
+    <div class="step-block">
+      <div class="step-num">4</div>
+      <div class="step-title">保存ボタンは不要</div>
+      <div class="step-text">Google スプレッドシートは自動保存されます。入力が終わったら、そのままで大丈夫です。</div>
+      <div class="img-placeholder">ここに「保存しました」表示のスクリーンショットを入れる</div>
+      <div class="img-caption">例: 画面上部に「保存しました」または自動保存の表示が出ている画面</div>
+      <div class="highlight">GitHub へのアップロードやコミット操作はありません。1〜2分ほどでサイトに反映されます。</div>
+    </div>
+
+    <h2 class="section">STEP 5 — 公開ページを確認する</h2>
+    <div class="step-block">
+      <div class="step-num">5</div>
+      <div class="step-title">活動報告ページを開いて確認する</div>
+      <div class="step-text">数分後に以下の URL を開き、追加した活動報告が表示されているか確認します。</div>
+      <div class="url-box" data-page-url="report.html"></div>
+      <div class="point">画像つきで確認したいときは <code>report.html</code> を開く</div>
+      <div class="point">設定や読込状況を確認したいときは <code>admin.html</code> を開く</div>
+      <div class="warn">すぐに反映されないときは、ブラウザ再読込を試してください。まだ出ない場合は 1〜2分待って再確認します。</div>
+
+      <div class="checklist">
+        <h3>公開前チェック</h3>
+        <div class="check-item">タイトルが途中で切れていない</div>
+        <div class="check-item">本文が意図した内容になっている</div>
+        <div class="check-item">写真が表示されている</div>
+        <div class="check-item">誤って非公開の <code>FALSE</code> になっていない</div>
+        <div class="check-item">日付が正しい順で表示されている</div>
+      </div>
+    </div>
+
+    <h2 class="section">確認用URL</h2>
+    <div class="step-block">
+      <div class="step-title">確認ページ</div>
+      <div class="url-box" data-page-url="report.html"></div>
+      <div class="point">report.html → 活動報告ページ本体</div>
+      <div class="point">admin.html → 現在どのデータ元を読んでいるかの確認ページ</div>
+      <div class="point">index.html → トップページ上の最新表示確認</div>
+    </div>
+
+    <h2 class="section">困ったときは</h2>
+    <div class="step-block">
+      <div class="step-title">次の切り分けで確認する</div>
+      <div class="point">文字修正や活動報告の追加は、まずスプレッドシートを修正する</div>
+      <div class="point">写真が出ないときは Drive の共有設定と <code>driveShareUrl</code> を確認する</div>
+      <div class="point">画像プレビューが出ないときは、前の行の数式が残っているか確認する</div>
+      <div class="point">見た目変更やページ追加は開発者対応</div>
+      <div class="highlight">運用担当者は「シートを更新する」ことに集中し、サイトの仕組み変更は切り分けると続けやすくなります。</div>
+    </div>
+
+  </div>
+  <script>
+    document.querySelectorAll('[data-page-url]').forEach((element) => {
+      const page = element.getAttribute('data-page-url');
+      if (!page) return;
+
+      const url = new URL(page, window.location.href);
+      element.textContent = url.href;
+    });
+  </script>
 </body>
+
 </html>

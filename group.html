@@ -1,286 +1,1954 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>小グループ会 | 西成住之江支部</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root { --primary: #1a3a5c; --accent: #c8973a; --light: #f8f6f2; --white: #ffffff; --gray: #666; --border: #e0dbd2; }
-  body { font-family: 'Noto Sans JP', sans-serif; background: var(--white); color: #333; line-height: 1.7; }
-  header { background: var(--white); border-bottom: 3px solid var(--primary); }
-  .header-top { background: var(--primary); text-align: center; padding: 6px; font-size: 12px; letter-spacing: 2px; color: white; }
-  .header-main { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; }
-  .header-logo h1 { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; color: var(--primary); }
-  .header-logo p { font-size: 12px; color: var(--gray); margin-top: 4px; letter-spacing: 2px; }
-  .breadcrumb { font-size: 12px; color: var(--gray); }
-  .breadcrumb span { color: var(--accent); font-weight: 500; }
-  nav { background: var(--primary); padding: 0 40px; }
-  nav ul { display: flex; list-style: none; }
-  nav ul li a { display: block; padding: 14px 20px; color: white; text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: background 0.2s; }
-  nav ul li a:hover, nav ul li a.active { background: rgba(255,255,255,0.15); }
-  .page-hero { background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%); color: white; padding: 40px; }
-  .page-hero-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); margin-bottom: 8px; }
-  .page-hero h2 { font-family: 'Noto Serif JP', serif; font-size: 26px; color: white; margin-bottom: 8px; }
-  .page-hero p { font-size: 13px; opacity: 0.8; color: white; }
-  section { padding: 60px 40px; }
-  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
-  .section-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); font-weight: 500; }
-  .section-title { font-family: 'Noto Serif JP', serif; font-size: 22px; color: var(--primary); }
-  .section-line { flex: 1; height: 1px; background: var(--border); }
-  .group-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
-  .group-card { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
-  .group-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
-  .group-card-header { padding: 20px; color: white; text-align: center; }
-  .g1 .group-card-header { background: #1a3a5c; }
-  .g2 .group-card-header { background: #c8973a; }
-  .g3 .group-card-header { background: #2e7d52; }
-  .g4 .group-card-header { background: #7b3f8c; }
-  .group-number { font-size: 11px; letter-spacing: 3px; opacity: 0.8; margin-bottom: 4px; }
-  .group-name { font-family: 'Noto Serif JP', serif; font-size: 18px; font-weight: 700; }
-  .group-leader { font-size: 12px; opacity: 0.85; margin-top: 6px; }
-  .group-card-body { padding: 20px; }
-  .group-info-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-  .group-info-row:last-child { border-bottom: none; }
-  .group-info-label { color: var(--gray); font-size: 12px; }
-  .group-info-value { font-weight: 500; color: var(--primary); }
-  .group-next { margin-top: 14px; background: var(--light); border-radius: 8px; padding: 12px; font-size: 12px; }
-  .group-next-label { color: var(--accent); font-weight: 700; font-size: 11px; letter-spacing: 1px; margin-bottom: 4px; }
-  .group-next-date { color: var(--primary); font-weight: 700; font-size: 15px; }
-  .group-next-theme { color: var(--gray); font-size: 12px; margin-top: 2px; }
-  .schedule-bg { background: var(--light); }
-  .schedule-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .schedule-card { background: white; border-radius: 8px; padding: 20px; text-align: center; border-top: 4px solid var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-  .schedule-round { font-size: 11px; color: var(--gray); letter-spacing: 1px; margin-bottom: 8px; }
-  .schedule-month { font-size: 40px; font-weight: 700; color: var(--primary); line-height: 1; }
-  .schedule-month-label { font-size: 13px; color: var(--gray); margin-bottom: 12px; }
-  .schedule-date { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
-  .schedule-place { font-size: 12px; color: var(--gray); }
-  .schedule-status { display: inline-block; margin-top: 10px; padding: 3px 12px; border-radius: 20px; font-size: 11px; }
-  .status-next { background: #fff3e0; color: #e65100; font-weight: 700; }
-  .status-plan { background: #e3f2fd; color: #1565c0; }
-  .report-list { display: flex; flex-direction: column; gap: 32px; }
-  .report-item { display: flex; gap: 32px; align-items: flex-start; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
-  .report-item:last-child { border-bottom: none; }
-  .report-img { width: 240px; min-width: 240px; height: 160px; background: linear-gradient(135deg, #e8e0d4, #d4ccc0); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 12px; }
-  .report-content { flex: 1; }
-  .report-tag { display: inline-block; background: var(--primary); color: white; font-size: 10px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 1px; }
-  .report-date { font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: 6px; }
-  .report-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 10px; line-height: 1.5; }
-  .report-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
-  .report-group-badge { display: inline-block; padding: 2px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; margin-left: 8px; }
-  .badge-g2 { background: #fff3e0; color: #c8973a; }
-  footer { background: var(--primary); color: white; text-align: center; padding: 40px; }
-  footer h3 { font-family: 'Noto Serif JP', serif; font-size: 18px; margin-bottom: 12px; color: white; }
-  footer p { font-size: 13px; opacity: 0.7; margin-bottom: 6px; color: white; }
-  footer .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 11px; opacity: 0.5; color: white; }
-</style>
-</head>
-<body>
-<header>
-  <div class="header-top">大阪中小企業家同友会 ／ 南東ブロック ／ 西成住之江支部</div>
-  <div class="header-main">
-    <div class="header-logo">
-      <h1>西成住之江支部</h1>
-      <p>NISHINARI SUMINOE BRANCH</p>
-    </div>
-    <div class="breadcrumb">HOME ＞ <span>小グループ会</span></div>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="report.html">活動報告</a></li>
-      <li><a href="group.html" class="active">小グループ会</a></li>
-    </ul>
-  </nav>
-</header>
-<div class="page-hero">
-  <div class="page-hero-label">SMALL GROUP</div>
-  <h2>小グループ会</h2>
-  <p>少人数で本音を語り合い、経営の悩みを共に解決する場。<br>西成住之江支部には4つのグループがあります。</p>
-</div>
-<section>
-  <div class="section-header">
-    <div>
-      <div class="section-label">GROUPS</div>
-      <div class="section-title">グループ紹介</div>
-    </div>
-    <div class="section-line"></div>
-  </div>
-  <div class="group-grid">
-    <div class="group-card g1">
-      <div class="group-card-header">
-        <div class="group-number">GROUP 1</div>
-        <div class="group-name">グループ1</div>
-        <div class="group-leader">リーダー：宮高 豪</div>
-      </div>
-      <div class="group-card-body">
-        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">約20名</span></div>
-        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">－</span></div>
-        <div class="group-next">
-          <div class="group-next-label">✅ 開催済</div>
-          <div class="group-next-date">5月19日（火）18:30〜</div>
-          <div class="group-next-theme">懐石料理「徳」住之江本店</div>
-          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967038&vSelDate=20260519&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#1a3a5c;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">e-doyu で確認</a>
-        </div>
-      </div>
-    </div>
-    <div class="group-card g2">
-      <div class="group-card-header">
-        <div class="group-number">GROUP 2</div>
-        <div class="group-name">グループ2</div>
-        <div class="group-leader">リーダー：松塲 謙一</div>
-      </div>
-      <div class="group-card-body">
-        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">22名</span></div>
-        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">濵中・牛丸</span></div>
-        <div class="group-next">
-          <div class="group-next-label">NEXT ▶</div>
-          <div class="group-next-date">6月10日（水）18:30〜</div>
-          <div class="group-next-theme">一人工務店のAI活用〜クラウドとAIで仕事はどう変わるか〜</div>
-          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966013&vSelDate=20260610&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F1" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#c8973a;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">参加登録（e-doyu）</a>
-        </div>
-      </div>
-    </div>
-    <div class="group-card g3">
-      <div class="group-card-header">
-        <div class="group-number">GROUP 3</div>
-        <div class="group-name">グループ3</div>
-        <div class="group-leader">リーダー：松浦 貴嗣</div>
-      </div>
-      <div class="group-card-body">
-        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">約20名</span></div>
-        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">中村 俊介</span></div>
-        <div class="group-next">
-          <div class="group-next-label">✅ 開催済</div>
-          <div class="group-next-date">5月15日（金）18:30〜</div>
-          <div class="group-next-theme">西成区民センター 会議室2-3｜近況報告＆経営課題</div>
-          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967417&vSelDate=20260515&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#1a3a5c;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">e-doyu で確認</a>
-        </div>
-      </div>
-    </div>
-    <div class="group-card g4">
-      <div class="group-card-header">
-        <div class="group-number">GROUP 4</div>
-        <div class="group-name">グループ4</div>
-        <div class="group-leader">リーダー：清水 修吉</div>
-      </div>
-      <div class="group-card-body">
-        <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value">約20名</span></div>
-        <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value">－</span></div>
-        <div class="group-next">
-          <div class="group-next-label">NEXT ▶</div>
-          <div class="group-next-date">6月3日（水）18:30〜</div>
-          <div class="group-next-theme">西成区民センター｜意見交換・経営課題共有</div>
-          <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=968062&vSelDate=20260603&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F01" target="_blank" style="display:inline-block;margin-top:8px;padding:5px 14px;background:#c8973a;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">参加登録（e-doyu）</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="schedule-bg">
-  <div class="section-header">
-    <div>
-      <div class="section-label">SCHEDULE</div>
-      <div class="section-title">2026年度 年間スケジュール</div>
-    </div>
-    <div class="section-line"></div>
-  </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小グループ会 | 西成住之江支部</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+    rel="stylesheet">
   <style>
-    .schedule-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .schedule-table th { background: var(--primary); color: white; padding: 12px 16px; text-align: center; font-weight: 500; letter-spacing: 1px; font-size: 12px; }
-    .schedule-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); text-align: center; vertical-align: middle; }
-    .schedule-table tr:last-child td { border-bottom: none; }
-    .schedule-table tr:hover td { background: #faf8f4; }
-    .g-label { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-    .g1-label { background: #e8eef5; color: #1a3a5c; }
-    .g2-label { background: #fdf3e3; color: #c8973a; }
-    .g3-label { background: #e8f5ee; color: #2e7d52; }
-    .g4-label { background: #f3e8f5; color: #7b3f8c; }
-    .done-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; font-size: 10px; padding: 2px 8px; border-radius: 20px; }
-    .next-badge { display: inline-block; background: #fff3e0; color: #e65100; font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
-    .plan-badge { display: inline-block; background: #e3f2fd; color: #1565c0; font-size: 10px; padding: 2px 8px; border-radius: 20px; }
-    .edoyu-btn { display: inline-block; margin-top: 4px; padding: 3px 10px; background: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-size: 10px; }
-    .edoyu-btn.gold { background: var(--accent); }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1a3a5c;
+      --accent: #c8973a;
+      --light: #f8f6f2;
+      --white: #ffffff;
+      --gray: #666;
+      --border: #e0dbd2;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--white);
+      color: #333;
+      line-height: 1.7;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .header-top {
+      background: var(--primary);
+      text-align: center;
+      padding: 6px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+    }
+
+    .header-logo h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo p {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 4px;
+      letter-spacing: 2px;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .breadcrumb span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    nav {
+      background: var(--primary);
+      padding: 0 40px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 14px 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .page-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%);
+      color: white;
+      padding: 40px;
+    }
+
+    .page-hero-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .page-hero h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 26px;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .page-hero p {
+      font-size: 13px;
+      opacity: 0.8;
+      color: white;
+    }
+
+    section {
+      padding: 60px 40px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      color: var(--primary);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .group-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .group-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .group-card-header {
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .g1 .group-card-header {
+      background: #1a3a5c;
+    }
+
+    .g2 .group-card-header {
+      background: #c8973a;
+    }
+
+    .g3 .group-card-header {
+      background: #2e7d52;
+    }
+
+    .g4 .group-card-header {
+      background: #7b3f8c;
+    }
+
+    .group-number {
+      font-size: 11px;
+      letter-spacing: 3px;
+      opacity: 0.8;
+      margin-bottom: 4px;
+    }
+
+    .group-name {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .group-leader {
+      font-size: 12px;
+      opacity: 0.85;
+      margin-top: 6px;
+    }
+
+    .group-leader-button {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .group-leader-button:hover {
+      opacity: 0.9;
+    }
+
+    .group-manager-button {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-weight: inherit;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .group-manager-button:hover {
+      opacity: 0.9;
+    }
+
+    .group-card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .group-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .group-info-row:last-child {
+      border-bottom: none;
+    }
+
+    .group-info-label {
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .group-info-value {
+      font-weight: 500;
+      color: var(--primary);
+    }
+
+    .group-members {
+      margin-top: 14px;
+      padding-top: 14px;
+      margin-bottom: 14px;
+    }
+
+    .group-members-label {
+      color: var(--gray);
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    .group-members-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .group-member-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f3f0ea;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+    }
+
+    .group-member-chip:hover {
+      background: #ece6db;
+    }
+
+    .group-member-empty {
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .group-member-hint {
+      color: #8a837a;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .group-next {
+      margin-top: auto;
+      background: var(--light);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      min-height: 156px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .group-next-label {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .group-next-date {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .group-next-theme {
+      color: var(--gray);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .group-next-empty {
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .member-dialog-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 58, 92, 0.32);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 1000;
+    }
+
+    .member-dialog-backdrop.is-open {
+      display: flex;
+    }
+
+    .member-dialog {
+      width: min(420px, 100%);
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .member-dialog-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20px;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .member-dialog-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .member-dialog-kana {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .member-dialog-company {
+      font-size: 16px;
+      color: #333;
+      line-height: 1.7;
+      margin-bottom: 18px;
+      word-break: break-word;
+    }
+
+    .member-dialog-link {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .member-dialog-link:hover {
+      text-decoration: underline;
+    }
+
+    .member-dialog-help {
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .member-dialog-copy-status {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      min-height: 1.6em;
+      margin-bottom: 12px;
+    }
+
+    .member-dialog-close {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .schedule-bg {
+      background: var(--light);
+    }
+
+    .schedule-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .schedule-card {
+      background: white;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      border-top: 4px solid var(--accent);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .schedule-round {
+      font-size: 11px;
+      color: var(--gray);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .schedule-month {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .schedule-month-label {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 12px;
+    }
+
+    .schedule-date {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .schedule-place {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .schedule-status {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+
+    .status-next {
+      background: #fff3e0;
+      color: #e65100;
+      font-weight: 700;
+    }
+
+    .status-plan {
+      background: #e3f2fd;
+      color: #1565c0;
+    }
+
+    .report-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .report-item {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-item:last-child {
+      border-bottom: none;
+    }
+
+    .report-img {
+      width: 240px;
+      min-width: 240px;
+      height: 160px;
+      background: linear-gradient(135deg, #e8e0d4, #d4ccc0);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 12px;
+    }
+
+    .report-content {
+      flex: 1;
+    }
+
+    .report-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    .report-date {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .report-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .report-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .report-group-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+
+    .badge-g2 {
+      background: #fff3e0;
+      color: #c8973a;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    footer h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    footer p {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    footer .footer-bottom {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 11px;
+      opacity: 0.5;
+      color: white;
+    }
   </style>
-  <table class="schedule-table">
-    <thead>
-      <tr>
-        <th>グループ</th>
-        <th>第1回</th>
-        <th>第2回</th>
-        <th>第3回</th>
-        <th>第4回</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="g-label g1-label">G1 宮高</span></td>
-        <td>5月19日（火）<br><span class="done-badge">✅ 開催済</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967038&vSelDate=20260519" target="_blank" class="edoyu-btn">e-doyu</a></td>
-        <td>7月7日（火）<br><span class="plan-badge">予定</span></td>
-        <td>10月7日（水）<br><span class="plan-badge">予定</span></td>
-        <td>1月13日（火）<br><span class="plan-badge">予定</span></td>
-      </tr>
-      <tr>
-        <td><span class="g-label g2-label">G2 松塲</span></td>
-        <td>6月10日（水）<br><span class="next-badge">▶ 次回</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966013&vSelDate=20260610" target="_blank" class="edoyu-btn gold">e-doyu</a></td>
-        <td>9月9日（火）<br><span class="plan-badge">予定</span></td>
-        <td>12月9日（火）<br><span class="plan-badge">予定</span></td>
-        <td>2月10日（火）<br><span class="plan-badge">予定</span></td>
-      </tr>
-      <tr>
-        <td><span class="g-label g3-label">G3 松浦</span></td>
-        <td>5月15日（金）<br><span class="done-badge">✅ 開催済</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967417&vSelDate=20260515" target="_blank" class="edoyu-btn">e-doyu</a></td>
-        <td>7月7日（月）<br><span class="plan-badge">予定</span></td>
-        <td>10月6日（火）<br><span class="plan-badge">予定</span></td>
-        <td>1月12日（月）<br><span class="plan-badge">予定</span></td>
-      </tr>
-      <tr>
-        <td><span class="g-label g4-label">G4 清水</span></td>
-        <td>6月3日（水）<br><span class="next-badge">▶ 次回</span><br><a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=968062&vSelDate=20260603" target="_blank" class="edoyu-btn gold">e-doyu</a></td>
-        <td>日程確認中<br><span class="plan-badge">予定</span></td>
-        <td>日程確認中<br><span class="plan-badge">予定</span></td>
-        <td>日程確認中<br><span class="plan-badge">予定</span></td>
-      </tr>
-    </tbody>
-  </table>
-</section>
-<section>
-  <div class="section-header">
-    <div>
-      <div class="section-label">REPORT</div>
-      <div class="section-title">活動報告</div>
+</head>
+
+<body>
+  <header>
+    <div class="header-top">大阪中小企業家同友会 ／ 南東ブロック ／ 西成住之江支部</div>
+    <div class="header-main">
+      <div class="header-logo">
+        <h1>西成住之江支部</h1>
+        <p>NISHINARI SUMINOE BRANCH</p>
+      </div>
+      <div class="breadcrumb">HOME ＞ <span>小グループ会</span></div>
     </div>
-    <div class="section-line"></div>
+    <nav>
+      <ul>
+        <li><a href="index.html" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">HOME</a></li>
+        <li><a href="report.html" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">活動報告</a></li>
+        <li><a href="group.html" class="active" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">小グループ会</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="page-hero">
+    <div class="page-hero-label">SMALL GROUP</div>
+    <h2>小グループ会</h2>
+    <p>少人数で本音を語り合い、経営の悩みを共に解決する場。<br>西成住之江支部には4つのグループがあります。</p>
   </div>
-  <div class="report-list">
-    <div class="report-item">
-      <div class="report-img">📸 写真をここに差し替え</div>
-      <div class="report-content">
-        <span class="report-tag">小グループ会</span>
-        <span class="report-group-badge badge-g2">G2</span>
-        <div class="report-date">2026年6月10日（火）</div>
-        <div class="report-title">第1回小グループ会<br>一人工務店のAI活用</div>
-        <div class="report-text">住之江会館にて開催。グループ2リーダーの松塲謙一氏が、一人工務店でAIチームを組み経営を変えた実体験を報告。参加者からは「自分の仕事にも置き換えられる」と多くの声があがりました。</div>
+  <section>
+    <div class="section-header">
+      <div>
+        <div class="section-label">GROUPS</div>
+        <div class="section-title">グループ紹介</div>
+      </div>
+      <div class="section-line"></div>
+    </div>
+    <div class="group-grid">
+      <div class="group-card g1" data-group="G1">
+        <div class="group-card-header">
+          <div class="group-number" data-role="group-number">GROUP 1</div>
+          <div class="group-name" data-role="group-name">グループ1</div>
+          <div class="group-leader" data-role="group-leader">リーダー：宮高 豪</div>
+        </div>
+        <div class="group-card-body">
+          <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value"
+              data-role="member-count">約20名</span></div>
+          <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value"
+              data-role="manager-name">－</span></div>
+          <div class="group-members">
+            <div class="group-members-label">メンバー</div>
+            <div class="group-members-list" data-role="member-list"><span class="group-member-empty">読み込み中です。</span>
+            </div>
+          </div>
+          <div class="group-next" data-role="group-next">読み込み中です。</div>
+        </div>
+      </div>
+      <div class="group-card g2" data-group="G2">
+        <div class="group-card-header">
+          <div class="group-number" data-role="group-number">GROUP 2</div>
+          <div class="group-name" data-role="group-name">グループ2</div>
+          <div class="group-leader" data-role="group-leader">リーダー：松塲 謙一</div>
+        </div>
+        <div class="group-card-body">
+          <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value"
+              data-role="member-count">22名</span></div>
+          <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value"
+              data-role="manager-name">濵中・牛丸</span></div>
+          <div class="group-members">
+            <div class="group-members-label">メンバー</div>
+            <div class="group-members-list" data-role="member-list"><span class="group-member-empty">読み込み中です。</span>
+            </div>
+          </div>
+          <div class="group-next" data-role="group-next">読み込み中です。</div>
+        </div>
+      </div>
+      <div class="group-card g3" data-group="G3">
+        <div class="group-card-header">
+          <div class="group-number" data-role="group-number">GROUP 3</div>
+          <div class="group-name" data-role="group-name">グループ3</div>
+          <div class="group-leader" data-role="group-leader">リーダー：松浦 貴嗣</div>
+        </div>
+        <div class="group-card-body">
+          <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value"
+              data-role="member-count">約20名</span></div>
+          <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value"
+              data-role="manager-name">中村 俊介</span></div>
+          <div class="group-members">
+            <div class="group-members-label">メンバー</div>
+            <div class="group-members-list" data-role="member-list"><span class="group-member-empty">読み込み中です。</span>
+            </div>
+          </div>
+          <div class="group-next" data-role="group-next">読み込み中です。</div>
+        </div>
+      </div>
+      <div class="group-card g4" data-group="G4">
+        <div class="group-card-header">
+          <div class="group-number" data-role="group-number">GROUP 4</div>
+          <div class="group-name" data-role="group-name">グループ4</div>
+          <div class="group-leader" data-role="group-leader">リーダー：清水 修吉</div>
+        </div>
+        <div class="group-card-body">
+          <div class="group-info-row"><span class="group-info-label">メンバー数</span><span class="group-info-value"
+              data-role="member-count">約20名</span></div>
+          <div class="group-info-row"><span class="group-info-label">幹事</span><span class="group-info-value"
+              data-role="manager-name">－</span></div>
+          <div class="group-members">
+            <div class="group-members-label">メンバー</div>
+            <div class="group-members-list" data-role="member-list"><span class="group-member-empty">読み込み中です。</span>
+            </div>
+          </div>
+          <div class="group-next" data-role="group-next">読み込み中です。</div>
+        </div>
       </div>
     </div>
-    <div class="report-item">
-      <div class="report-img">📸 写真をここに差し替え</div>
-      <div class="report-content">
-        <span class="report-tag">勉強会</span>
-        <div class="report-date">2026年4月27日（月）</div>
-        <div class="report-title">小グループ長勉強会<br>大阪同友会事務局にて</div>
-        <div class="report-text">全大阪の小グループ長が集まり、2026年度の活動方針と成功事例を共有。愛知同友会の取り組みを学び、今期の運営に活かします。</div>
+  </section>
+  <section class="schedule-bg">
+    <div class="section-header">
+      <div>
+        <div class="section-label">SCHEDULE</div>
+        <div class="section-title">2026年度 年間スケジュール</div>
+      </div>
+      <div class="section-line"></div>
+    </div>
+    <style>
+      .schedule-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      .schedule-table th {
+        background: var(--primary);
+        color: white;
+        padding: 12px 16px;
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 1px;
+        font-size: 12px;
+      }
+
+      .schedule-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      .schedule-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .schedule-table tr:hover td {
+        background: #faf8f4;
+      }
+
+      .g-label {
+        display: inline-block;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .g1-label {
+        background: #e8eef5;
+        color: #1a3a5c;
+      }
+
+      .g2-label {
+        background: #fdf3e3;
+        color: #c8973a;
+      }
+
+      .g3-label {
+        background: #e8f5ee;
+        color: #2e7d52;
+      }
+
+      .g4-label {
+        background: #f3e8f5;
+        color: #7b3f8c;
+      }
+
+      .done-badge {
+        display: inline-block;
+        background: #e8f5e9;
+        color: #2e7d32;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 20px;
+      }
+
+      .next-badge {
+        display: inline-block;
+        background: #fff3e0;
+        color: #e65100;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-weight: 700;
+      }
+
+      .plan-badge {
+        display: inline-block;
+        background: #e3f2fd;
+        color: #1565c0;
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 20px;
+      }
+
+      .edoyu-btn {
+        display: inline-block;
+        margin-top: 4px;
+        padding: 3px 10px;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 10px;
+      }
+
+      .edoyu-btn.gold {
+        background: var(--accent);
+      }
+    </style>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>グループ</th>
+          <th>第1回</th>
+          <th>第2回</th>
+          <th>第3回</th>
+          <th>第4回</th>
+        </tr>
+      </thead>
+      <tbody id="schedule-body">
+        <tr>
+          <td colspan="5">読み込み中です。</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section>
+    <div class="section-header">
+      <div>
+        <div class="section-label">REPORT</div>
+        <div class="section-title">活動報告</div>
+      </div>
+      <div class="section-line"></div>
+    </div>
+    <div class="report-list">
+      <div class="report-item">
+        <div class="report-img">📸 写真をここに差し替え</div>
+        <div class="report-content">
+          <span class="report-tag">小グループ会</span>
+          <span class="report-group-badge badge-g2">G2</span>
+          <div class="report-date">2026年6月10日（火）</div>
+          <div class="report-title">第1回小グループ会<br>一人工務店のAI活用</div>
+          <div class="report-text">
+            住之江会館にて開催。グループ2リーダーの松塲謙一氏が、一人工務店でAIチームを組み経営を変えた実体験を報告。参加者からは「自分の仕事にも置き換えられる」と多くの声があがりました。</div>
+        </div>
+      </div>
+      <div class="report-item">
+        <div class="report-img">📸 写真をここに差し替え</div>
+        <div class="report-content">
+          <span class="report-tag">勉強会</span>
+          <div class="report-date">2026年4月27日（月）</div>
+          <div class="report-title">小グループ長勉強会<br>大阪同友会事務局にて</div>
+          <div class="report-text">全大阪の小グループ長が集まり、2026年度の活動方針と成功事例を共有。愛知同友会の取り組みを学び、今期の運営に活かします。</div>
+        </div>
       </div>
     </div>
+  </section>
+  <footer>
+    <h3>大阪中小企業家同友会 西成住之江支部</h3>
+    <p>大阪府大阪市西成区・住之江区</p>
+    <p>お問い合わせ：支部長 堂上 智史</p>
+    <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
+  </footer>
+  <div class="member-dialog-backdrop" id="member-dialog-backdrop" aria-hidden="true">
+    <div class="member-dialog" role="dialog" aria-modal="true" aria-labelledby="member-dialog-title">
+      <div class="member-dialog-label">COMPANY</div>
+      <div class="member-dialog-title" id="member-dialog-title">氏名</div>
+      <div class="member-dialog-kana" id="member-dialog-kana">カナ</div>
+      <div class="member-dialog-company" id="member-dialog-company">会社名</div>
+      <a href="#" target="_blank" rel="noopener noreferrer" class="member-dialog-link" id="member-dialog-link"
+        hidden>e-doyu ユーザ名簿</a>
+      <div class="member-dialog-help" id="member-dialog-help" hidden>クリックするとe-doyu ユーザ名簿の検索欄に氏名をコピーできます。</div>
+      <div class="member-dialog-copy-status" id="member-dialog-copy-status" aria-live="polite"></div>
+      <button type="button" class="member-dialog-close" id="member-dialog-close">閉じる</button>
+    </div>
   </div>
-</section>
-<footer>
-  <h3>大阪中小企業家同友会 西成住之江支部</h3>
-  <p>大阪府大阪市西成区・住之江区</p>
-  <p>お問い合わせ：支部長 堂上 智史</p>
-  <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
-</footer>
+  <script>
+    const currentParams = new URLSearchParams(window.location.search);
+    function preserveAdminNavigation(event, link) {
+      if (currentParams.get('admin') !== '1') {
+        return true;
+      }
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('#')) {
+        return true;
+      }
+      if (event) {
+        event.preventDefault();
+      }
+      const url = new URL(href, window.location.href);
+      url.searchParams.set('admin', '1');
+      window.location.href = `${url.pathname.split('/').pop()}${url.search}`;
+      return false;
+    }
+
+    const defaultConfig = {
+      sheetCsvUrl: '',
+      fallbackJsonUrl: './data/events.json',
+      groupSheetCsvUrl: '',
+      groupMemberSheetCsvUrls: {},
+      groupMemberSheetGids: {},
+      groupMemberSheetNames: {},
+      spreadsheetEditUrl: '',
+      fallbackGroupsUrl: './data/groups.json'
+    };
+    const defaultGroupCards = {
+      G1: { number: 'GROUP 1', name: 'グループ1', leader: '宮高 豪', leaderDetail: null, memberCount: '約20名', manager: '－', managerDetails: [], members: [], memberDetails: [], memberTotalCount: 0, leaderCount: 0 },
+      G2: { number: 'GROUP 2', name: 'グループ2', leader: '松塲 謙一', leaderDetail: null, memberCount: '22名', manager: '濵中・牛丸', managerDetails: [], members: [], memberDetails: [], memberTotalCount: 0, leaderCount: 0 },
+      G3: { number: 'GROUP 3', name: 'グループ3', leader: '松浦 貴嗣', leaderDetail: null, memberCount: '約20名', manager: '中村 俊介', managerDetails: [], members: [], memberDetails: [], memberTotalCount: 0, leaderCount: 0 },
+      G4: { number: 'GROUP 4', name: 'グループ4', leader: '清水 修吉', leaderDetail: null, memberCount: '約20名', manager: '－', managerDetails: [], members: [], memberDetails: [], memberTotalCount: 0, leaderCount: 0 }
+    };
+    const groupMeta = {
+      G1: { label: 'G1 宮高', badgeClass: 'g1-label' },
+      G2: { label: 'G2 松塲', badgeClass: 'g2-label' },
+      G3: { label: 'G3 松浦', badgeClass: 'g3-label' },
+      G4: { label: 'G4 清水', badgeClass: 'g4-label' }
+    };
+    const scheduleBody = document.getElementById('schedule-body');
+    const groupCards = [...document.querySelectorAll('.group-card[data-group]')];
+    const memberDialogBackdrop = document.getElementById('member-dialog-backdrop');
+    const memberDialogTitle = document.getElementById('member-dialog-title');
+    const memberDialogKana = document.getElementById('member-dialog-kana');
+    const memberDialogCompany = document.getElementById('member-dialog-company');
+    const memberDialogLink = document.getElementById('member-dialog-link');
+    const memberDialogHelp = document.getElementById('member-dialog-help');
+    const memberDialogCopyStatus = document.getElementById('member-dialog-copy-status');
+    const memberDialogClose = document.getElementById('member-dialog-close');
+    const eDoyuDirectoryUrl = 'https://web.doyumeibo.jp/#/top-route';
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let memberDialogCopyStatusTimer = null;
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let current = '';
+      let row = [];
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const next = text[i + 1];
+        if (char === '"') {
+          if (inQuotes && next === '"') {
+            current += '"';
+            i += 1;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          row.push(current);
+          current = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && next === '\n') {
+            i += 1;
+          }
+          row.push(current);
+          rows.push(row);
+          row = [];
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+
+      if (current.length > 0 || row.length > 0) {
+        row.push(current);
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function normalizeHeader(value) {
+      return String(value || '')
+        .replace(/^[\uFEFF\u200B-\u200D\u2060]+/, '')
+        .trim()
+        .toLowerCase();
+    }
+
+    function pickValue(record, keys) {
+      for (const key of keys) {
+        const normalizedKey = normalizeHeader(key);
+        if (Object.prototype.hasOwnProperty.call(record, normalizedKey)) {
+          return String(record[normalizedKey] || '').trim();
+        }
+      }
+      return '';
+    }
+
+    function normalizeMemberList(value) {
+      if (Array.isArray(value)) {
+        return value
+          .map((item) => String(item || '').trim())
+          .filter(Boolean);
+      }
+
+      return String(value || '')
+        .split(/[\n,、，]/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function extractSpreadsheetId(value) {
+      const match = String(value || '').match(/\/spreadsheets\/d\/([a-zA-Z0-9-_]+)/);
+      return match ? match[1] : '';
+    }
+
+    function extractPublishedSheetBaseUrl(value) {
+      const match = String(value || '').match(/^(https:\/\/docs\.google\.com\/spreadsheets\/d\/e\/[^/]+\/pub)\?/);
+      return match ? match[1] : '';
+    }
+
+    function buildPublishedSheetQueryBaseUrl(baseUrl) {
+      return String(baseUrl || '').replace(/\/pub$/, '/gviz/tq');
+    }
+
+    function buildPublishedHtmlUrl(baseUrl) {
+      return String(baseUrl || '').replace(/\/pub$/, '/pubhtml');
+    }
+
+    function inferGroup(item) {
+      if (item.group) {
+        return item.group.toUpperCase();
+      }
+      const match = item.title.match(/\b(G[1-4])\b/i);
+      return match ? match[1].toUpperCase() : '';
+    }
+
+    function inferRound(item) {
+      if (item.round) {
+        return String(item.round);
+      }
+      const match = item.title.match(/第\s*([1-4])\s*回/);
+      return match ? match[1] : '';
+    }
+
+    function assignSequentialRounds(events) {
+      const counters = {
+        G1: 0,
+        G2: 0,
+        G3: 0,
+        G4: 0
+      };
+
+      return events.map((item) => {
+        if (!item.group || !groupMeta[item.group]) {
+          return item;
+        }
+
+        if (item.round) {
+          const roundNumber = Number(item.round);
+          if (Number.isFinite(roundNumber) && roundNumber > counters[item.group]) {
+            counters[item.group] = roundNumber;
+          }
+          return item;
+        }
+
+        counters[item.group] += 1;
+        return {
+          ...item,
+          round: String(counters[item.group])
+        };
+      });
+    }
+
+    function parseDate(dateString) {
+      const date = new Date(`${dateString}T00:00:00+09:00`);
+      return Number.isNaN(date.getTime()) ? null : date;
+    }
+
+    function getEventLinkLabel(event, upcoming) {
+      return upcoming ? '詳細・参加登録（e-doyu）' : 'e-doyu で確認';
+    }
+
+    function parseEventsFromRows(rows) {
+      if (!Array.isArray(rows) || rows.length < 2) {
+        return [];
+      }
+
+      const headers = rows[0].map((header) => normalizeHeader(header));
+      return rows.slice(1)
+        .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+        .map((row) => {
+          const record = {};
+          headers.forEach((header, index) => {
+            record[header] = row[index] ?? '';
+          });
+
+          const visible = pickValue(record, ['visible', '公開', '表示']);
+          if (visible && ['0', 'false', 'no', '非公開'].includes(visible.toLowerCase())) {
+            return null;
+          }
+
+          const item = {
+            date: pickValue(record, ['date', '日付', '年月日']),
+            category: pickValue(record, ['category', '区分', '種別']),
+            group: pickValue(record, ['group', 'グループ', '小グループ']),
+            round: pickValue(record, ['round', '回']),
+            title: pickValue(record, ['title', 'タイトル']),
+            place: pickValue(record, ['place', '場所']),
+            time: pickValue(record, ['time', '時間']),
+            detail: pickValue(record, ['detail', '詳細', 'place', '場所']),
+            url: pickValue(record, ['url', 'e.doyu_url', 'リンクurl', 'linkurl', 'リンク']),
+            linkLabel: pickValue(record, ['linklabel', 'リンク文字', 'button', 'ボタン文字'])
+          };
+
+          item.group = inferGroup(item);
+          item.round = inferRound(item);
+          return item.date && item.title ? item : null;
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title, 'ja'));
+    }
+
+    async function loadConfig() {
+      try {
+        const response = await fetch('./data/site-config.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error('Failed to fetch site-config.json');
+        }
+        return { ...defaultConfig, ...(await response.json()) };
+      } catch (error) {
+        console.error(error);
+        return defaultConfig;
+      }
+    }
+
+    async function loadEventsFromSheet(csvUrl) {
+      const response = await fetch(csvUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch published Google Sheet CSV');
+      }
+      return parseEventsFromRows(parseCsv(await response.text()));
+    }
+
+    async function loadEventsFromJson(jsonUrl) {
+      const response = await fetch(jsonUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch fallback events.json');
+      }
+      const data = await response.json();
+      return (Array.isArray(data.events) ? data.events : []).map((item) => ({
+        ...item,
+        group: inferGroup(item),
+        round: inferRound(item)
+      }));
+    }
+
+    async function loadGroupsFromSheet(csvUrl) {
+      const response = await fetch(csvUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch published group Google Sheet CSV');
+      }
+      return parseGroupsFromRows(parseCsv(await response.text()));
+    }
+
+    async function loadGroupsFromJson(jsonUrl) {
+      const response = await fetch(jsonUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch fallback groups.json');
+      }
+      const data = await response.json();
+      return Object.entries(data.groups || {}).reduce((acc, [groupKey, groupInfo]) => {
+        const normalizedGroupKey = String(groupKey || '').toUpperCase();
+        if (!groupMeta[normalizedGroupKey]) {
+          return acc;
+        }
+
+        acc[normalizedGroupKey] = {
+          number: String(groupInfo.number || `GROUP ${normalizedGroupKey.slice(1)}`),
+          name: String(groupInfo.name || `グループ${normalizedGroupKey.slice(1)}`),
+          leader: String(groupInfo.leader || ''),
+          memberCount: String(groupInfo.memberCount || ''),
+          manager: String(groupInfo.manager || ''),
+          members: normalizeMemberList(groupInfo.members || groupInfo.memberNames || ''),
+          memberDetails: Array.isArray(groupInfo.memberDetails) ? groupInfo.memberDetails : [],
+          memberTotalCount: Number(groupInfo.memberTotalCount || 0),
+          leaderCount: Number(groupInfo.leaderCount || 0)
+        };
+        return acc;
+      }, {});
+    }
+
+    function parseMemberRosterFromRows(rows) {
+      if (!Array.isArray(rows) || rows.length < 2) {
+        return { members: [], memberDetails: [], managers: [], memberTotalCount: 0, leaderCount: 0 };
+      }
+
+      const headers = rows[0].map((header) => normalizeHeader(header));
+      const roster = rows.slice(1)
+        .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+        .reduce((acc, row) => {
+          const record = {};
+          headers.forEach((header, index) => {
+            record[header] = row[index] ?? '';
+          });
+
+          const visible = pickValue(record, ['visible', '公開']);
+          if (visible && ['0', 'false', 'no', '非公開'].includes(visible.toLowerCase())) {
+            return acc;
+          }
+
+          const name = pickValue(record, ['name', 'membername', 'member', '氏名', '名前', 'メンバー名']);
+          const kana = pickValue(record, ['namekana', 'kana', '名前カナ', '氏名カナ']);
+          const company = pickValue(record, ['company', '会社', 'companyname', '勤務先']);
+          const userDirectoryUrl = pickValue(record, ['userdirectory', 'directoryurl', 'ユーザ名簿', 'ユーザー名簿']);
+          const managerValue = pickValue(record, ['manager', 'organizer', '幹事']);
+          const normalizedManagerValue = managerValue.toLowerCase();
+          const isLeader = ['leader', 'リーダー'].includes(normalizedManagerValue);
+          const isManager = !!(
+            name
+            && managerValue
+            && !isLeader
+            && !['0', 'false', 'no', 'off', '×', '-', 'ー'].includes(normalizedManagerValue)
+          );
+
+          if (name) {
+            acc.allMembers.push(name);
+          }
+
+          if (
+            name
+            && !isLeader
+            && !isManager
+          ) {
+            acc.members.push(name);
+            acc.memberDetails.push({ name, kana, company, userDirectoryUrl });
+          }
+
+          if (name && isLeader) {
+            acc.leaderCount += 1;
+            if (!acc.leaderDetail) {
+              acc.leaderDetail = { name, kana, company, userDirectoryUrl };
+            }
+          }
+
+          if (isManager) {
+            acc.managers.push(name);
+            acc.managerDetails.push({ name, kana, company, userDirectoryUrl });
+          }
+
+          return acc;
+        }, { members: [], memberDetails: [], managers: [], managerDetails: [], allMembers: [], leaderCount: 0, leaderDetail: null });
+
+      return {
+        members: roster.members,
+        memberDetails: roster.memberDetails,
+        managers: [...new Set(roster.managers)],
+        managerDetails: roster.managerDetails.filter((manager, index, array) =>
+          array.findIndex((item) => item.name === manager.name) === index
+        ),
+        memberTotalCount: roster.members.length + roster.leaderCount + [...new Set(roster.managers)].length,
+        leaderCount: roster.leaderCount,
+        leaderDetail: roster.leaderDetail
+      };
+    }
+
+    async function loadMemberNamesFromSheet(csvUrlOrUrls) {
+      const candidates = Array.isArray(csvUrlOrUrls) ? csvUrlOrUrls : [csvUrlOrUrls];
+      let lastError = null;
+
+      for (const csvUrl of candidates) {
+        if (!csvUrl) {
+          continue;
+        }
+
+        try {
+          const response = await fetch(csvUrl, { cache: 'no-store' });
+          if (!response.ok) {
+            throw new Error(`Failed to fetch group members CSV: ${response.status}`);
+          }
+          return parseMemberRosterFromRows(parseCsv(await response.text()));
+        } catch (error) {
+          lastError = error;
+        }
+      }
+
+      throw lastError || new Error('Failed to fetch published group members Google Sheet CSV');
+    }
+
+    function gvizTableToRows(table) {
+      const headers = Array.isArray(table && table.cols)
+        ? table.cols.map((col) => String((col && (col.label || col.id)) || ''))
+        : [];
+      const bodyRows = Array.isArray(table && table.rows)
+        ? table.rows.map((row) => (
+          Array.isArray(row && row.c)
+            ? row.c.map((cell) => (cell && typeof cell.v !== 'undefined' ? String(cell.v) : ''))
+            : []
+        ))
+        : [];
+      return headers.length ? [headers, ...bodyRows] : bodyRows;
+    }
+
+    async function loadMemberNamesViaJsonp(spreadsheetId, options) {
+      if (!spreadsheetId || (!options.gid && !options.sheetName)) {
+        throw new Error('Missing spreadsheet JSONP settings');
+      }
+
+      const callbackName = `groupMembersJsonp_${Math.random().toString(36).slice(2)}`;
+
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        const cleanup = () => {
+          delete window[callbackName];
+          script.remove();
+        };
+
+        const timer = window.setTimeout(() => {
+          cleanup();
+          reject(new Error('JSONP timeout'));
+        }, 10000);
+
+        window[callbackName] = (response) => {
+          window.clearTimeout(timer);
+          cleanup();
+
+          if (response && response.status && response.status !== 'ok') {
+            const errorMessage = response.errors && response.errors.length
+              ? String(response.errors[0].detailed_message || response.errors[0].message || response.status)
+              : String(response.status);
+            reject(new Error(errorMessage));
+            return;
+          }
+
+          try {
+            resolve(parseMemberRosterFromRows(gvizTableToRows(response.table)));
+          } catch (error) {
+            reject(error);
+          }
+        };
+
+        script.onerror = () => {
+          window.clearTimeout(timer);
+          cleanup();
+          reject(new Error('JSONP script load failed'));
+        };
+
+        script.src = buildGvizJsonpUrl(spreadsheetId, options, callbackName);
+        document.head.appendChild(script);
+      });
+    }
+
+    async function loadPublishedSheetGidMap(baseUrl) {
+      if (!baseUrl) {
+        return {};
+      }
+
+      const response = await fetch(buildPublishedHtmlUrl(baseUrl), { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`Failed to fetch published sheet HTML: ${response.status}`);
+      }
+
+      const html = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const links = [...doc.querySelectorAll('a[href*="gid="]')];
+
+      return links.reduce((acc, link) => {
+        const text = String(link.textContent || '').trim();
+        const href = String(link.getAttribute('href') || '');
+        const match = href.match(/gid=([0-9]+)/);
+        if (!text || !match) {
+          return acc;
+        }
+        acc[text] = match[1];
+        return acc;
+      }, {});
+    }
+
+    function buildSheetCsvUrlFromName(spreadsheetId, sheetName) {
+      return `https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+    }
+
+    function buildPublishedSheetCsvUrlFromName(baseUrl, sheetName) {
+      return `${baseUrl}?single=true&output=csv&sheet=${encodeURIComponent(sheetName)}`;
+    }
+
+    function buildPublishedSheetCsvUrlFromGid(baseUrl, gid) {
+      return `${baseUrl}?gid=${encodeURIComponent(gid)}&single=true&output=csv`;
+    }
+
+    function buildPublishedSheetQueryUrlFromName(baseUrl, sheetName) {
+      return `${buildPublishedSheetQueryBaseUrl(baseUrl)}?tqx=out:csv&sheet=${encodeURIComponent(sheetName)}`;
+    }
+
+    function buildPublishedSheetQueryUrlFromGid(baseUrl, gid) {
+      return `${buildPublishedSheetQueryBaseUrl(baseUrl)}?tqx=out:csv&gid=${encodeURIComponent(gid)}`;
+    }
+
+    function buildGvizJsonpUrl(spreadsheetId, options, callbackName) {
+      const url = new URL(`https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq`);
+      url.searchParams.set('tqx', `out:json;responseHandler:${callbackName}`);
+      if (options.gid) {
+        url.searchParams.set('gid', options.gid);
+      }
+      if (options.sheetName) {
+        url.searchParams.set('sheet', options.sheetName);
+      }
+      return url.toString();
+    }
+
+    function formatErrorMessage(error) {
+      if (!error) {
+        return '';
+      }
+      return String(error && error.message ? error.message : error).trim();
+    }
+
+    function openMemberDialog(name, kana, company, userDirectoryUrl) {
+      if (!memberDialogBackdrop || !memberDialogTitle || !memberDialogKana || !memberDialogCompany || !memberDialogLink) {
+        return;
+      }
+
+      if (memberDialogCopyStatusTimer) {
+        window.clearTimeout(memberDialogCopyStatusTimer);
+        memberDialogCopyStatusTimer = null;
+      }
+      memberDialogTitle.textContent = name || '氏名';
+      memberDialogKana.textContent = kana || 'カナ未登録';
+      memberDialogCompany.textContent = company || '会社情報は未登録です。';
+      memberDialogCopyStatus.textContent = '';
+      memberDialogLink.href = eDoyuDirectoryUrl;
+      memberDialogLink.dataset.copyName = name || '';
+      memberDialogLink.hidden = false;
+      memberDialogHelp.hidden = false;
+      memberDialogBackdrop.classList.add('is-open');
+      memberDialogBackdrop.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMemberDialog() {
+      if (!memberDialogBackdrop) {
+        return;
+      }
+      memberDialogBackdrop.classList.remove('is-open');
+      memberDialogBackdrop.setAttribute('aria-hidden', 'true');
+    }
+
+    async function copyTextToClipboard(text) {
+      if (!text) {
+        return false;
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      textarea.setSelectionRange(0, textarea.value.length);
+      const copied = document.execCommand('copy');
+      document.body.removeChild(textarea);
+      return copied;
+    }
+
+    async function handleDirectoryLinkClick(event) {
+      const link = event.currentTarget;
+      const copyName = String(link.dataset.copyName || '').trim();
+
+      if (!copyName) {
+        return;
+      }
+
+      try {
+        const copied = await copyTextToClipboard(copyName);
+        memberDialogCopyStatus.textContent = copied
+          ? `「${copyName}」をコピーしました。`
+          : '氏名のコピーに失敗しました。';
+      } catch (error) {
+        memberDialogCopyStatus.textContent = '氏名のコピーに失敗しました。';
+      }
+
+      if (memberDialogCopyStatusTimer) {
+        window.clearTimeout(memberDialogCopyStatusTimer);
+      }
+      memberDialogCopyStatusTimer = window.setTimeout(() => {
+        memberDialogCopyStatus.textContent = '';
+        memberDialogCopyStatusTimer = null;
+      }, 3000);
+    }
+
+    async function loadGroupMembers(config) {
+      const explicitEntries = Object.entries(config.groupMemberSheetCsvUrls || {})
+        .map(([groupKey, csvUrl]) => [String(groupKey || '').toUpperCase(), String(csvUrl || '').trim()])
+        .filter(([groupKey, csvUrl]) => groupMeta[groupKey] && csvUrl);
+      const configuredSheetNames = Object.entries(config.groupMemberSheetNames || {})
+        .map(([groupKey, sheetName]) => [String(groupKey || '').toUpperCase(), String(sheetName || '').trim()])
+        .filter(([groupKey, sheetName]) => groupMeta[groupKey] && sheetName);
+      const spreadsheetId = extractSpreadsheetId(
+        config.spreadsheetEditUrl
+        || config.groupSheetEditUrl
+        || config.reportSheetEditUrl
+        || ''
+      );
+      const publishedBaseUrl = extractPublishedSheetBaseUrl(
+        config.groupSheetCsvUrl
+        || config.sheetCsvUrl
+        || config.reportSheetCsvUrl
+        || ''
+      );
+      let resolvedGroupMemberSheetGids = Object.entries(config.groupMemberSheetGids || {})
+        .reduce((acc, [groupKey, gid]) => {
+          const normalizedGroupKey = String(groupKey || '').toUpperCase();
+          const normalizedGid = String(gid || '').trim();
+          if (groupMeta[normalizedGroupKey] && normalizedGid) {
+            acc[normalizedGroupKey] = normalizedGid;
+          }
+          return acc;
+        }, {});
+
+      if (!explicitEntries.length && !configuredSheetNames.length && !Object.keys(resolvedGroupMemberSheetGids).length) {
+        return {};
+      }
+
+      if (!explicitEntries.length && !Object.keys(resolvedGroupMemberSheetGids).length && publishedBaseUrl) {
+        try {
+          const publishedSheetGidMap = await loadPublishedSheetGidMap(publishedBaseUrl);
+          resolvedGroupMemberSheetGids = configuredSheetNames
+            .reduce((acc, [groupKey, sheetName]) => {
+              const gid = publishedSheetGidMap[sheetName];
+              if (gid) {
+                acc[groupKey] = gid;
+              }
+              return acc;
+            }, {});
+        } catch (error) {
+          console.error('Failed to resolve published sheet gid map', error);
+        }
+      }
+
+      const gidEntries = explicitEntries.length
+        ? []
+        : Object.entries(resolvedGroupMemberSheetGids)
+          .map(([groupKey, gid]) => [groupKey, [
+            buildPublishedSheetCsvUrlFromGid(publishedBaseUrl, gid),
+            buildPublishedSheetQueryUrlFromGid(publishedBaseUrl, gid)
+          ]]);
+
+      const namedEntries = explicitEntries.length || gidEntries.length
+        ? []
+        : configuredSheetNames
+          .filter(([, sheetName]) => sheetName && (spreadsheetId || publishedBaseUrl))
+          .map(([groupKey, sheetName]) => {
+            const urls = [];
+            if (publishedBaseUrl) {
+              urls.push(buildPublishedSheetCsvUrlFromName(publishedBaseUrl, sheetName));
+              urls.push(buildPublishedSheetQueryUrlFromName(publishedBaseUrl, sheetName));
+            }
+            if (spreadsheetId) {
+              urls.push(buildSheetCsvUrlFromName(spreadsheetId, sheetName));
+            }
+            return [groupKey, urls];
+          });
+
+      const entries = [...explicitEntries, ...gidEntries, ...namedEntries];
+      if (!entries.length) {
+        return {};
+      }
+
+      const results = await Promise.all(entries.map(async ([groupKey, csvUrl]) => {
+        try {
+          return [groupKey, { ...(await loadMemberNamesFromSheet(csvUrl)), error: '' }];
+        } catch (error) {
+          const sheetName = String((config.groupMemberSheetNames || {})[groupKey] || '').trim();
+          const gid = resolvedGroupMemberSheetGids[groupKey] || '';
+
+          if (spreadsheetId && (gid || sheetName)) {
+            try {
+              return [groupKey, { ...(await loadMemberNamesViaJsonp(spreadsheetId, { gid, sheetName })), error: '' }];
+            } catch (jsonpError) {
+              console.error(`${groupKey} members load failed`, error, jsonpError);
+              return [groupKey, { members: [], managers: [], error: formatErrorMessage(jsonpError) }];
+            }
+          }
+
+          console.error(`${groupKey} members load failed`, error);
+          return [groupKey, { members: [], managers: [], error: formatErrorMessage(error) }];
+        }
+      }));
+
+      return Object.fromEntries(results);
+    }
+
+    async function loadGroupDefinitions(config) {
+      if (!config.groupSheetCsvUrl) {
+        return loadGroupsFromJson(config.fallbackGroupsUrl);
+      }
+
+      try {
+        return await loadGroupsFromSheet(config.groupSheetCsvUrl);
+      } catch (error) {
+        console.error(error);
+        return loadGroupsFromJson(config.fallbackGroupsUrl);
+      }
+    }
+
+    function formatJapaneseDate(dateString) {
+      const date = parseDate(dateString);
+      if (!date) {
+        return '';
+      }
+      return new Intl.DateTimeFormat('ja-JP', {
+        month: 'numeric',
+        day: 'numeric',
+        weekday: 'short'
+      }).format(date);
+    }
+
+    function extractTime(detail) {
+      const match = String(detail || '').match(/(\d{1,2}:\d{2}[〜\-]\d{1,2}:\d{2})/);
+      return match ? match[1] : '';
+    }
+
+    function getEventTime(event) {
+      return String(event.time || '').trim() || extractTime(event.detail);
+    }
+
+    function getEventPlace(event) {
+      const explicitPlace = String(event.place || '').trim();
+      if (explicitPlace) {
+        return explicitPlace;
+      }
+      const detail = String(event.detail || '').trim();
+      const time = getEventTime(event);
+      if (!detail || !time) {
+        return detail;
+      }
+      return detail.replace(time, '').replace(/\s{2,}/g, ' ').trim();
+    }
+
+    function isUpcoming(event) {
+      const date = parseDate(event.date);
+      return date && date.getTime() >= today.getTime();
+    }
+
+    function applyGroupCardContent(card, groupInfo) {
+      const numberNode = card.querySelector('[data-role="group-number"]');
+      const nameNode = card.querySelector('[data-role="group-name"]');
+      const leaderNode = card.querySelector('[data-role="group-leader"]');
+      const memberCountNode = card.querySelector('[data-role="member-count"]');
+      const managerNode = card.querySelector('[data-role="manager-name"]');
+      const memberListNode = card.querySelector('[data-role="member-list"]');
+      const members = normalizeMemberList(groupInfo.members);
+      const memberDetails = Array.isArray(groupInfo.memberDetails) && groupInfo.memberDetails.length
+        ? groupInfo.memberDetails
+        : members.map((member) => ({ name: member, kana: '', company: '', userDirectoryUrl: '' }));
+      const leaderDetail = groupInfo.leaderDetail && groupInfo.leaderDetail.name
+        ? groupInfo.leaderDetail
+        : { name: groupInfo.leader || '', kana: '', company: '', userDirectoryUrl: '' };
+      const managerDetails = Array.isArray(groupInfo.managerDetails) ? groupInfo.managerDetails : [];
+      const totalMembers = Number(groupInfo.memberTotalCount || 0);
+      const memberCountText = totalMembers > 0
+        ? `${totalMembers}名`
+        : (members.length ? `${members.length}名` : (groupInfo.memberCount || ''));
+
+      if (numberNode) {
+        numberNode.textContent = groupInfo.number || '';
+      }
+      if (nameNode) {
+        nameNode.textContent = groupInfo.name || '';
+      }
+      if (leaderNode) {
+        const leaderName = leaderDetail.name || '未設定';
+        leaderNode.innerHTML = `リーダー：<button type="button" class="group-leader-button" data-role="leader-link" data-member-name="${escapeHtml(leaderName)}" data-member-kana="${escapeHtml(leaderDetail.kana || '')}" data-member-company="${escapeHtml(leaderDetail.company || '')}" data-member-directory-url="${escapeHtml(leaderDetail.userDirectoryUrl || '')}">${escapeHtml(leaderName)}</button>`;
+      }
+      if (memberCountNode) {
+        memberCountNode.textContent = memberCountText || '－';
+      }
+      if (managerNode) {
+        if (managerDetails.length) {
+          managerNode.innerHTML = managerDetails.map((manager) => `
+            <button
+              type="button"
+              class="group-manager-button"
+              data-role="manager-link"
+              data-member-name="${escapeHtml(manager.name)}"
+              data-member-kana="${escapeHtml(manager.kana || '')}"
+              data-member-company="${escapeHtml(manager.company || '')}"
+              data-member-directory-url="${escapeHtml(manager.userDirectoryUrl || '')}"
+            >${escapeHtml(manager.name)}</button>
+          `).join('・');
+        } else {
+          managerNode.textContent = groupInfo.manager || '－';
+        }
+      }
+      if (memberListNode) {
+        if (members.length) {
+          memberListNode.innerHTML = memberDetails.map((member) => `
+          <button
+            type="button"
+            class="group-member-chip"
+            data-member-name="${escapeHtml(member.name)}"
+            data-member-kana="${escapeHtml(member.kana || '')}"
+            data-member-company="${escapeHtml(member.company || '')}"
+            data-member-directory-url="${escapeHtml(member.userDirectoryUrl || '')}"
+          >${escapeHtml(member.name)}</button>
+        `).join('');
+        } else {
+          memberListNode.innerHTML = `
+          <span class="group-member-empty">－</span>
+          <div class="group-member-hint">グループ G1〜G4 別シートを使う場合は、そのシートを公開CSVとして読める設定が必要です。もしくは公開中の「グループ紹介」シートに memberNames / メンバー一覧 列を入れてください。</div>
+        `;
+        }
+      }
+    }
+
+    function parseGroupsFromRows(rows) {
+      if (!Array.isArray(rows) || rows.length < 2) {
+        return {};
+      }
+
+      const headers = rows[0].map((header) => normalizeHeader(header));
+      return rows.slice(1)
+        .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+        .reduce((acc, row) => {
+          const record = {};
+          headers.forEach((header, index) => {
+            record[header] = row[index] ?? '';
+          });
+
+          const visible = pickValue(record, ['visible', '公開']);
+          if (visible && ['0', 'false', 'no', '非公開'].includes(visible.toLowerCase())) {
+            return acc;
+          }
+
+          const groupKey = pickValue(record, ['group', 'グループ']).toUpperCase();
+          if (!groupMeta[groupKey]) {
+            return acc;
+          }
+
+          acc[groupKey] = {
+            number: pickValue(record, ['number', 'groupnumber', '表示番号', 'グループ番号']) || `GROUP ${groupKey.slice(1)}`,
+            name: pickValue(record, ['name', 'groupname', '表示名', 'グループ名']) || `グループ${groupKey.slice(1)}`,
+            leader: pickValue(record, ['leader', 'リーダー']),
+            memberCount: pickValue(record, ['membercount', 'members', 'メンバー数']),
+            manager: pickValue(record, ['manager', 'organizer', '幹事']),
+            members: normalizeMemberList(pickValue(record, ['membernames', 'memberlist', 'メンバー一覧', 'メンバー名一覧']))
+          };
+          return acc;
+        }, {});
+    }
+
+    function renderGroupCard(card, event) {
+      const container = card.querySelector('[data-role="group-next"]');
+      if (!container) {
+        return;
+      }
+      if (!event) {
+        container.innerHTML = '<div class="group-next-empty">予定がまだ登録されていません。</div>';
+        return;
+      }
+
+      const upcoming = isUpcoming(event);
+      const label = upcoming ? 'NEXT ▶' : '✅ 開催済';
+      const time = getEventTime(event);
+      const place = getEventPlace(event);
+      const dateText = `${formatJapaneseDate(event.date)}${time ? ` ${time}` : ''}`;
+      const theme = place || event.detail || event.title;
+      const buttonLabel = escapeHtml(getEventLinkLabel(event, upcoming));
+      const buttonClass = upcoming ? 'edoyu-btn gold' : 'edoyu-btn';
+      const button = event.url
+        ? `<a href="${escapeHtml(event.url)}" target="_blank" rel="noopener noreferrer" class="${buttonClass}" style="display:inline-block;margin-top:8px;padding:5px 14px;color:white;text-decoration:none;border-radius:4px;font-size:11px;letter-spacing:1px;">${buttonLabel}</a>`
+        : '';
+
+      container.innerHTML = `
+      <div class="group-next-label">${label}</div>
+      <div class="group-next-date">${escapeHtml(dateText)}</div>
+      <div class="group-next-theme">${escapeHtml(theme)}</div>
+      ${button}
+    `;
+    }
+
+    function renderSchedule(events) {
+      const groupOrder = ['G1', 'G2', 'G3', 'G4'];
+      scheduleBody.innerHTML = groupOrder.map((groupKey) => {
+        const meta = groupMeta[groupKey];
+        const roundCells = [1, 2, 3, 4].map((round) => {
+          const event = events.find((item) => item.group === groupKey && String(item.round) === String(round));
+          if (!event) {
+            return '日程確認中<br><span class="plan-badge">予定</span>';
+          }
+          const upcoming = isUpcoming(event);
+          const badge = upcoming
+            ? (round === 1 ? '<span class="next-badge">▶ 次回</span>' : '<span class="plan-badge">予定</span>')
+            : '<span class="done-badge">✅ 開催済</span>';
+          const link = event.url
+            ? `<br><a href="${escapeHtml(event.url)}" target="_blank" rel="noopener noreferrer" class="${upcoming ? 'edoyu-btn gold' : 'edoyu-btn'}">${escapeHtml(getEventLinkLabel(event, upcoming))}</a>`
+            : '';
+          return `${escapeHtml(formatJapaneseDate(event.date))}<br>${badge}${link}`;
+        }).map((cell) => `<td>${cell}</td>`).join('');
+
+        return `
+        <tr>
+          <td><span class="g-label ${meta.badgeClass}">${meta.label}</span></td>
+          ${roundCells}
+        </tr>
+      `;
+      }).join('');
+    }
+
+    async function loadGroupEvents() {
+      try {
+        const config = await loadConfig();
+        const groups = await loadGroupDefinitions(config);
+        const groupMembers = await loadGroupMembers(config);
+        const allEvents = config.sheetCsvUrl
+          ? await loadEventsFromSheet(config.sheetCsvUrl)
+          : await loadEventsFromJson(config.fallbackJsonUrl);
+        const groupEvents = assignSequentialRounds(
+          allEvents.filter((item) => item.group && groupMeta[item.group])
+        );
+
+        groupCards.forEach((card) => {
+          const groupKey = card.dataset.group;
+          const mergedGroupInfo = {
+            ...defaultGroupCards[groupKey],
+            ...(groups[groupKey] || {})
+          };
+          const memberData = groupMembers[groupKey];
+          if (memberData && memberData.members.length) {
+            mergedGroupInfo.members = memberData.members;
+          }
+          if (memberData && memberData.memberDetails.length) {
+            mergedGroupInfo.memberDetails = memberData.memberDetails;
+          }
+          if (memberData && memberData.memberTotalCount) {
+            mergedGroupInfo.memberTotalCount = memberData.memberTotalCount;
+          }
+          if (memberData && memberData.leaderCount) {
+            mergedGroupInfo.leaderCount = memberData.leaderCount;
+          }
+          if (memberData && memberData.leaderDetail && memberData.leaderDetail.name) {
+            mergedGroupInfo.leader = memberData.leaderDetail.name;
+            mergedGroupInfo.leaderDetail = memberData.leaderDetail;
+          }
+          if (memberData && memberData.managerDetails && memberData.managerDetails.length) {
+            mergedGroupInfo.managerDetails = memberData.managerDetails;
+          }
+          if (memberData && memberData.managers.length) {
+            mergedGroupInfo.manager = memberData.managers.join('・');
+          }
+          applyGroupCardContent(card, {
+            ...mergedGroupInfo
+          });
+          const events = groupEvents.filter((item) => item.group === groupKey);
+          const nextEvent = events.find((item) => isUpcoming(item)) || events[events.length - 1] || null;
+          renderGroupCard(card, nextEvent);
+        });
+
+        renderSchedule(groupEvents);
+      } catch (error) {
+        console.error(error);
+        groupCards.forEach((card) => renderGroupCard(card, null));
+        scheduleBody.innerHTML = '<tr><td colspan="5">予定の読み込みに失敗しました。</td></tr>';
+      }
+    }
+
+    document.addEventListener('click', (event) => {
+      const memberTrigger = event.target.closest('.group-member-chip, [data-role="leader-link"], [data-role="manager-link"]');
+      if (memberTrigger) {
+        openMemberDialog(
+          memberTrigger.dataset.memberName || '',
+          memberTrigger.dataset.memberKana || '',
+          memberTrigger.dataset.memberCompany || '',
+          memberTrigger.dataset.memberDirectoryUrl || ''
+        );
+        return;
+      }
+
+      if (event.target === memberDialogBackdrop || event.target === memberDialogClose) {
+        closeMemberDialog();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeMemberDialog();
+      }
+    });
+
+    if (memberDialogLink) {
+      memberDialogLink.addEventListener('click', handleDirectoryLinkClick);
+    }
+
+    loadGroupEvents();
+  </script>
 </body>
+
 </html>

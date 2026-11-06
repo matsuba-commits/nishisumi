@@ -1,0 +1,32 @@
+{
+  "groups": {
+    "G1": {
+      "number": "GROUP 1",
+      "name": "グループ1",
+      "leader": "宮高 豪",
+      "memberCount": "約20名",
+      "manager": "－"
+    },
+    "G2": {
+      "number": "GROUP 2",
+      "name": "グループ2",
+      "leader": "松塲 謙一",
+      "memberCount": "22名",
+      "manager": "濵中・牛丸"
+    },
+    "G3": {
+      "number": "GROUP 3",
+      "name": "グループ3",
+      "leader": "松浦 貴嗣",
+      "memberCount": "約20名",
+      "manager": "中村 俊介"
+    },
+    "G4": {
+      "number": "GROUP 4",
+      "name": "グループ4",
+      "leader": "清水 修吉",
+      "memberCount": "約20名",
+      "manager": "－"
+    }
+  }
+}

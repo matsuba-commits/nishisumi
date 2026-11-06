@@ -1,0 +1,25 @@
+{
+  "sheetCsvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Vrn3Smkqvr0XIwv7eiOrVkepH1bQExLlXZNLrKOG_bwfG4rQJgXooxoL_tGVIrN8YNDUYWQqgLYR/pub?gid=0&single=true&output=csv",
+  "fallbackJsonUrl": "./data/events.json",
+  "groupSheetCsvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Vrn3Smkqvr0XIwv7eiOrVkepH1bQExLlXZNLrKOG_bwfG4rQJgXooxoL_tGVIrN8YNDUYWQqgLYR/pub?gid=390000209&single=true&output=csv",
+  "groupMemberSheetCsvUrls": {
+    "G1": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Vrn3Smkqvr0XIwv7eiOrVkepH1bQExLlXZNLrKOG_bwfG4rQJgXooxoL_tGVIrN8YNDUYWQqgLYR/pub?gid=1984014384&single=true&output=csv",
+    "G2": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Vrn3Smkqvr0XIwv7eiOrVkepH1bQExLlXZNLrKOG_bwfG4rQJgXooxoL_tGVIrN8YNDUYWQqgLYR/pub?gid=1059100724&single=true&output=csv",
+    "G3": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Vrn3Smkqvr0XIwv7eiOrVkepH1bQExLlXZNLrKOG_bwfG4rQJgXooxoL_tGVIrN8YNDUYWQqgLYR/pub?gid=1516954320&single=true&output=csv",
+    "G4": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Vrn3Smkqvr0XIwv7eiOrVkepH1bQExLlXZNLrKOG_bwfG4rQJgXooxoL_tGVIrN8YNDUYWQqgLYR/pub?gid=144191647&single=true&output=csv"
+  },
+  "groupMemberSheetGids": {
+    "G1": "",
+    "G2": "",
+    "G3": "",
+    "G4": ""
+  },
+  "groupMemberSheetNames": {},
+  "spreadsheetEditUrl": "https://docs.google.com/spreadsheets/d/1urdx6tlczcddvSLl3brm7yjp0u8z2NcQ2pOMlybOxoc/edit",
+  "fallbackGroupsUrl": "./data/groups.json",
+  "reportSheetCsvUrl": "https://docs.google.com/spreadsheets/d/e/2PACX-1vR-Vrn3Smkqvr0XIwv7eiOrVkepH1bQExLlXZNLrKOG_bwfG4rQJgXooxoL_tGVIrN8YNDUYWQqgLYR/pub?gid=163030588&single=true&output=csv",
+  "fallbackReportsUrl": "./data/reports.json",
+  "reportDriveFolderUrl": "https://drive.google.com/drive/folders/1avX6JcZfG9ADNrJGo_x_3K3idvViFPUd?usp=drive_link",
+  "reportSheetEditUrl": "https://docs.google.com/spreadsheets/d/1urdx6tlczcddvSLl3brm7yjp0u8z2NcQ2pOMlybOxoc/edit?gid=163030588#gid=163030588",
+  "reportSheetWebhookUrl": "https://script.google.com/macros/s/AKfycbwwVPyd3CXWgbRj1Y1QeY7X8Rps-EW5NY_nYDRCUt98zjv4T5Z_xn3n3FPxgDz-BoQNwA/exec"
+}

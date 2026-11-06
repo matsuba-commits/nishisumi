@@ -1,0 +1,5 @@
+年月日,種別,タイトル,内容,タグ,画像Url,imageFileId,imageUrl,画像説明,previewImage,公開/非公開
+,,,,,Drive共有リンクをここに貼る,画像IDを自動反映,サムネイルURLを自動反映,写真の説明文を入れる,シート内プレビュー,非公開
+2026-05-19,小グループ会,"G1小グループ会 第1回
+自社紹介・経営課題共有",懐石料理「徳」住之江本店にて開催。メンバー同士の自社紹介と経営課題を共有し、活発な意見交換が行われました。,"G1,自社紹介,課題共有",https://drive.google.com/file/d/1AbCdEfGhIjKlMnOp/view?usp=sharing,1AbCdEfGhIjKlMnOp,https://drive.google.com/thumbnail?id=1AbCdEfGhIjKlMnOp&sz=w1600,G1小グループ会の集合写真,"=IF(G3="""","""",IMAGE(""https://drive.google.com/thumbnail?id=""&G3&""&sz=w1600""))",公開
+2026-05-12,支部行事,新春★西成住之江支部【新会員を知る会】,今期入会した新会員を迎え、お互いを知り合う場を設けました。,"新会員,交流,支部",https://drive.google.com/open?id=2ZaYxWvUtSrQpOnMl,2ZaYxWvUtSrQpOnMl,https://drive.google.com/thumbnail?id=2ZaYxWvUtSrQpOnMl&sz=w1600,新会員を知る会の様子,"=IF(G4="""","""",IMAGE(""https://drive.google.com/thumbnail?id=""&G4&""&sz=w1600""))",公開

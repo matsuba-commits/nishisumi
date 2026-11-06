@@ -41,7 +41,10 @@
   .report-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
   .report-card { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
   .report-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
-  .report-card-img { width: 100%; height: 180px; background: linear-gradient(135deg, #e8e0d4, #d4ccc0); display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 13px; }
+  .report-card-img-wrap { width: 100%; height: 180px; background: linear-gradient(135deg, #e8e0d4, #d4ccc0); display: flex; align-items: center; justify-content: center; }
+  .report-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .report-card-img, .report-card-helper-link { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 13px; text-decoration: none; padding: 16px; text-align: center; }
+  .report-card-helper-link:hover { background: rgba(255,255,255,0.2); color: var(--primary); }
   .report-card-body { padding: 20px; }
   .report-card-date { font-size: 11px; color: var(--accent); font-weight: 500; letter-spacing: 1px; margin-bottom: 8px; }
   .report-card-title { font-size: 15px; font-weight: 700; color: var(--primary); margin-bottom: 8px; line-height: 1.5; }
@@ -58,6 +61,8 @@
   .event-title { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
   .event-detail { font-size: 13px; color: var(--gray); }
   .event-link { display: inline-block; margin-top: 10px; padding: 6px 16px; background: var(--accent); color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: 500; letter-spacing: 1px; }
+  .event-admin-link { display: inline-block; margin-top: 10px; margin-left: 10px; padding: 6px 16px; background: var(--primary); color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: 500; letter-spacing: 1px; }
+  .event-empty { background: white; border-radius: 8px; padding: 24px; color: var(--gray); border-left: 4px solid var(--border); }
   .calendar-embed { width: 100%; height: 400px; border: 1px solid var(--border); border-radius: 8px; background: var(--light); display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 14px; }
   .update-badge { display: inline-block; background: #e74c3c; color: white; font-size: 10px; padding: 2px 8px; border-radius: 20px; margin-left: 8px; vertical-align: middle; }
   footer { background: var(--primary); color: white; text-align: center; padding: 40px; }
@@ -81,9 +86,9 @@
   </div>
   <nav>
     <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="report.html">活動報告</a></li>
-      <li><a href="group.html">小グループ会</a></li>
+      <li><a href="index.html" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">HOME</a></li>
+      <li><a href="report.html" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">活動報告</a></li>
+      <li><a href="group.html" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">小グループ会</a></li>
     </ul>
   </nav>
 </header>
@@ -100,29 +105,13 @@
     </div>
     <div class="section-line"></div>
   </div>
-  <div class="report-grid">
+  <div class="report-grid" id="home-report-grid">
     <div class="report-card">
-      <div class="report-card-img">📸 写真をここに差し替え</div>
+      <div class="report-card-img">活動報告を読み込み中です。</div>
       <div class="report-card-body">
-        <div class="report-card-date">2026.04.27</div>
-        <div class="report-card-title">小グループ長勉強会<br>大阪同友会事務局にて開催</div>
-        <div class="report-card-text">全大阪の小グループ長が集まり、2026年度の活動方針と運営ノウハウを共有しました。</div>
-      </div>
-    </div>
-    <div class="report-card">
-      <div class="report-card-img">📸 写真をここに差し替え</div>
-      <div class="report-card-body">
-        <div class="report-card-date">2026.05.XX</div>
-        <div class="report-card-title">支部例会<br>〇〇会館にて開催</div>
-        <div class="report-card-text">今月の例会の様子です。報告者の経営体験を聞き、グループ討論で深く学びました。</div>
-      </div>
-    </div>
-    <div class="report-card">
-      <div class="report-card-img">📸 写真をここに差し替え</div>
-      <div class="report-card-body">
-        <div class="report-card-date">2026.04.XX</div>
-        <div class="report-card-title">新会員歓迎会<br>仲間が増えました！</div>
-        <div class="report-card-text">今期も新しい仲間が加わりました。一緒に学び、経営を磨いていきましょう。</div>
+        <div class="report-card-date">--</div>
+        <div class="report-card-title">読み込み中</div>
+        <div class="report-card-text">活動報告データを取得しています。</div>
       </div>
     </div>
   </div>
@@ -136,84 +125,7 @@
     <div class="section-line"></div>
   </div>
   <div class="event-list">
-    <div class="event-item">
-      <div class="event-date-box">
-        <div class="event-month">MAY</div>
-        <div class="event-day">12</div>
-        <div class="event-weekday">火曜日</div>
-      </div>
-      <div class="event-content">
-        <span class="event-tag">支部行事</span>
-        <div class="event-title">新春★西成住之江支部【新会員を知る会】</div>
-        <div class="event-detail">🕕 詳細はe-doyuにて</div>
-        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966073&vSelDate=20260512&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
-      </div>
-    </div>
-    <div class="event-item">
-      <div class="event-date-box">
-        <div class="event-month">MAY</div>
-        <div class="event-day">15</div>
-        <div class="event-weekday">金曜日</div>
-      </div>
-      <div class="event-content">
-        <span class="event-tag">小グループ会</span>
-        <div class="event-title">G3小グループ会 第1回｜近況報告＆経営課題</div>
-        <div class="event-detail">📍 西成区民センター 会議室2-3　🕕 18:30〜20:30</div>
-        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967417&vSelDate=20260515&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
-      </div>
-    </div>
-    <div class="event-item">
-      <div class="event-date-box">
-        <div class="event-month">MAY</div>
-        <div class="event-day">19</div>
-        <div class="event-weekday">火曜日</div>
-      </div>
-      <div class="event-content">
-        <span class="event-tag">小グループ会</span>
-        <div class="event-title">G1小グループ会 第1回｜自社紹介・経営課題共有</div>
-        <div class="event-detail">📍 懐石料理「徳」住之江本店　🕕 18:30〜21:00　参加費：8,000円</div>
-        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=967038&vSelDate=20260519&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
-      </div>
-    </div>
-    <div class="event-item">
-      <div class="event-date-box">
-        <div class="event-month">MAY</div>
-        <div class="event-day">21</div>
-        <div class="event-weekday">木曜日</div>
-      </div>
-      <div class="event-content">
-        <span class="event-tag">合同例会</span>
-        <div class="event-title">【南東ブロック】4支部合同例会</div>
-        <div class="event-detail">📍 たかつガーデン（天王寺区東高津町7-11）　🕕 18:30〜21:00</div>
-        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=963447&vSelDate=20260521&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F05%2F08" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
-      </div>
-    </div>
-    <div class="event-item">
-      <div class="event-date-box">
-        <div class="event-month">JUN</div>
-        <div class="event-day">3</div>
-        <div class="event-weekday">水曜日</div>
-      </div>
-      <div class="event-content">
-        <span class="event-tag">小グループ会</span>
-        <div class="event-title">G4小グループ会 第1回｜意見交換・経営課題共有</div>
-        <div class="event-detail">📍 西成区民センター　🕕 18:30〜20:30</div>
-        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=968062&vSelDate=20260603&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F01" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
-      </div>
-    </div>
-    <div class="event-item">
-      <div class="event-date-box">
-        <div class="event-month">JUN</div>
-        <div class="event-day">10</div>
-        <div class="event-weekday">水曜日</div>
-      </div>
-      <div class="event-content">
-        <span class="event-tag">小グループ会</span>
-        <div class="event-title">G2小グループ会 第1回｜一人工務店のAI活用〜クラウドとAIで仕事はどう変わるか〜</div>
-        <div class="event-detail">📍 墨の絵会館（住之江区南加賀屋3丁目）　🕕 18:30〜21:30</div>
-        <a href="https://osaka.e-doyu.jp/s.schedule/eventDetails.html?init&vmode=view&appid=28&gw33105=966013&vSelDate=20260610&vBaseURL=https%3A%2F%2Fosaka.e-doyu.jp%2Fs.calendar%2Findex.html%3Freset%26appid%3D28%26vCalType%3DMonth%26vSelGroup%3D01%26vDateSelBase%3D2026%2F06%2F1" class="event-link" target="_blank">詳細・参加登録（e-doyu）</a>
-      </div>
-    </div>
+    <div class="event-empty">イベントを読み込み中です。</div>
   </div>
 </section>
 <section class="event-bg">
@@ -230,11 +142,6 @@
     .annual-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); text-align: center; vertical-align: middle; background: white; }
     .annual-table td:first-child { background: var(--light); font-weight: 700; color: var(--primary); font-size: 11px; }
     .annual-table tr:last-child td { border-bottom: none; }
-    .ev-tag { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; font-weight: 700; }
-    .ev-block { background: #fde8e8; color: #c0392b; }
-    .ev-branch { background: #e8f0fe; color: #1a3a8c; }
-    .ev-group { background: #fdf3e3; color: #c8973a; }
-    .ev-other { background: #e8f5e9; color: #2e7d32; }
     .ev-done { color: #999; text-decoration: line-through; font-size: 11px; }
     .ev-next { font-weight: 700; color: #e65100; }
   </style>
@@ -245,39 +152,8 @@
         <th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th><th>1月</th><th>2月</th><th>3月</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td>ブロック役委会</td>
-        <td class="ev-done">4/15</td><td class="ev-done">5/18</td><td>6/10</td><td>7/14</td><td>8/10</td><td>9/8</td><td>10/9</td><td>11/10</td><td>12/8</td><td>1/14</td><td>2/9</td><td>3月</td>
-      </tr>
-      <tr>
-        <td>支部幹事会</td>
-        <td class="ev-done">4/21</td><td class="ev-done">5/22</td><td>6/19</td><td>7/17</td><td>8/17</td><td>9/11</td><td>10/16</td><td>11/13</td><td>12/10</td><td>1/22</td><td>2/12</td><td>3月</td>
-      </tr>
-      <tr>
-        <td>支部例会</td>
-        <td>－</td><td class="ev-done">合同例会<br>5/21</td><td>6/15</td><td>7/28</td><td>－</td><td>9/28</td><td>－</td><td>11/27</td><td>12/10<br>忘年</td><td>－</td><td>2/24</td><td>3/24</td>
-      </tr>
-      <tr>
-        <td>G1（宮高）</td>
-        <td>－</td><td class="ev-done">5/19</td><td>－</td><td>7/7</td><td>－</td><td>－</td><td>10/7</td><td>－</td><td>－</td><td>1/13</td><td>－</td><td>－</td>
-      </tr>
-      <tr>
-        <td>G2（松塲）</td>
-        <td>－</td><td>－</td><td class="ev-next">6/10 ▶</td><td>－</td><td>－</td><td>9/9</td><td>－</td><td>－</td><td>12/9</td><td>－</td><td>2/10</td><td>－</td>
-      </tr>
-      <tr>
-        <td>G3（松浦）</td>
-        <td>－</td><td class="ev-done">5/15</td><td>－</td><td>7/7</td><td>－</td><td>－</td><td>10/6</td><td>－</td><td>－</td><td>1/12</td><td>－</td><td>－</td>
-      </tr>
-      <tr>
-        <td>G4（清水）</td>
-        <td>－</td><td>－</td><td class="ev-next">6/3 ▶</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td><td>－</td>
-      </tr>
-      <tr>
-        <td>その他</td>
-        <td class="ev-done">指針4/9</td><td class="ev-done">大阪総会<br>5/13</td><td>指針6/13</td><td>住之江<br>博物館<br>7/26<br>指針7/11</td><td>指針8/8</td><td>指針9/12</td><td>指針10/10<br>西成博物館<br>11/8</td><td>全大阪<br>11/5</td><td>－</td><td>役員研修<br>1/7</td><td>支部方針</td><td>－</td>
-      </tr>
+    <tbody id="annual-schedule-body">
+      <tr><td colspan="13">読み込み中です。</td></tr>
     </tbody>
   </table>
   <p style="font-size:11px;color:var(--gray);margin-top:12px;">※取消線は開催済み　▶は次回開催　詳細はe-doyuにて</p>
@@ -289,5 +165,853 @@
   <p>お問い合わせ：支部長 堂上 智史</p>
   <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
 </footer>
+<script src="./js/report-photos.js"></script>
+<script>
+  const currentParams = new URLSearchParams(window.location.search);
+  function preserveAdminNavigation(event, link) {
+    if (currentParams.get('admin') !== '1') {
+      return true;
+    }
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('http') || href.startsWith('#')) {
+      return true;
+    }
+    if (event) {
+      event.preventDefault();
+    }
+    const url = new URL(href, window.location.href);
+    url.searchParams.set('admin', '1');
+    window.location.href = `${url.pathname.split('/').pop()}${url.search}`;
+    return false;
+  }
+
+  const reportGrid = document.getElementById('home-report-grid');
+  const eventList = document.querySelector('.event-list');
+  const annualScheduleBody = document.getElementById('annual-schedule-body');
+  const weekdayFormatter = new Intl.DateTimeFormat('ja-JP', { weekday: 'long' });
+  let reportPhotoApiUrl = '';
+  const isAdminMode = new URLSearchParams(window.location.search).get('admin') === '1';
+  const defaultConfig = {
+    sheetCsvUrl: '',
+    fallbackJsonUrl: './data/events.json',
+    reportSheetCsvUrl: '',
+    fallbackReportsUrl: './data/reports.json',
+    reportSheetWebhookUrl: ''
+  };
+  const UPCOMING_EVENT_WINDOW_DAYS = 90;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const upcomingLimit = new Date(today);
+  upcomingLimit.setDate(upcomingLimit.getDate() + UPCOMING_EVENT_WINDOW_DAYS);
+  const scheduleRows = [
+    { key: 'block', label: 'ブロック役委会' },
+    { key: 'board', label: '支部幹事会' },
+    { key: 'branch', label: '支部例会' },
+    { key: 'G1', label: 'G1（宮高）' },
+    { key: 'G2', label: 'G2（松塲）' },
+    { key: 'G3', label: 'G3（松浦）' },
+    { key: 'G4', label: 'G4（清水）' },
+    { key: 'other', label: 'その他' }
+  ];
+  const fiscalMonths = [4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3];
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function formatEventDate(dateString) {
+    const date = new Date(dateString + 'T00:00:00+09:00');
+    if (Number.isNaN(date.getTime())) {
+      return null;
+    }
+    return {
+      month: date.toLocaleString('en-US', { month: 'short' }).toUpperCase(),
+      day: String(date.getDate()),
+      weekday: weekdayFormatter.format(date)
+    };
+  }
+
+  function formatReportCardDate(dateString) {
+    const date = parseEventDate(dateString);
+    if (!date) {
+      return escapeHtml(String(dateString || ''));
+    }
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}.${month}.${day}`;
+  }
+
+  function parseEventDate(dateString) {
+    const date = new Date(`${dateString}T00:00:00+09:00`);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  function extractTime(value) {
+    const match = String(value || '').match(/(\d{1,2}:\d{2}[〜\-]\d{1,2}:\d{2})/);
+    return match ? match[1] : '';
+  }
+
+  function getEventTime(event) {
+    return String(event.time || '').trim() || extractTime(event.detail);
+  }
+
+  function getEventPlace(event) {
+    const explicitPlace = String(event.place || '').trim();
+    if (explicitPlace) {
+      return explicitPlace;
+    }
+    const detail = String(event.detail || '').trim();
+    const time = getEventTime(event);
+    if (!detail || !time) {
+      return detail;
+    }
+    return detail.replace(time, '').replace(/\s{2,}/g, ' ').trim();
+  }
+
+  function formatEventDetail(event) {
+    const place = getEventPlace(event);
+    const time = getEventTime(event);
+    if (place && time) {
+      return `${place} ${time}`;
+    }
+    return place || time || String(event.detail || '').trim();
+  }
+
+  function inferGroup(record) {
+    const value = String(record.group || '').trim().toUpperCase();
+    if (['G1', 'G2', 'G3', 'G4'].includes(value)) {
+      return value;
+    }
+    const match = String(record.title || '').match(/\b(G[1-4])\b/i);
+    return match ? match[1].toUpperCase() : '';
+  }
+
+  function getScheduleRowKey(event) {
+    const group = inferGroup(event);
+    if (group) {
+      return group;
+    }
+
+    const category = String(event.category || '').trim();
+    const title = String(event.title || '');
+    const text = `${category} ${title}`;
+
+    if (category === '支部行事') {
+      return '';
+    }
+
+    if (text.includes('ブロック')) {
+      return 'block';
+    }
+    if (text.includes('幹事')) {
+      return 'board';
+    }
+    if (text.includes('支部') || text.includes('例会') || text.includes('合同例会')) {
+      return 'branch';
+    }
+    return 'other';
+  }
+
+  function isWithinFiscalMonths(date) {
+    if (!date) {
+      return false;
+    }
+    const month = date.getMonth() + 1;
+    return fiscalMonths.includes(month);
+  }
+
+  function formatScheduleCell(event, rowKey, nextUpcomingKey) {
+    const date = parseEventDate(event.date);
+    if (!date) {
+      return '－';
+    }
+
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const upcoming = date.getTime() >= today.getTime();
+    const dateText = `${month}/${day}`;
+    const category = String(event.category || '').trim();
+    const title = String(event.title || '');
+    const scheduleIndex = String(event.index || '').trim();
+    let body = dateText;
+
+    if (rowKey === 'other' && category) {
+      body = `${escapeHtml(category)}${dateText}`;
+    } else if (rowKey === 'branch' && scheduleIndex) {
+      body = `${dateText}<br>${escapeHtml(scheduleIndex)}`;
+    }
+
+    const eventKey = `${event.date}__${rowKey}__${title}__${scheduleIndex}`;
+    if (upcoming && eventKey === nextUpcomingKey) {
+      return `<span class="ev-next">${body} ▶</span>`;
+    }
+    return upcoming ? body : `<span class="ev-done">${body}</span>`;
+  }
+
+  function getEventLinkLabel(event) {
+    const date = parseEventDate(event.date);
+    if (!date) {
+      return '詳細・参加登録（e-doyu）';
+    }
+    return date.getTime() < today.getTime()
+      ? 'e-doyu で確認'
+      : '詳細・参加登録（e-doyu）';
+  }
+
+  function parseCsv(text) {
+    const rows = [];
+    let current = '';
+    let row = [];
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i += 1) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          current += '"';
+          i += 1;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (char === ',' && !inQuotes) {
+        row.push(current);
+        current = '';
+      } else if ((char === '\n' || char === '\r') && !inQuotes) {
+        if (char === '\r' && next === '\n') {
+          i += 1;
+        }
+        row.push(current);
+        rows.push(row);
+        row = [];
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+
+    if (current.length > 0 || row.length > 0) {
+      row.push(current);
+      rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function normalizeHeader(value) {
+    return String(value || '').trim().toLowerCase();
+  }
+
+  function pickValue(record, keys) {
+    for (const key of keys) {
+      const normalizedKey = normalizeHeader(key);
+      if (Object.prototype.hasOwnProperty.call(record, normalizedKey)) {
+        return String(record[normalizedKey] || '').trim();
+      }
+    }
+    return '';
+  }
+
+  function isLatestGuideVisible(record) {
+    const guideVisible = pickValue(record, [
+      'latestGuideVisible',
+      'guideVisible',
+      '直近のイベント案内表示',
+      '表示',
+      'visible',
+      '公開'
+    ]);
+
+    if (!guideVisible) {
+      return true;
+    }
+
+    return ['公開', 'true', '1', 'yes'].includes(guideVisible.toLowerCase());
+  }
+
+  function normalizeReportMatchValue(value) {
+    return String(value || '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function buildReportIdentifier(date, title) {
+    return `${normalizeReportMatchValue(date)}__${normalizeReportMatchValue(title)}`;
+  }
+
+  function buildFreshRequestUrl(url) {
+    try {
+      const parsed = new URL(String(url || ''), window.location.href);
+      parsed.searchParams.set('_', String(Date.now()));
+      return parsed.toString();
+    } catch (error) {
+      console.error(error);
+      return url;
+    }
+  }
+
+  function isValidWebUrl(value) {
+    try {
+      const parsed = new URL(String(value || '').trim(), window.location.href);
+      return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function buildApiResourceUrl(baseUrl, resource) {
+    const parsed = new URL(String(baseUrl || '').trim(), window.location.href);
+    parsed.searchParams.set('resource', resource);
+    parsed.searchParams.set('_', String(Date.now()));
+    return parsed.toString();
+  }
+
+  function unwrapMarkdownLink(value) {
+    const text = String(value || '').trim();
+    const markdownMatch = text.match(/^\[.*?\]\((https?:\/\/.+)\)$/i);
+    return markdownMatch ? markdownMatch[1].trim() : text;
+  }
+
+  function extractGoogleDriveFileId(value) {
+    const text = unwrapMarkdownLink(value);
+    try {
+      if (!['drive.google.com', 'lh3.googleusercontent.com'].includes(new URL(text).hostname)) return '';
+    } catch (error) { return ''; }
+    if (!text) {
+      return '';
+    }
+
+    const directMatch = text.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (directMatch) {
+      return directMatch[1];
+    }
+
+    try {
+      const url = new URL(text);
+      return url.searchParams.get('id') || '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function getReportImageSource(value) {
+    const raw = unwrapMarkdownLink(value);
+    const fileId = extractGoogleDriveFileId(raw);
+
+    if (fileId) {
+      return {
+        src: `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1600`,
+        fallbacks: [
+          `https://drive.google.com/uc?export=view&id=${encodeURIComponent(fileId)}`,
+          `https://lh3.googleusercontent.com/d/${encodeURIComponent(fileId)}`
+        ]
+      };
+    }
+
+    try {
+      const url = new URL(raw);
+      if (url.protocol === 'https:' || url.protocol === 'http:') {
+        return {
+          src: raw,
+          fallbacks: []
+        };
+      }
+    } catch (error) {
+      return null;
+    }
+
+    return null;
+  }
+
+  function parseKeywords(value) {
+    if (Array.isArray(value)) {
+      return value.map((item) => String(item || '').trim()).filter(Boolean);
+    }
+    return String(value || '')
+      .split(/[,\n、]/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  function truncateText(value, maxLength) {
+    const text = String(value || '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return `${text.slice(0, maxLength).trim()}…`;
+  }
+
+  function rowsToReports(rows) {
+    if (!Array.isArray(rows) || rows.length < 2) {
+      return [];
+    }
+
+    const headers = rows[0].map((header) => normalizeHeader(header));
+    return rows.slice(1)
+      .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+      .map((row) => {
+        const record = {};
+        headers.forEach((header, index) => {
+          record[header] = row[index] ?? '';
+        });
+
+        const visible = pickValue(record, ['visible', '公開', '公開/非公開']);
+        if (visible && ['0', 'false', 'no', '非公開'].includes(visible.toLowerCase())) {
+          return null;
+        }
+
+        const categoryLabel = pickValue(record, ['category', '区分', '種別']) || '活動報告';
+        const date = pickValue(record, ['date', '日付', '年月日']);
+        const title = pickValue(record, ['title', 'タイトル']);
+        return {
+          id: pickValue(record, ['id', '識別子']) || buildReportIdentifier(date, title),
+          date,
+          categoryLabel,
+          title,
+          text: pickValue(record, ['text', 'body', 'report', '本文', '内容', '詳細']),
+          place: pickValue(record, ['place', 'location', 'venue', '会場', '場所']),
+          keywords: parseKeywords(pickValue(record, ['keywords', 'tags', 'キーワード', 'タグ'])),
+          imageUrl: pickValue(record, ['imageurl', 'image', 'photo', '画像url', '写真url']),
+          imageAlt: pickValue(record, ['imagealt', 'alt', '画像alt', '代替テキスト', '画像説明'])
+        };
+      })
+      .filter((item) => item && item.date && item.title && item.text);
+  }
+
+  function normalizeJsonReports(data) {
+    const items = Array.isArray(data?.reports) ? data.reports : [];
+    return items
+      .map((item) => {
+        const categoryLabel = String(item.categoryLabel || item.category || '活動報告').trim();
+        const normalizedTitle = String(item.title || '').trim();
+        const normalizedDate = String(item.date || '').trim();
+        return {
+          id: String(item.id || buildReportIdentifier(normalizedDate, normalizedTitle)).trim(),
+          date: normalizedDate,
+          categoryLabel,
+          title: normalizedTitle,
+          text: String(item.text || item.body || item.detail || '').trim(),
+          place: String(item.place || item.location || '').trim(),
+          keywords: parseKeywords(item.keywords),
+          imageUrl: String(item.imageUrl || '').trim(),
+          imageAlt: String(item.imageAlt || '').trim()
+        };
+      })
+      .filter((item) => item.date && item.title && item.text);
+  }
+
+  function normalizeLiveReports(items) {
+    return (Array.isArray(items) ? items : [])
+      .map((item) => {
+        const visible = String(item?.visible || '').trim();
+        if (visible && ['0', 'false', 'no', '非公開'].includes(visible.toLowerCase())) {
+          return null;
+        }
+
+        const categoryLabel = String(item?.categoryLabel || item?.category || '活動報告').trim();
+        const normalizedTitle = String(item?.title || '').trim();
+        const normalizedDate = String(item?.date || '').trim();
+        return {
+          id: String(item?.id || buildReportIdentifier(normalizedDate, normalizedTitle)).trim(),
+          date: normalizedDate,
+          categoryLabel,
+          title: normalizedTitle,
+          text: String(item?.text || item?.body || item?.detail || '').trim(),
+          place: String(item?.place || item?.location || '').trim(),
+          keywords: parseKeywords(item?.keywords),
+          imageUrl: String(item?.imageUrl || '').trim(),
+          imageAlt: String(item?.imageAlt || '').trim()
+        };
+      })
+      .filter((item) => item && item.date && item.title && item.text);
+  }
+
+  function sortReports(items) {
+    return [...items].sort((a, b) => {
+      const dateCompare = new Date(b.date) - new Date(a.date);
+      if (dateCompare !== 0) {
+        return dateCompare;
+      }
+      return String(a.title || '').localeCompare(String(b.title || ''), 'ja');
+    });
+  }
+
+  function readPendingReportPhotoUpdate() {
+    try {
+      const raw = window.localStorage.getItem('pending-report-photo-update');
+      if (!raw) {
+        return null;
+      }
+      const payload = JSON.parse(raw);
+      return payload && typeof payload === 'object' ? payload : null;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+
+  function clearPendingReportPhotoUpdate() {
+    try {
+      window.localStorage.removeItem('pending-report-photo-update');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  function applyPendingReportPhotoUpdate(items) {
+    const pending = readPendingReportPhotoUpdate();
+    if (!pending) {
+      return items;
+    }
+
+    const pendingId = normalizeReportMatchValue(pending.reportId)
+      || buildReportIdentifier(pending.reportDate, pending.reportTitle);
+    if (!pendingId) {
+      return items;
+    }
+
+    let hasMatch = false;
+    const nextItems = items.map((item) => {
+      if (normalizeReportMatchValue(item.id) !== pendingId) {
+        return item;
+      }
+
+      hasMatch = true;
+      return {
+        ...item,
+        imageUrl: String(pending.imageUrl || item.imageUrl || '').trim(),
+        imageAlt: String(pending.imageAlt || item.imageAlt || '').trim()
+      };
+    });
+
+    if (hasMatch) {
+      clearPendingReportPhotoUpdate();
+    }
+
+    return nextItems;
+  }
+
+  function csvRowsToEvents(rows) {
+    if (!Array.isArray(rows) || rows.length < 2) {
+      return [];
+    }
+
+    const headers = rows[0].map((header) => normalizeHeader(header));
+    const items = rows.slice(1)
+      .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+      .map((row) => {
+        const record = {};
+        headers.forEach((header, index) => {
+          record[header] = row[index] ?? '';
+        });
+
+        return {
+          date: pickValue(record, ['date', '日付', '年月日']),
+          index: pickValue(record, ['index', 'round', 'インデックス', '回']),
+          category: pickValue(record, ['category', '区分', '種別']),
+          group: pickValue(record, ['group', 'グループ', '小グループ']),
+          title: pickValue(record, ['title', 'タイトル']),
+          place: pickValue(record, ['place', '場所']),
+          time: pickValue(record, ['time', '時間']),
+          detail: pickValue(record, ['detail', '詳細', 'place', '場所']),
+          url: pickValue(record, ['url', 'e.doyu_url', 'リンクurl', 'linkurl', 'リンク']),
+          linkLabel: pickValue(record, ['linklabel', 'リンク文字', 'button', 'ボタン文字']),
+          latestGuideVisible: isLatestGuideVisible(record)
+        };
+      })
+      .filter((item) => item && item.date && item.title)
+      .sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title, 'ja'));
+
+    return items;
+  }
+
+  function renderEvents(events) {
+    const upcomingEvents = (Array.isArray(events) ? events : []).filter((event) => {
+      const date = parseEventDate(event.date);
+      const rowKey = getScheduleRowKey(event);
+      const scheduleIndex = String(event.index || '').trim();
+      return date
+        && event.latestGuideVisible
+        && date.getTime() >= today.getTime()
+        && date.getTime() <= upcomingLimit.getTime()
+        && rowKey !== 'block'
+        && rowKey !== 'board'
+        && (rowKey !== 'branch' || scheduleIndex);
+    }).sort((a, b) => {
+      const dateCompare = String(a.date || '').localeCompare(String(b.date || ''));
+      if (dateCompare !== 0) {
+        return dateCompare;
+      }
+      return String(a.title || '').localeCompare(String(b.title || ''), 'ja');
+    });
+
+    if (upcomingEvents.length === 0) {
+      eventList.innerHTML = '<div class="event-empty">現在表示できるイベントはありません。</div>';
+      return;
+    }
+
+    eventList.innerHTML = upcomingEvents.map((event) => {
+      const formatted = formatEventDate(event.date);
+      if (!formatted) {
+        return '';
+      }
+
+      const scheduleIndex = String(event.index || '').trim();
+      const categoryLabel = String(event.category || 'イベント').trim();
+      const rawTitle = String(event.title || '').trim();
+      const titleLabel = categoryLabel === '支部例会' && scheduleIndex
+        ? (rawTitle.includes('支部例会')
+          ? rawTitle.replace('支部例会', `支部例会 ${scheduleIndex}`)
+          : `${rawTitle} ${scheduleIndex}`.trim())
+        : rawTitle;
+      const detailText = formatEventDetail(event);
+      const detail = detailText ? `<div class="event-detail">${escapeHtml(detailText)}</div>` : '';
+      const link = event.url
+        ? `<a href="${escapeHtml(event.url)}" class="event-link" target="_blank" rel="noopener noreferrer">${escapeHtml(getEventLinkLabel(event))}</a>`
+        : '';
+      const helperLink = isAdminMode
+        ? `admin.html?mode=event-guide-helper&eventDate=${encodeURIComponent(event.date || '')}&eventCategory=${encodeURIComponent(categoryLabel)}&eventTitle=${encodeURIComponent(rawTitle)}&eventPlace=${encodeURIComponent(getEventPlace(event))}&eventTime=${encodeURIComponent(getEventTime(event))}&eventGroup=${encodeURIComponent(String(event.group || ''))}&eventRound=${encodeURIComponent(scheduleIndex)}&eventDetail=${encodeURIComponent(String(event.detail || ''))}&eventUrl=${encodeURIComponent(String(event.url || ''))}`
+        : '';
+      const titleMarkup = isAdminMode
+        ? `<a href="${escapeHtml(helperLink)}" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">${escapeHtml(titleLabel)}</a>`
+        : escapeHtml(titleLabel);
+      const adminLink = isAdminMode
+        ? `<a href="${escapeHtml(helperLink)}" class="event-admin-link" target="_blank" rel="noopener noreferrer">管理用詳細を開く</a>`
+        : '';
+
+      return `
+        <div class="event-item">
+          <div class="event-date-box">
+            <div class="event-month">${formatted.month}</div>
+            <div class="event-day">${formatted.day}</div>
+            <div class="event-weekday">${formatted.weekday}</div>
+          </div>
+          <div class="event-content">
+            <span class="event-tag">${escapeHtml(categoryLabel)}</span>
+            <div class="event-title">${titleMarkup}</div>
+            ${detail}
+            ${link}
+            ${adminLink}
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderHomeReports(items) {
+    const reports = sortReports(applyPendingReportPhotoUpdate(Array.isArray(items) ? items : [])).slice(0, 3);
+
+    if (!reports.length) {
+      reportGrid.innerHTML = `
+        <div class="report-card">
+          <div class="report-card-img">活動報告はまだありません</div>
+          <div class="report-card-body">
+            <div class="report-card-date">--</div>
+            <div class="report-card-title">活動報告を準備中です</div>
+            <div class="report-card-text">活動報告シートに公開データを追加すると、ここに新しい3件が表示されます。</div>
+          </div>
+        </div>
+      `;
+      return;
+    }
+
+    reportGrid.innerHTML = reports.map((item) => {
+      const helperLink = `admin.html?mode=report-photo-helper&reportId=${encodeURIComponent(item.id)}&reportDate=${encodeURIComponent(item.date)}&reportTitle=${encodeURIComponent(item.title)}&reportCategory=${encodeURIComponent(item.categoryLabel || '')}&reportPlace=${encodeURIComponent(item.place || '')}`;
+      const imageSource = getReportImageSource(item.imageUrl);
+      const imageMarkup = imageSource
+        ? `<img src="${escapeHtml(imageSource.src)}" data-report-id="${escapeHtml(item.id)}" data-fallbacks="${escapeHtml(imageSource.fallbacks.join('||'))}" alt="${escapeHtml(item.imageAlt || item.categoryLabel || item.title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`
+        : (isAdminMode
+          ? `<a class="report-card-img report-card-helper-link" href="${escapeHtml(helperLink)}" target="_blank" rel="noopener noreferrer">📸 写真をここに差し替え</a>`
+          : '<div class="report-card-img" aria-hidden="true">写真準備中</div>');
+
+      return `
+        <article class="report-card">
+          <div class="report-card-img-wrap">${imageMarkup}</div>
+          <div class="report-card-body">
+            <div class="report-card-date">${escapeHtml(formatReportCardDate(item.date))}</div>
+            <div class="report-card-title">${escapeHtml(item.title).replace(/\n/g, '<br>')}</div>
+            <div class="report-card-text">${escapeHtml(truncateText(item.text, 88))}</div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    reportGrid.querySelectorAll('img[data-fallbacks]').forEach((img) => {
+      window.ReportPhotos.attach(img, reportPhotoApiUrl);
+    });
+  }
+
+  function renderAnnualSchedule(events) {
+    const buckets = Object.fromEntries(scheduleRows.map((row) => [row.key, new Map()]));
+    const filtered = (Array.isArray(events) ? events : []).filter((event) => isWithinFiscalMonths(parseEventDate(event.date)));
+
+    filtered.forEach((event) => {
+      const date = parseEventDate(event.date);
+      if (!date) {
+        return;
+      }
+      const month = date.getMonth() + 1;
+      const rowKey = getScheduleRowKey(event);
+      if (!rowKey || !buckets[rowKey]) {
+        return;
+      }
+      const current = buckets[rowKey].get(month) || [];
+      current.push(event);
+      current.sort((a, b) => a.date.localeCompare(b.date) || a.title.localeCompare(b.title, 'ja'));
+      buckets[rowKey].set(month, current);
+    });
+
+    annualScheduleBody.innerHTML = scheduleRows.map((row) => {
+      const rowUpcomingItems = filtered
+        .filter((event) => {
+          const date = parseEventDate(event.date);
+          return getScheduleRowKey(event) === row.key && date && date.getTime() >= today.getTime();
+        })
+        .sort((a, b) => a.date.localeCompare(b.date) || String(a.title || '').localeCompare(String(b.title || ''), 'ja'));
+      const nextUpcomingKey = rowUpcomingItems.length
+        ? `${rowUpcomingItems[0].date}__${row.key}__${String(rowUpcomingItems[0].title || '')}__${String(rowUpcomingItems[0].index || '')}`
+        : '';
+
+      const cells = fiscalMonths.map((month) => {
+        const items = buckets[row.key].get(month) || [];
+        if (!items.length) {
+          return '<td>－</td>';
+        }
+        return `<td>${items.map((event) => formatScheduleCell(event, row.key, nextUpcomingKey)).join('<br>')}</td>`;
+      }).join('');
+      return `<tr><td>${row.label}</td>${cells}</tr>`;
+    }).join('');
+  }
+
+  async function loadConfig() {
+    try {
+      const response = await fetch('./data/site-config.json', { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch site-config.json');
+      }
+      const config = await response.json();
+      return {
+        ...defaultConfig,
+        ...config
+      };
+    } catch (error) {
+      console.error(error);
+      return defaultConfig;
+    }
+  }
+
+  async function loadEventsFromSheet(csvUrl) {
+    const response = await fetch(buildFreshRequestUrl(csvUrl), { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Failed to fetch published Google Sheet CSV');
+    }
+    const text = await response.text();
+    return csvRowsToEvents(parseCsv(text));
+  }
+
+  async function loadEventsFromJson(jsonUrl) {
+    const response = await fetch(jsonUrl, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Failed to fetch fallback events.json');
+    }
+    const data = await response.json();
+    return Array.isArray(data.events) ? data.events : [];
+  }
+
+  async function loadEventsFromApi(apiUrl) {
+    const response = await fetch(buildApiResourceUrl(apiUrl, 'events'), { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Failed to fetch live events API');
+    }
+    const data = await response.json();
+    return Array.isArray(data.events) ? data.events : [];
+  }
+
+  async function loadReportsFromSheet(csvUrl) {
+    const response = await fetch(buildFreshRequestUrl(csvUrl), { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Failed to fetch published report Google Sheet CSV');
+    }
+    return rowsToReports(parseCsv(await response.text()));
+  }
+
+  async function loadReportsFromJson(jsonUrl) {
+    const response = await fetch(jsonUrl, { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Failed to fetch fallback reports.json');
+    }
+    return normalizeJsonReports(await response.json());
+  }
+
+  async function loadReportsFromApi(apiUrl) {
+    const response = await fetch(buildApiResourceUrl(apiUrl, 'reports'), { cache: 'no-store' });
+    if (!response.ok) {
+      throw new Error('Failed to fetch live reports API');
+    }
+    const data = await response.json();
+    return normalizeLiveReports(data.reports);
+  }
+
+  async function loadPageData() {
+    try {
+      const config = await loadConfig();
+        reportPhotoApiUrl = config.reportSheetWebhookUrl || '';
+      let events = [];
+      let reports = [];
+
+      if (isValidWebUrl(config.reportSheetWebhookUrl)) {
+        try {
+          [events, reports] = await Promise.all([
+            loadEventsFromApi(config.reportSheetWebhookUrl),
+            loadReportsFromApi(config.reportSheetWebhookUrl)
+          ]);
+        } catch (apiError) {
+          console.error(apiError);
+        }
+      }
+
+      if (!events.length) {
+        events = config.sheetCsvUrl
+          ? await loadEventsFromSheet(config.sheetCsvUrl)
+          : await loadEventsFromJson(config.fallbackJsonUrl);
+      }
+
+      if (!reports.length) {
+        reports = config.reportSheetCsvUrl
+          ? await loadReportsFromSheet(config.reportSheetCsvUrl)
+          : await loadReportsFromJson(config.fallbackReportsUrl);
+      }
+
+      renderHomeReports(reports);
+      renderEvents(events);
+      renderAnnualSchedule(events);
+    } catch (error) {
+      reportGrid.innerHTML = `
+        <div class="report-card">
+          <div class="report-card-img">読み込みに失敗しました</div>
+          <div class="report-card-body">
+            <div class="report-card-date">--</div>
+            <div class="report-card-title">活動報告を表示できませんでした</div>
+            <div class="report-card-text">Google スプレッドシート公開設定、または data/reports.json を確認してください。</div>
+          </div>
+        </div>
+      `;
+      eventList.innerHTML = '<div class="event-empty">イベントの読み込みに失敗しました。Googleスプレッドシート公開設定、または `data/events.json` を確認してください。</div>';
+      annualScheduleBody.innerHTML = '<tr><td colspan="13">年間スケジュールの読み込みに失敗しました。</td></tr>';
+      console.error(error);
+    }
+  }
+
+  loadPageData();
+</script>
 </body>
 </html>

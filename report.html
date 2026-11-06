@@ -1,167 +1,1185 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>活動報告 | 西成住之江支部</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root { --primary: #1a3a5c; --accent: #c8973a; --light: #f8f6f2; --white: #ffffff; --gray: #666; --border: #e0dbd2; }
-  body { font-family: 'Noto Sans JP', sans-serif; background: var(--white); color: #333; line-height: 1.7; }
-  header { background: var(--white); border-bottom: 3px solid var(--primary); }
-  .header-top { background: var(--primary); text-align: center; padding: 6px; font-size: 12px; letter-spacing: 2px; color: white; }
-  .header-main { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; }
-  .header-logo h1 { font-family: 'Noto Serif JP', serif; font-size: 22px; font-weight: 700; color: var(--primary); }
-  .header-logo p { font-size: 12px; color: var(--gray); margin-top: 4px; letter-spacing: 2px; }
-  .breadcrumb { font-size: 12px; color: var(--gray); }
-  .breadcrumb span { color: var(--accent); font-weight: 500; }
-  nav { background: var(--primary); padding: 0 40px; }
-  nav ul { display: flex; list-style: none; }
-  nav ul li a { display: block; padding: 14px 20px; color: white; text-decoration: none; font-size: 13px; letter-spacing: 1px; transition: background 0.2s; }
-  nav ul li a:hover, nav ul li a.active { background: rgba(255,255,255,0.15); }
-  .page-hero { background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%); color: white; padding: 40px; }
-  .page-hero-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); margin-bottom: 8px; }
-  .page-hero h2 { font-family: 'Noto Serif JP', serif; font-size: 26px; color: white; margin-bottom: 8px; }
-  .page-hero p { font-size: 13px; opacity: 0.8; color: white; }
-  section { padding: 60px 40px; max-width: 900px; margin: 0 auto; }
-  .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
-  .section-label { font-size: 11px; letter-spacing: 3px; color: var(--accent); font-weight: 500; }
-  .section-title { font-family: 'Noto Serif JP', serif; font-size: 22px; color: var(--primary); }
-  .section-line { flex: 1; height: 1px; background: var(--border); }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>活動報告 | 西成住之江支部</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* 活動報告リスト */
-  .report-list { display: flex; flex-direction: column; gap: 40px; }
-  .report-item { display: flex; gap: 32px; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
-  .report-item:last-child { border-bottom: none; padding-bottom: 0; }
-  .report-img { width: 260px; min-width: 260px; height: 174px; background: linear-gradient(135deg, #e8e0d4, #d4ccc0); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gray); font-size: 12px; overflow: hidden; }
-  .report-img img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
-  .report-content { flex: 1; }
-  .report-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
-  .report-tag { display: inline-block; background: var(--primary); color: white; font-size: 10px; padding: 3px 10px; border-radius: 20px; letter-spacing: 1px; }
-  .report-tag.group { background: var(--accent); }
-  .report-tag.event { background: #2e7d52; }
-  .report-tag.block { background: #7b3f8c; }
-  .report-date { font-size: 12px; color: var(--accent); font-weight: 500; }
-  .report-title { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 10px; line-height: 1.5; }
-  .report-text { font-size: 14px; color: var(--gray); line-height: 1.8; }
+    :root {
+      --primary: #1a3a5c;
+      --accent: #c8973a;
+      --light: #f8f6f2;
+      --white: #ffffff;
+      --gray: #666;
+      --border: #e0dbd2;
+    }
 
-  /* 空状態 */
-  .empty-state { text-align: center; padding: 80px 40px; color: var(--gray); }
-  .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
-  .empty-state p { font-size: 14px; line-height: 1.8; }
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: var(--white);
+      color: #333;
+      line-height: 1.7;
+    }
 
-  footer { background: var(--primary); color: white; text-align: center; padding: 40px; }
-  footer h3 { font-family: 'Noto Serif JP', serif; font-size: 18px; margin-bottom: 12px; color: white; }
-  footer p { font-size: 13px; opacity: 0.7; margin-bottom: 6px; color: white; }
-  footer .footer-bottom { margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 11px; opacity: 0.5; color: white; }
+    header {
+      background: var(--white);
+      border-bottom: 3px solid var(--primary);
+    }
 
-  /* レスポンシブ */
-  @media (max-width: 640px) {
-    .report-item { flex-direction: column; }
-    .report-img { width: 100%; min-width: unset; }
-    section { padding: 40px 20px; }
-    .header-main { padding: 16px 20px; }
-    nav { padding: 0 20px; }
-  }
-</style>
+    .header-top {
+      background: var(--primary);
+      text-align: center;
+      padding: 6px;
+      font-size: 12px;
+      letter-spacing: 2px;
+      color: white;
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 40px;
+    }
+
+    .header-logo h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .header-logo p {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 4px;
+      letter-spacing: 2px;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .breadcrumb span {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    nav {
+      background: var(--primary);
+      padding: 0 40px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 14px 20px;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      transition: background 0.2s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .page-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #2a5a8c 100%);
+      color: white;
+      padding: 40px;
+    }
+
+    .page-hero-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .page-hero h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 26px;
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .page-hero p {
+      font-size: 13px;
+      opacity: 0.8;
+      color: white;
+    }
+
+    section {
+      padding: 60px 40px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 22px;
+      color: var(--primary);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      /* margin-bottom: 32px; */
+    }
+
+    .summary-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .summary-label {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .summary-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .summary-value small {
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .summary-note {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 10px;
+      line-height: 1.7;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 28px;
+      padding: 18px 20px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fcfbf8;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-button {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--primary);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-button:hover {
+      border-color: var(--primary);
+    }
+
+    .filter-button.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .toolbar-status {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    /* 活動報告リスト */
+    .report-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .report-item {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .report-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .report-img {
+      width: 260px;
+      min-width: 260px;
+      height: 174px;
+      background: linear-gradient(135deg, #e8e0d4, #d4ccc0);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .report-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .report-img-link {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: inherit;
+      text-decoration: none;
+      text-align: center;
+      padding: 20px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .report-img-link:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .report-content {
+      flex: 1;
+    }
+
+    .report-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .report-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      letter-spacing: 1px;
+    }
+
+    .report-tag.group {
+      background: var(--accent);
+    }
+
+    .report-tag.event {
+      background: #2e7d52;
+    }
+
+    .report-tag.block {
+      background: #7b3f8c;
+    }
+
+    .report-date {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .report-place {
+      font-size: 12px;
+      color: var(--gray);
+      padding-left: 12px;
+      border-left: 1px solid var(--border);
+    }
+
+    .report-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .report-text {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+
+    .report-footer {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .report-keyword {
+      font-size: 11px;
+      color: var(--primary);
+      background: #edf2f7;
+      border-radius: 999px;
+      padding: 4px 10px;
+    }
+
+    /* 空状態 */
+    .empty-state {
+      text-align: center;
+      padding: 80px 40px;
+      color: var(--gray);
+    }
+
+    .empty-state .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    footer {
+      background: var(--primary);
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    footer h3 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: white;
+    }
+
+    footer p {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 6px;
+      color: white;
+    }
+
+    footer .footer-bottom {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 11px;
+      opacity: 0.5;
+      color: white;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 640px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .toolbar {
+        padding: 16px;
+      }
+
+      .report-item {
+        flex-direction: column;
+      }
+
+      .report-img {
+        width: 100%;
+        min-width: unset;
+      }
+
+      section {
+        padding: 40px 20px;
+      }
+
+      .header-main {
+        padding: 16px 20px;
+      }
+
+      nav {
+        padding: 0 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<header>
-  <div class="header-top">大阪中小企業家同友会 ／ 南東ブロック ／ 西成住之江支部</div>
-  <div class="header-main">
-    <div class="header-logo">
-      <h1>西成住之江支部</h1>
-      <p>NISHINARI SUMINOE BRANCH</p>
+  <header>
+    <div class="header-top">大阪中小企業家同友会 ／ 南東ブロック ／ 西成住之江支部</div>
+    <div class="header-main">
+      <div class="header-logo">
+        <h1>西成住之江支部</h1>
+        <p>NISHINARI SUMINOE BRANCH</p>
+      </div>
+      <div class="breadcrumb">HOME ＞ <span>活動報告</span></div>
     </div>
-    <div class="breadcrumb">HOME ＞ <span>活動報告</span></div>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="report.html" class="active">活動報告</a></li>
-      <li><a href="group.html">小グループ会</a></li>
-    </ul>
-  </nav>
-</header>
+    <nav>
+      <ul>
+        <li><a href="index.html" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">HOME</a></li>
+        <li><a href="report.html" class="active" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">活動報告</a></li>
+        <li><a href="group.html" data-preserve-admin="1" onclick="return preserveAdminNavigation(event, this);">小グループ会</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<div class="page-hero">
-  <div class="page-hero-label">ACTIVITY REPORT</div>
-  <h2>活動報告</h2>
-  <p>2026年度の支部活動の記録です。<br>例会・小グループ会・イベントの様子をお届けします。</p>
-</div>
-
-<section>
-  <div class="section-header">
-    <div>
-      <div class="section-label">2026年度</div>
-      <div class="section-title">活動履歴</div>
-    </div>
-    <div class="section-line"></div>
+  <div class="page-hero">
+    <div class="page-hero-label">ACTIVITY REPORT</div>
+    <h2>活動報告</h2>
+    <p>2026年度の支部活動の記録です。<br>例会・小グループ会・イベントの様子をお届けします。</p>
   </div>
 
-  <div class="report-list">
-
-    <!-- ↓ここから活動報告を追加していく（新しい順）↓ -->
-
-    <div class="report-item">
-      <div class="report-img">📸 写真をここに差し替え</div>
-      <div class="report-content">
-        <div class="report-meta">
-          <span class="report-tag group">小グループ会</span>
-          <span class="report-date">2026年5月19日（火）</span>
-        </div>
-        <div class="report-title">G1小グループ会 第1回<br>自社紹介・経営課題共有</div>
-        <div class="report-text">懐石料理「徳」住之江本店にて開催。メンバー同士の自社紹介と経営課題を共有し、活発な意見交換が行われました。</div>
+  <section>
+    <div class="section-header">
+      <div>
+        <div class="section-label">2026年度</div>
+        <div class="section-title">活動履歴</div>
       </div>
+      <div class="section-line"></div>
     </div>
 
-    <div class="report-item">
-      <div class="report-img">📸 写真をここに差し替え</div>
-      <div class="report-content">
-        <div class="report-meta">
-          <span class="report-tag group">小グループ会</span>
-          <span class="report-date">2026年5月15日（金）</span>
-        </div>
-        <div class="report-title">G3小グループ会 第1回<br>近況報告＆経営課題</div>
-        <div class="report-text">大阪市立西成区民センター 会議室2-3にて開催。各会員の近況報告と経営課題を語り合い、終了後は駅前で懇親会を行いました。</div>
-      </div>
+    <div class="summary-grid" id="summary-grid"></div>
+
+    <div class="toolbar">
+      <div class="filter-group" id="filter-group"></div>
+      <div class="toolbar-status" id="toolbar-status">読み込み中です。</div>
     </div>
 
-    <div class="report-item">
-      <div class="report-img">📸 写真をここに差し替え</div>
-      <div class="report-content">
-        <div class="report-meta">
-          <span class="report-tag event">支部行事</span>
-          <span class="report-date">2026年5月12日（火）</span>
+    <div class="report-list" id="report-list"></div>
+  </section>
+
+  <footer>
+    <h3>大阪中小企業家同友会 西成住之江支部</h3>
+    <p>大阪府大阪市西成区・住之江区</p>
+    <p>お問い合わせ：支部長 堂上 智史</p>
+    <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
+  </footer>
+  <script src="./js/report-photos.js"></script>
+<script>
+    const currentParams = new URLSearchParams(window.location.search);
+    function preserveAdminNavigation(event, link) {
+      if (currentParams.get('admin') !== '1') {
+        return true;
+      }
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('http') || href.startsWith('#')) {
+        return true;
+      }
+      if (event) {
+        event.preventDefault();
+      }
+      const url = new URL(href, window.location.href);
+      url.searchParams.set('admin', '1');
+      window.location.href = `${url.pathname.split('/').pop()}${url.search}`;
+      return false;
+    }
+
+    const defaultConfig = {
+      reportSheetCsvUrl: '',
+      fallbackReportsUrl: './data/reports.json',
+      reportSheetWebhookUrl: ''
+    };
+    const reportList = document.getElementById('report-list');
+    const filterGroup = document.getElementById('filter-group');
+    const summaryGrid = document.getElementById('summary-grid');
+    const toolbarStatus = document.getElementById('toolbar-status');
+    const weekdayFormatter = new Intl.DateTimeFormat('ja-JP', { weekday: 'short' });
+    let reportPhotoApiUrl = '';
+    const isAdminMode = new URLSearchParams(window.location.search).get('admin') === '1';
+
+    let activeFilter = 'all';
+
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let current = '';
+      let row = [];
+      let inQuotes = false;
+
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const next = text[i + 1];
+
+        if (char === '"') {
+          if (inQuotes && next === '"') {
+            current += '"';
+            i += 1;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (char === ',' && !inQuotes) {
+          row.push(current);
+          current = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && next === '\n') {
+            i += 1;
+          }
+          row.push(current);
+          rows.push(row);
+          row = [];
+          current = '';
+        } else {
+          current += char;
+        }
+      }
+
+      if (current.length > 0 || row.length > 0) {
+        row.push(current);
+        rows.push(row);
+      }
+
+      return rows;
+    }
+
+    function normalizeHeader(value) {
+      return String(value || '').trim().toLowerCase();
+    }
+
+    function pickValue(record, keys) {
+      for (const key of keys) {
+        const normalizedKey = normalizeHeader(key);
+        if (Object.prototype.hasOwnProperty.call(record, normalizedKey)) {
+          return String(record[normalizedKey] || '').trim();
+        }
+      }
+      return '';
+    }
+
+    function formatReportDate(dateString) {
+      const date = new Date(`${dateString}T00:00:00+09:00`);
+      if (Number.isNaN(date.getTime())) {
+        return escapeHtml(dateString);
+      }
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      return `${year}年${month}月${day}日（${escapeHtml(weekdayFormatter.format(date))}）`;
+    }
+
+    function formatMultiline(value) {
+      return escapeHtml(value).replace(/\n/g, '<br>');
+    }
+
+    function escapeAttribute(value) {
+      return escapeHtml(value).replace(/`/g, '&#96;');
+    }
+
+    function unwrapMarkdownLink(value) {
+      const text = String(value || '').trim();
+      const markdownMatch = text.match(/^\[[^\]]*\]\((https?:\/\/[^)\s]+)\)$/i);
+      return markdownMatch ? markdownMatch[1].trim() : text;
+    }
+
+    function extractGoogleDriveFileId(value) {
+      const text = unwrapMarkdownLink(value);
+      try {
+        if (!['drive.google.com', 'lh3.googleusercontent.com'].includes(new URL(text).hostname)) return '';
+      } catch (error) { return ''; }
+      if (!text) {
+        return '';
+      }
+
+      const directMatch = text.match(/\/d\/([a-zA-Z0-9_-]+)/);
+      if (directMatch) {
+        return directMatch[1];
+      }
+
+      try {
+        const url = new URL(text);
+        return url.searchParams.get('id') || '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function getReportImageSource(value) {
+      const raw = unwrapMarkdownLink(value);
+      const fileId = extractGoogleDriveFileId(raw);
+
+      if (fileId) {
+        return {
+          src: `https://drive.google.com/thumbnail?id=${encodeURIComponent(fileId)}&sz=w1600`,
+          fallbacks: [
+            `https://drive.google.com/uc?export=view&id=${encodeURIComponent(fileId)}`,
+            `https://lh3.googleusercontent.com/d/${encodeURIComponent(fileId)}`
+          ]
+        };
+      }
+
+      try {
+        const url = new URL(raw);
+        if (url.protocol === 'https:' || url.protocol === 'http:') {
+          return {
+            src: raw,
+            fallbacks: []
+          };
+        }
+      } catch (error) {
+        return null;
+      }
+
+      return null;
+    }
+
+    function parseKeywords(value) {
+      if (Array.isArray(value)) {
+        return value.map((item) => String(item || '').trim()).filter(Boolean);
+      }
+      return String(value || '')
+        .split(/[,\n、]/)
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    function normalizeCategoryKey(label) {
+      const value = String(label || '').trim().toLowerCase();
+      if (!value) {
+        return 'other';
+      }
+      if (value.includes('小グループ') || value.includes('group')) {
+        return 'group';
+      }
+      if (value.includes('支部') || value.includes('例会') || value.includes('event')) {
+        return 'event';
+      }
+      if (value.includes('勉強') || value.includes('study')) {
+        return 'study';
+      }
+      if (value.includes('ブロック') || value.includes('block')) {
+        return 'block';
+      }
+      return value.replace(/\s+/g, '-');
+    }
+
+    function getTagClass(categoryKey) {
+      return ['group', 'event', 'block'].includes(categoryKey) ? categoryKey : '';
+    }
+
+    function sortReports(items) {
+      return [...items].sort((a, b) => {
+        const dateCompare = new Date(b.date) - new Date(a.date);
+        if (dateCompare !== 0) {
+          return dateCompare;
+        }
+        return String(a.title || '').localeCompare(String(b.title || ''), 'ja');
+      });
+    }
+
+    function rowsToReports(rows) {
+      if (!Array.isArray(rows) || rows.length < 2) {
+        return [];
+      }
+
+      const headers = rows[0].map((header) => normalizeHeader(header));
+      return rows.slice(1)
+        .filter((row) => row.some((cell) => String(cell || '').trim() !== ''))
+        .map((row) => {
+          const record = {};
+          headers.forEach((header, index) => {
+            record[header] = row[index] ?? '';
+          });
+
+          const visible = pickValue(record, ['visible', '公開', '公開/非公開']);
+          if (visible && ['0', 'false', 'no', '非公開'].includes(visible.toLowerCase())) {
+            return null;
+          }
+
+          const categoryLabel = pickValue(record, ['category', '区分', '種別']) || '活動報告';
+          const date = pickValue(record, ['date', '日付', '年月日']);
+          const title = pickValue(record, ['title', 'タイトル']);
+          return {
+            id: pickValue(record, ['id', '識別子']) || buildReportIdentifier(date, title),
+            date,
+            categoryLabel,
+            category: normalizeCategoryKey(categoryLabel),
+            title,
+            text: pickValue(record, ['text', 'body', 'report', '本文', '内容', '詳細']),
+            place: pickValue(record, ['place', 'location', 'venue', '会場', '場所']),
+            keywords: parseKeywords(pickValue(record, ['keywords', 'tags', 'キーワード', 'タグ'])),
+            imageUrl: pickValue(record, ['imageurl', 'image', 'photo', '画像url', '写真url']),
+            imageAlt: pickValue(record, ['imagealt', 'alt', '画像alt', '代替テキスト', '画像説明'])
+          };
+        })
+        .filter((item) => item && item.date && item.title && item.text);
+    }
+
+    function normalizeJsonReports(data) {
+      const items = Array.isArray(data?.reports) ? data.reports : [];
+      return items
+        .map((item) => {
+          const categoryLabel = String(item.categoryLabel || item.category || '活動報告').trim();
+          const normalizedTitle = String(item.title || '').trim();
+          const normalizedDate = String(item.date || '').trim();
+          return {
+            id: String(item.id || buildReportIdentifier(normalizedDate, normalizedTitle)).trim(),
+            date: normalizedDate,
+            categoryLabel,
+            category: normalizeCategoryKey(categoryLabel),
+            title: normalizedTitle,
+            text: String(item.text || item.body || item.detail || '').trim(),
+            place: String(item.place || item.location || '').trim(),
+            keywords: parseKeywords(item.keywords),
+            imageUrl: String(item.imageUrl || '').trim(),
+            imageAlt: String(item.imageAlt || '').trim()
+          };
+        })
+        .filter((item) => item.date && item.title && item.text);
+    }
+
+    function normalizeLiveReports(items, includeHidden = false) {
+      return (Array.isArray(items) ? items : [])
+        .map((item) => {
+          const visible = String(item?.visible || '').trim();
+          if (!includeHidden && visible && ['0', 'false', 'no', '非公開'].includes(visible.toLowerCase())) {
+            return null;
+          }
+
+          const categoryLabel = String(item?.categoryLabel || item?.category || '活動報告').trim();
+          const normalizedTitle = String(item?.title || '').trim();
+          const normalizedDate = String(item?.date || '').trim();
+          return {
+            id: String(item?.id || buildReportIdentifier(normalizedDate, normalizedTitle)).trim(),
+            date: normalizedDate,
+            categoryLabel,
+            category: normalizeCategoryKey(categoryLabel),
+            title: normalizedTitle,
+            text: String(item?.text || item?.body || item?.detail || '').trim(),
+            place: String(item?.place || item?.location || '').trim(),
+            keywords: parseKeywords(item?.keywords),
+            imageUrl: String(item?.imageUrl || '').trim(),
+            imageAlt: String(item?.imageAlt || '').trim(),
+            visible
+          };
+        })
+        .filter((item) => item && item.date && item.title && item.text);
+    }
+
+    async function loadConfig() {
+      try {
+        const response = await fetch('./data/site-config.json', { cache: 'no-store' });
+        if (!response.ok) {
+          throw new Error('Failed to fetch site-config.json');
+        }
+        return { ...defaultConfig, ...(await response.json()) };
+      } catch (error) {
+        console.error(error);
+        return defaultConfig;
+      }
+    }
+
+    async function loadReportsFromSheet(csvUrl) {
+      const response = await fetch(buildFreshRequestUrl(csvUrl), { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch published report Google Sheet CSV');
+      }
+      return rowsToReports(parseCsv(await response.text()));
+    }
+
+    async function loadReportsFromJson(jsonUrl) {
+      const response = await fetch(jsonUrl, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch fallback reports.json');
+      }
+      return normalizeJsonReports(await response.json());
+    }
+
+    function normalizeReportMatchValue(value) {
+      return String(value || '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function buildReportIdentifier(date, title) {
+      return `${normalizeReportMatchValue(date)}__${normalizeReportMatchValue(title)}`;
+    }
+
+    function buildFreshRequestUrl(url) {
+      try {
+        const parsed = new URL(String(url || ''), window.location.href);
+        parsed.searchParams.set('_', String(Date.now()));
+        return parsed.toString();
+      } catch (error) {
+        console.error(error);
+        return url;
+      }
+    }
+
+    function isValidWebUrl(value) {
+      try {
+        const parsed = new URL(String(value || '').trim(), window.location.href);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function buildApiResourceUrl(baseUrl, resource, includeHidden) {
+      const parsed = new URL(String(baseUrl || '').trim(), window.location.href);
+      parsed.searchParams.set('resource', resource);
+      if (includeHidden) {
+        parsed.searchParams.set('includeHidden', 'true');
+      }
+      parsed.searchParams.set('_', String(Date.now()));
+      return parsed.toString();
+    }
+
+    async function loadReportsFromApi(apiUrl, includeHidden = false) {
+      const response = await fetch(buildApiResourceUrl(apiUrl, 'reports', includeHidden), { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('Failed to fetch live reports API');
+      }
+      const data = await response.json();
+      return normalizeLiveReports(data.reports, includeHidden);
+    }
+
+    function getReportMatchIdentifier(item) {
+      return normalizeReportMatchValue(item?.id) || buildReportIdentifier(item?.date, item?.title);
+    }
+
+    function readPendingReportPhotoUpdate() {
+      try {
+        const raw = window.localStorage.getItem('pending-report-photo-update');
+        if (!raw) {
+          return null;
+        }
+        const payload = JSON.parse(raw);
+        return payload && typeof payload === 'object' ? payload : null;
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+
+    function clearPendingReportPhotoUpdate() {
+      try {
+        window.localStorage.removeItem('pending-report-photo-update');
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    function applyPendingReportPhotoUpdate(items) {
+      const pending = readPendingReportPhotoUpdate();
+      if (!pending) {
+        return items;
+      }
+
+      const pendingId = normalizeReportMatchValue(pending.reportId)
+        || buildReportIdentifier(pending.reportDate, pending.reportTitle);
+      if (!pendingId) {
+        return items;
+      }
+
+      let hasMatch = false;
+      const nextItems = items.map((item) => {
+        if (getReportMatchIdentifier(item) !== pendingId) {
+          return item;
+        }
+
+        hasMatch = true;
+        return {
+          ...item,
+          imageUrl: String(pending.imageUrl || item.imageUrl || '').trim(),
+          imageAlt: String(pending.imageAlt || item.imageAlt || '').trim()
+        };
+      });
+
+      if (hasMatch) {
+        clearPendingReportPhotoUpdate();
+      }
+
+      return nextItems;
+    }
+
+    function getLatestDate(items) {
+      if (!items.length) {
+        return '未更新';
+      }
+      const sorted = [...items].sort((a, b) => new Date(b.date) - new Date(a.date));
+      return formatReportDate(sorted[0].date);
+    }
+
+    // function renderSummary(items) {
+    //   const groupCount = items.filter((item) => item.category === 'group').length;
+    //   const uniqueCategories = new Set(items.map((item) => item.categoryLabel)).size;
+    //   summaryGrid.innerHTML = `
+    //   <div class="summary-card">
+    //     <div class="summary-label">REPORT COUNT</div>
+    //     <div class="summary-value">${items.length}<small>件</small></div>
+    //     <div class="summary-note">2026年度に掲載している活動報告の件数です。</div>
+    //   </div>
+    //   <div class="summary-card">
+    //     <div class="summary-label">LATEST UPDATE</div>
+    //     <div class="summary-value" style="font-size:20px; line-height:1.4;">${getLatestDate(items)}</div>
+    //     <div class="summary-note">新しい報告ほど上に表示される構成です。</div>
+    //   </div>
+    //   <div class="summary-card">
+    //     <div class="summary-label">CATEGORY BALANCE</div>
+    //     <div class="summary-value">${uniqueCategories}<small>分類</small></div>
+    //     <div class="summary-note">小グループ会 ${groupCount}件を中心に、支部行事や勉強会も掲載しています。</div>
+    //   </div>
+    // `;
+    // }
+
+    function renderFilters(items) {
+      const counts = items.reduce((acc, item) => {
+        if (!acc[item.category]) {
+          acc[item.category] = {
+            label: item.categoryLabel,
+            count: 0
+          };
+        }
+        acc[item.category].count += 1;
+        return acc;
+      }, {});
+      const filterItems = [
+        { key: 'all', label: 'すべて', count: items.length },
+        ...Object.entries(counts)
+          .sort((a, b) => a[1].label.localeCompare(b[1].label, 'ja'))
+          .map(([key, info]) => ({ key, label: info.label, count: info.count }))
+      ];
+
+      filterGroup.innerHTML = filterItems
+        .map((item) => {
+          const isActive = item.key === activeFilter ? 'active' : '';
+          return `<button type="button" class="filter-button ${isActive}" data-filter="${escapeHtml(item.key)}">${escapeHtml(item.label)} (${item.count})</button>`;
+        })
+        .join('');
+    }
+
+    function renderReports(items) {
+      const filteredItems = activeFilter === 'all'
+        ? items
+        : items.filter((item) => item.category === activeFilter);
+
+      toolbarStatus.textContent = `${filteredItems.length}件を表示中`;
+
+      if (!filteredItems.length) {
+        reportList.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">📝</div>
+          <p>このカテゴリの活動報告はまだありません。<br>新しい報告を追加するとここに表示されます。</p>
         </div>
-        <div class="report-title">新春★西成住之江支部【新会員を知る会】</div>
-        <div class="report-text">今期入会した新会員を迎え、お互いを知り合う場を設けました。</div>
+      `;
+        return;
+      }
+
+      reportList.innerHTML = filteredItems.map((item) => {
+        const keywords = (item.keywords || [])
+          .map((keyword) => `<span class="report-keyword">${escapeHtml(keyword)}</span>`)
+          .join('');
+        const tagClass = getTagClass(item.category);
+        const place = item.place ? `<span class="report-place">${escapeHtml(item.place)}</span>` : '';
+        const helperLink = `admin.html?mode=report-photo-helper&reportId=${encodeURIComponent(item.id)}&reportDate=${encodeURIComponent(item.date)}&reportTitle=${encodeURIComponent(item.title)}&reportCategory=${encodeURIComponent(item.categoryLabel || '')}&reportPlace=${encodeURIComponent(item.place || '')}`;
+        const imageSource = getReportImageSource(item.imageUrl);
+        const imageMarkup = imageSource
+          ? `<img src="${escapeAttribute(imageSource.src)}" data-report-id="${escapeAttribute(item.id)}" data-fallbacks="${escapeAttribute(imageSource.fallbacks.join('||'))}" alt="${escapeHtml(item.imageAlt || item.categoryLabel)}" loading="lazy" decoding="async" referrerpolicy="no-referrer">`
+          : (isAdminMode
+            ? `<a class="report-img-link" href="${escapeAttribute(helperLink)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttribute(`${item.title.replace(/\n/g, ' ')} の写真リンク入力補助を開く`)}">📸 写真をここに差し替え</a>`
+            : '<div class="report-img-link" aria-hidden="true">写真準備中</div>');
+        return `
+        <article class="report-item" data-report-id="${escapeAttribute(getReportMatchIdentifier(item))}">
+          <div class="report-img">${imageMarkup}</div>
+          <div class="report-content">
+            <div class="report-meta">
+              <span class="report-tag ${tagClass}">${escapeHtml(item.categoryLabel)}</span>
+              <span class="report-date">${formatReportDate(item.date)}</span>
+              ${place}
+            </div>
+            <div class="report-title">${formatMultiline(item.title)}</div>
+            <div class="report-text">${formatMultiline(item.text)}</div>
+            ${keywords ? `<div class="report-footer">${keywords}</div>` : ''}
+          </div>
+        </article>
+      `;
+      }).join('');
+
+      reportList.querySelectorAll('.report-img img[data-fallbacks]').forEach((img) => {
+        window.ReportPhotos.attach(img, reportPhotoApiUrl);
+      });
+    }
+
+    function renderLoadError() {
+      summaryGrid.innerHTML = '';
+      filterGroup.innerHTML = '';
+      toolbarStatus.textContent = '読み込み失敗';
+      reportList.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">⚠️</div>
+        <p>活動報告の読み込みに失敗しました。<br>Google スプレッドシート公開設定、または <code>data/reports.json</code> を確認してください。</p>
       </div>
-    </div>
+    `;
+    }
 
-    <div class="report-item">
-      <div class="report-img">📸 写真をここに差し替え</div>
-      <div class="report-content">
-        <div class="report-meta">
-          <span class="report-tag">勉強会</span>
-          <span class="report-date">2026年4月27日（月）</span>
-        </div>
-        <div class="report-title">小グループ長勉強会<br>大阪同友会事務局にて</div>
-        <div class="report-text">全大阪の小グループ長が集まり、2026年度の活動方針と成功事例を共有。今期の運営に活かします。</div>
-      </div>
-    </div>
+    filterGroup.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-filter]');
+      if (!button) {
+        return;
+      }
+      activeFilter = button.dataset.filter;
+      renderFilters(currentReports);
+      renderReports(currentReports);
+    });
 
-    <!-- ↑ここまで。新しい報告は上に追加する↑ -->
+    let currentReports = [];
 
-  </div>
-</section>
+    function rerenderCurrentReports() {
+      renderFilters(currentReports);
+      renderReports(currentReports);
+    }
 
-<footer>
-  <h3>大阪中小企業家同友会 西成住之江支部</h3>
-  <p>大阪府大阪市西成区・住之江区</p>
-  <p>お問い合わせ：支部長 堂上 智史</p>
-  <div class="footer-bottom">© 2026 大阪中小企業家同友会 西成住之江支部</div>
-</footer>
+    function mergePendingUpdateIntoCurrentReports(payload) {
+      if (!payload || typeof payload !== 'object') {
+        return;
+      }
+
+      const pendingId = normalizeReportMatchValue(payload.reportId)
+        || buildReportIdentifier(payload.reportDate, payload.reportTitle);
+      if (!pendingId) {
+        return;
+      }
+
+      let hasMatch = false;
+      currentReports = currentReports.map((item) => {
+        if (getReportMatchIdentifier(item) !== pendingId) {
+          return item;
+        }
+
+        hasMatch = true;
+        return {
+          ...item,
+          imageUrl: String(payload.imageUrl || item.imageUrl || '').trim(),
+          imageAlt: String(payload.imageAlt || item.imageAlt || '').trim()
+        };
+      });
+
+      if (hasMatch) {
+        rerenderCurrentReports();
+      }
+    }
+
+    async function loadReports() {
+      try {
+        const config = await loadConfig();
+        reportPhotoApiUrl = config.reportSheetWebhookUrl || '';
+        let reports = [];
+
+        if (isValidWebUrl(config.reportSheetWebhookUrl)) {
+          try {
+            reports = await loadReportsFromApi(config.reportSheetWebhookUrl, false);
+          } catch (apiError) {
+            console.error(apiError);
+          }
+        }
+
+        if (!reports.length) {
+          reports = config.reportSheetCsvUrl
+            ? await loadReportsFromSheet(config.reportSheetCsvUrl)
+            : await loadReportsFromJson(config.fallbackReportsUrl);
+        }
+
+        currentReports = sortReports(applyPendingReportPhotoUpdate(reports));
+        activeFilter = 'all';
+        // renderSummary(currentReports);
+        rerenderCurrentReports();
+      } catch (error) {
+        console.error(error);
+        renderLoadError();
+      }
+    }
+
+    window.addEventListener('message', (event) => {
+      if (event.origin !== window.location.origin) {
+        return;
+      }
+      const data = event.data;
+      if (!data || data.type !== 'pending-report-photo-update') {
+        return;
+      }
+      mergePendingUpdateIntoCurrentReports(data.payload);
+    });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key !== 'pending-report-photo-update' || !event.newValue) {
+        return;
+      }
+      try {
+        mergePendingUpdateIntoCurrentReports(JSON.parse(event.newValue));
+      } catch (error) {
+        console.error(error);
+      }
+    });
+
+    loadReports();
+  </script>
 </body>
+
 </html>
